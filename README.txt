@@ -1,4 +1,4 @@
-===Minicraft - a game for MINETEST-C55===
+===MiniTest - a game for MINETEST-C55===
 by PilzAdam
 
 Introduction:
