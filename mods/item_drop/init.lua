@@ -37,16 +37,18 @@ function item_drop(pos, oldnode, digger)
 			digger:get_inventory():remove_item("main", ItemStack(oldnode.name))
 		end
 		local item = minetest.env:add_item(pos, oldnode)
-		item:get_luaentity().collect = true
-		local x = math.random(1, 5)
-		if math.random(1,2) == 1 then
-			x = -x
+		if item ~= nil then
+			item:get_luaentity().collect = true
+			local x = math.random(1, 5)
+			if math.random(1,2) == 1 then
+				x = -x
+			end
+			local z = math.random(1, 5)
+			if math.random(1,2) == 1 then
+				z = -z
+			end
+			item:setvelocity({x=1/x, y=item:getvelocity().y, z=1/z})
 		end
-		local z = math.random(1, 5)
-		if math.random(1,2) == 1 then
-			z = -z
-		end
-		item:setvelocity({x=1/x, y=item:getvelocity().y, z=1/z})
 	end
 end
 
