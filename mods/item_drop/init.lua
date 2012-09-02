@@ -1,147 +1,157 @@
-function item_drop(pos, oldnode, digger)
-	local anzahl = 1
-	if oldnode.name.items ~= nil then
-		local drops = {}
-		local max_items = oldnode.name.max_items
-		for i,item in ipairs(oldnode.name.items) do
-			local rarity
-			if item.rarity == nil then
-				rarity = 1
-			else
-				rarity = item.rarity
-			end
-			if math.random(1, rarity) == 1 then
-				table.insert(drops, item.items[1])
-			end
-			if #drops == max_items then
-				for j,it in ipairs(drops) do
-					item_drop(pos, {name=it}, digger)
-				end
-				return
-			end
-		end
-		return
-	else
-		if string.find(oldnode.name, " ") ~= nil then
-			oldnode.name = oldnode.name:gsub('"',""):gsub("craft ",""):gsub("item ",""):gsub("node ","")
-			anzahl = string.sub(oldnode.name, string.find(oldnode.name, " ")+1, string.len(oldnode.name))
-			oldnode.name = string.sub(oldnode.name, 1, string.find(oldnode.name, " ")-1)
-		end
-	end
-	
-	if oldnode.name == "" then
-		return
-	end
-	
-	for i=1,anzahl do
-		if digger:get_inventory():room_for_item("main", ItemStack(oldnode.name)) then
-			digger:get_inventory():remove_item("main", ItemStack(oldnode.name))
-		end
-		local item = minetest.env:add_item(pos, oldnode)
-		if item ~= nil then
-			item:get_luaentity().collect = true
-			local x = math.random(1, 5)
-			if math.random(1,2) == 1 then
-				x = -x
-			end
-			local z = math.random(1, 5)
-			if math.random(1,2) == 1 then
-				z = -z
-			end
-			item:setvelocity({x=1/x, y=item:getvelocity().y, z=1/z})
-		end
-	end
-end
-
-local item_timer = {}
-
 minetest.register_globalstep(function(dtime)
-	for i,player in ipairs(minetest.get_connected_players()) do
+	for _,player in ipairs(minetest.get_connected_players()) do
 		local pos = player:getpos()
 		pos.y = pos.y+0.5
-		local items = minetest.env:get_objects_inside_radius(pos,1)
-		for j,item in ipairs(items) do
-			if not item:is_player() and item:get_luaentity().itemstring ~= nil then
-				if item:get_luaentity().itemstring ~= "" and player:get_inventory():room_for_item("main", ItemStack(item:get_luaentity().itemstring)) and item:get_luaentity().collect then
-					player:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring))
-					minetest.sound_play("item_drop_pickup", {
-						to_player = player,
-					})
-					item:remove()
-					item:get_luaentity().itemstring = ""
-				end
-			end
-		end
+		local inv = player:get_inventory()
 		
-		items = minetest.env:get_objects_inside_radius(pos, 2)
-		for j,item in ipairs(items) do
-			if not item:is_player() and item:get_luaentity().itemstring ~= nil then
-				if player:get_inventory():room_for_item("main", ItemStack(item:get_luaentity().itemstring)) and item:get_luaentity().collect then
-					local p = player:getpos()
-					p.y = p.y+0.5
-					local i = item:getpos()
-					local move = {x=(p.x-i.x)*15, y=(p.y-i.y)*15, z=(p.z-i.z)*15}
-					item:setacceleration(move)
-				end
-				
-				if item:get_luaentity().collect == nil and item:get_luaentity().itemstring ~= "" then
-					if item:get_luaentity().timer == nil then
-						item:get_luaentity().timer = 0
-						table.insert(item_timer, item)
+		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+			if not object:is_player() and object:get_luaentity().name == "__builtin:item" then
+				if inv:room_for_item("main", ItemStack(object:get_luaentity().itemstring)) then
+					inv:add_item("main", ItemStack(object:get_luaentity().itemstring))
+					if object:get_luaentity().itemstring ~= "" then
+						minetest.sound_play("item_drop_pickup", {
+							to_player = player:get_player_name(),
+						})
 					end
-				end
-			end
-		end
-	end
-	
-	for i,item in ipairs(item_timer) do
-		if item:get_luaentity() == nil then
-			table.remove(item_timer, i)
-		else
-			item:get_luaentity().timer = item:get_luaentity().timer + dtime
-			if item:get_luaentity().timer > 1 then
-				item:get_luaentity().collect = true
-				table.remove(item_timer, i)
-			end
-		end
-	end
-end)
-
-minetest.after(0, function()
-	for name,node in pairs(minetest.registered_nodes) do
-		local func
-		if node.drop == nil then
-			if node.after_dig_node == nil then
-				func = function(pos, oldnode, oldmetadata, digger)
-					item_drop(pos, oldnode, digger)
-				end
-			else
-				func = function(pos, oldnode, oldmetadata, digger)
-					item_drop(pos, oldnode, digger)
-				end
-			end
-		else
-			if node.after_dig_node == nil then
-				func = function(pos, oldnode, oldmetadata, digger)
-					oldnode.name = node.drop
-					item_drop(pos, oldnode, digger)
-				end
-			else
-				func = function(pos, oldnode, oldmetadata, digger)
-					oldnode.name = node.drop
-					item_drop(pos, oldnode, digger)
+					object:get_luaentity().itemstring = ""
+					object:remove()
 				end
 			end
 		end
 		
-		local new_node = {
-			after_dig_node = func,
-			stack_max = 64,
-		}
-		for str,val in pairs(node) do
-			new_node[str] = val
+		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 2)) do
+			if not object:is_player() and object:get_luaentity().name == "__builtin:item" then
+				if object:get_luaentity().collect then
+					if inv:room_for_item("main", ItemStack(object:get_luaentity().itemstring)) then
+						local pos1 = pos
+						pos1.y = pos1.y+0.2
+						local pos2 = object:getpos()
+						local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
+						vec.x = vec.x*3
+						vec.y = vec.y*3
+						vec.z = vec.z*3
+						object:setvelocity(vec)
+						
+						minetest.after(1, function(args)
+							local lua = object:get_luaentity()
+							if object == nil or lua == nil or lua.itemstring == nil then
+								return
+							end
+							if inv:room_for_item("main", ItemStack(object:get_luaentity().itemstring)) then
+								inv:add_item("main", ItemStack(object:get_luaentity().itemstring))
+								if object:get_luaentity().itemstring ~= "" then
+									minetest.sound_play("item_drop_pickup", {
+										to_player = player:get_player_name(),
+									})
+								end
+								object:get_luaentity().itemstring = ""
+								object:remove()
+							else
+								object:setvelocity({x=0,y=0,z=0})
+							end
+						end, {player, object})
+						
+					end
+				else
+					minetest.after(0.5, function(entity)
+						entity.collect = true
+					end, object:get_luaentity())
+				end
+			end
 		end
-		minetest.register_node(":"..new_node.name, new_node)
 	end
 end)
 
+
+function minetest.get_node_drops(nodename, toolname)
+	return {}
+end
+
+function minetest.get_drops(nodename, toolname)
+	local drop = ItemStack({name=nodename}):get_definition().drop
+	if drop == nil then
+		-- default drop
+		return {ItemStack({name=nodename})}
+	elseif type(drop) == "string" then
+		-- itemstring drop
+		return {ItemStack(drop)}
+	elseif drop.items == nil then
+		-- drop = {} to disable default drop
+		return {}
+	end
+
+	-- Extended drop table
+	local got_items = {}
+	local got_count = 0
+	local _, item, tool
+	for _, item in ipairs(drop.items) do
+		local good_rarity = true
+		local good_tool = true
+		if item.rarity ~= nil then
+			good_rarity = item.rarity < 1 or math.random(item.rarity) == 1
+		end
+		if item.tools ~= nil then
+			good_tool = false
+			for _, tool in ipairs(item.tools) do
+				if tool:sub(1, 1) == '~' then
+					good_tool = toolname:find(tool:sub(2)) ~= nil
+				else
+					good_tool = toolname == tool
+				end
+				if good_tool then
+					break
+				end
+			end
+        	end
+		if good_rarity and good_tool then
+			got_count = got_count + 1
+			for _, add_item in ipairs(item.items) do
+				got_items[#got_items+1] = add_item
+			end
+			if drop.max_items ~= nil and got_count == drop.max_items then
+				break
+			end
+		end
+	end
+	return got_items
+end
+
+minetest.register_on_dignode(function(pos, oldnode, digger)
+	local drop = minetest.get_drops(oldnode.name, digger:get_wielded_item():get_name())
+	if drop == nil then
+		return
+	end
+	for _,item in ipairs(drop) do
+		if type(item) == "string" then
+			local obj = minetest.env:add_item(pos, item)
+				if obj ~= nil then
+					obj:get_luaentity().collect = true
+					local x = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						x = -x
+					end
+					local z = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						z = -z
+					end
+					obj:setvelocity({x=1/x, y=obj:getvelocity().y, z=1/z})
+				end
+		else
+			for i=1,item:get_count() do
+				local obj = minetest.env:add_item(pos, item:get_name())
+				if obj ~= nil then
+					obj:get_luaentity().collect = true
+					local x = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						x = -x
+					end
+					local z = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						z = -z
+					end
+					obj:setvelocity({x=1/x, y=obj:getvelocity().y, z=1/z})
+				end
+			end
+		end
+	end
+end)
