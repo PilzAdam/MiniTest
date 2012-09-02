@@ -23,6 +23,7 @@ function item_drop(pos, oldnode, digger)
 		return
 	else
 		if string.find(oldnode.name, " ") ~= nil then
+			oldnode.name = oldnode.name:gsub('"',""):gsub("craft ",""):gsub("item ",""):gsub("node ","")
 			anzahl = string.sub(oldnode.name, string.find(oldnode.name, " ")+1, string.len(oldnode.name))
 			oldnode.name = string.sub(oldnode.name, 1, string.find(oldnode.name, " ")-1)
 		end
