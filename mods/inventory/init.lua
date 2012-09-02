@@ -13,3 +13,14 @@ minetest.register_on_joinplayer(function(player)
 		player:get_inventory():set_size("craft", 9)
 	end
 end)
+
+--minetest.nodedef_default.stack_max = 64 FIXME why does this not work?
+minetest.after(0, function()
+	for name,node in pairs(minetest.registered_nodes) do
+		local new_node = {stack_max=64,}
+		for attrib,value in pairs(node) do
+			new_node[attrib] = value
+		end
+		minetest.register_node(":"..name, new_node)
+	end
+end)
