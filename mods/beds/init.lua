@@ -8,6 +8,7 @@ minetest.register_node("beds:bed_bottom", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	stack_max = 1,
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
