@@ -73,7 +73,8 @@ minetest.register_abm({
 		end
 		if not do_preserve then
 			-- Drop stuff other than the node itself
-			itemstacks = minetest.get_node_drops(n0.name)
+			--itemstacks = minetest.get_node_drops(n0.name)
+			itemstacks = minetest.get_drops(n0.name)
 			for _, itemname in ipairs(itemstacks) do
 				if itemname ~= n0.name then
 					local p_drop = {
