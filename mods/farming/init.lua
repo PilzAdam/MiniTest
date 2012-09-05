@@ -136,6 +136,66 @@ farming.seeds = {
 	["farming:carrot_seed"]=30,
 }
 
+-- ========= ALIASES FOR FARMING MOD BY SAPIER =========
+-- hoes
+minetest.register_alias("farming:wood_hoe", "farming:hoe_wood")
+minetest.register_alias("farming:cobble_hoe", "farming:hoe_stone")
+minetest.register_alias("farming:steel_hoe", "farming:hoe_steel")
+minetest.register_alias("farming:mese_hoe", "farming:hoe_steel")
+
+-- wheat -> wheat
+minetest.register_alias("farming:wheat_node", "farming:wheat")
+--minetest.register_alias("farming:wheat", "farming_wheat_harvested") cant do this
+minetest.register_alias("farming:wheat_straw", "farming:wheat")
+minetest.register_alias("farming:seed_wheat", "farming:wheat_seed")
+for lvl = 1, 6, 1 do
+	minetest.register_entity(":farming:wheat_lvl"..lvl, {
+		on_activate = function(self, staticdata)
+			minetest.env:set_node(self.object:getpos(), {name="farming:wheat_1"})
+		end
+	})
+end
+
+-- rye -> wheat
+minetest.register_alias("farming:rhy_node", "farming:wheat")
+minetest.register_alias("farming:rhy", "farming:wheat_harvested")
+minetest.register_alias("farming:rhy_straw", "farming:wheat")
+minetest.register_alias("farming:seed_rhy", "farming:wheat_seed")
+for lvl = 1, 6, 1 do
+	minetest.register_entity(":farming:rhy_lvl"..lvl, {
+		on_activate = function(self, staticdata)
+			minetest.env:set_node(self.object:getpos(), {name="farming:wheat_1"})
+		end
+	})
+end
+
+-- potatoe -> potatoe
+minetest.register_alias("farming:potatoe_node", "farming:potatoe")
+--minetest.register_alias("farming:potatoe", "farming:potatoe_item") cant do this
+minetest.register_alias("farming:potatoe_straw", "farming:potatoe")
+minetest.register_alias("farming:seed_potatoe", "farming:potatoe_seed")
+for lvl = 1, 6, 1 do
+	minetest.register_entity(":farming:potatoe_lvl"..lvl, {
+		on_activate = function(self, staticdata)
+			minetest.env:set_node(self.object:getpos(), {name="farming:potatoe_1"})
+		end
+	})
+end
+
+-- corn -> wheat
+minetest.register_alias("farming:corn_node", "farming:wheat")
+minetest.register_alias("farming:corn", "farming:wheat_harvested")
+minetest.register_alias("farming:corn_straw", "farming:wheat")
+minetest.register_alias("farming:seed_corn", "farming:wheat_seed")
+for lvl = 1, 6, 1 do
+	minetest.register_entity(":farming:corn_lvl"..lvl, {
+		on_activate = function(self, staticdata)
+			minetest.env:set_node(self.object:getpos(), {name="farming:wheat_1"})
+		end
+	})
+end
+
+
 -- ========= SOIL =========
 dofile(minetest.get_modpath("farming").."/soil.lua")
 
@@ -183,3 +243,6 @@ dofile(minetest.get_modpath("farming").."/cactus.lua")
 
 -- ========= CARROTS =========
 dofile(minetest.get_modpath("farming").."/carrots.lua")
+
+-- ========= COCOA =========
+dofile(minetest.get_modpath("farming").."/cocoa.lua")
