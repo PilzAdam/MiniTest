@@ -1,4 +1,3 @@
-local player_ges = 0
 local player_in_bed = 0
 
 minetest.register_node("beds:bed_bottom", {
@@ -7,8 +6,8 @@ minetest.register_node("beds:bed_bottom", {
 	tiles = {"beds_bed_top_bottom.png", "default_wood.png",  "beds_bed_side.png",  "beds_bed_side.png",  "beds_bed_side.png",  "beds_bed_side.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	stack_max = 1,
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
@@ -140,18 +139,10 @@ minetest.register_alias("beds:bed", "beds:bed_bottom")
 minetest.register_craft({
 	output = "beds:bed",
 	recipe = {
-		{"wool:red", "wool:blue", "wool:blue", },
+		{"wool:white", "wool:white", "wool:white", },
 		{"default:stick", "", "default:stick", }
 	}
 })
-
-minetest.register_on_joinplayer(function(pl)
-	player_ges = player_ges+1
-end)
-
-minetest.register_on_leaveplayer(function(pl)
-	player_ges = player_ges-1
-end)
 
 local timer = 0
 local wait = false
@@ -161,7 +152,8 @@ minetest.register_globalstep(function(dtime)
 	end
 	timer = 0
 	
-	if player_ges == player_in_bed and player_ges ~= 0 then
+	local players = #minetest.get_connected_players()
+	if players == player_in_bed and players ~= 0 then
 		if minetest.env:get_timeofday() < 0.2 or minetest.env:get_timeofday() > 0.805 then
 			if not wait then
 				minetest.chat_send_all("Good night!!!")
