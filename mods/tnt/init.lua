@@ -5,6 +5,7 @@ local destroy = function(pos)
 	local nodename = minetest.env:get_node(pos).name
 	if nodename ~= "air" then
 		minetest.env:remove_node(pos)
+		nodeupdate(pos)
 		if minetest.registered_nodes[nodename].groups.flammable ~= nil then
 			minetest.env:set_node(pos, {name="fire:basic_flame"})
 			return
@@ -47,25 +48,24 @@ boom = function(pos, time)
 		
 		local objects = minetest.env:get_objects_inside_radius(pos, 7)
 		for _,obj in ipairs(objects) do
-			if obj:is_player() or obj:get_luaentity().name ~= "__builtin:item" then
+			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
 				local obj_p = obj:getpos()
 				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
 				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
 				local damage = (80*0.5^dist)*2
-				obj:set_hp(obj:get_hp()-damage)
-				--[[obj:punch(obj, 1.0, { FIXME
+				obj:punch(obj, 1.0, {
 					full_punch_interval=1.0,
 					groupcaps={
 						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
 						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
 					}
-				}, nil)]]
+				}, nil)
 			end
 		end
 		
 		for dx=-2,2 do
 			for dz=-2,2 do
-				for dy=-2,2 do
+				for dy=2,-2,-1 do
 					pos.x = pos.x+dx
 					pos.y = pos.y+dy
 					pos.z = pos.z+dz
@@ -111,7 +111,6 @@ minetest.register_node("tnt:tnt", {
 })
 
 minetest.register_node("tnt:tnt_burning", {
-	--tiles = {"tnt_top_burning.png", "tnt_bottom.png", "tnt_side.png"},
 	tiles = {{name="tnt_top_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}, "tnt_bottom.png", "tnt_side.png"},
 	light_source = 5,
 	drop = "",
@@ -200,7 +199,6 @@ minetest.register_node("tnt:gunpowder_burning", {
 	sunlight_propagates = true,
 	walkable = false,
 	light_source = 5,
-	--tiles = {"tnt_gunpowder_burning.png"},
 	tiles = {{name="tnt_gunpowder_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}},
 	selection_box = {
 		type = "fixed",
