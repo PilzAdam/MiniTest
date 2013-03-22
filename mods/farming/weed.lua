@@ -1,6 +1,7 @@
 minetest.register_node("farming:weed", {
 	description = "Weed",
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	tiles = {"farming_weed.png"},

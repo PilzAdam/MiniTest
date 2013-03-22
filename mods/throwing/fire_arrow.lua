@@ -103,7 +103,9 @@ minetest.register_craft({
 })
 
 minetest.register_node("throwing:light", {
-	drawtype = "glasslike",
+	drawtype = "airlike",
+	paramtype = "light",
+	sunlight_propagates = true,
 	tiles = {"throwing_empty.png"},
 	light_source = LIGHT_MAX-4,
 	selection_box = {

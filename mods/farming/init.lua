@@ -11,6 +11,9 @@ function farming:add_plant(full_grown, names, interval, chance)
 				return
 			end
 			pos.y = pos.y+1
+			if not minetest.env:get_node_light(pos) then
+				return
+			end
 			if minetest.env:get_node_light(pos) < 8 then
 				return
 			end
@@ -44,6 +47,9 @@ function farming:generate_tree(pos, trunk, leaves, underground, replacements)
 		end
 	end
 	pos.y = pos.y+1
+	if not minetest.env:get_node_light(pos) then
+		return
+	end
 	if ret or minetest.env:get_node_light(pos) < 8 then
 		return
 	end
@@ -128,12 +134,6 @@ farming.seeds = {
 	["farming:wheat_seed"]=20,
 	["farming:cotton_seed"]=30,
 	["farming:pumpkin_seed"]=60,
-	["farming:strawberry_seed"]=30,
-	["farming:rhubarb_seed"]=30,
-	["farming:potatoe_seed"]=30,
-	["farming:tomato_seed"]=30,
-	["farming:orange_seed"]=30,
-	["farming:carrot_seed"]=30,
 }
 
 -- ========= ALIASES FOR FARMING MOD BY SAPIER =========
@@ -169,19 +169,6 @@ for lvl = 1, 6, 1 do
 	})
 end
 
--- potatoe -> potatoe
-minetest.register_alias("farming:potatoe_node", "farming:potatoe")
---minetest.register_alias("farming:potatoe", "farming:potatoe_item") cant do this
-minetest.register_alias("farming:potatoe_straw", "farming:potatoe")
-minetest.register_alias("farming:seed_potatoe", "farming:potatoe_seed")
-for lvl = 1, 6, 1 do
-	minetest.register_entity(":farming:potatoe_lvl"..lvl, {
-		on_activate = function(self, staticdata)
-			minetest.env:set_node(self.object:getpos(), {name="farming:potatoe_1"})
-		end
-	})
-end
-
 -- corn -> wheat
 minetest.register_alias("farming:corn_node", "farming:wheat")
 minetest.register_alias("farming:corn", "farming:wheat_harvested")
@@ -208,32 +195,11 @@ dofile(minetest.get_modpath("farming").."/wheat.lua")
 -- ========= COTTON =========
 dofile(minetest.get_modpath("farming").."/cotton.lua")
 
--- ========= PUMPKINS =========
+-- ========= PUMPKIN =========
 dofile(minetest.get_modpath("farming").."/pumpkin.lua")
-
--- ========= RUBBER =========
-dofile(minetest.get_modpath("farming").."/rubber.lua")
 
 -- ========= WEED =========
 dofile(minetest.get_modpath("farming").."/weed.lua")
-
--- ========= STRAWBERRIES =========
-dofile(minetest.get_modpath("farming").."/strawberries.lua")
-
--- ========= RHUBARB =========
-dofile(minetest.get_modpath("farming").."/rhubarb.lua")
-
--- ========= POTATOES =========
-dofile(minetest.get_modpath("farming").."/potatoes.lua")
-
--- ========= TOMATOES =========
-dofile(minetest.get_modpath("farming").."/tomatoes.lua")
-
--- ========= ORANGES =========
-dofile(minetest.get_modpath("farming").."/oranges.lua")
-
--- ========= BANANAS =========
-dofile(minetest.get_modpath("farming").."/bananas.lua")
 
 -- ========= PAPYRUS =========
 dofile(minetest.get_modpath("farming").."/papyrus.lua")
@@ -241,8 +207,6 @@ dofile(minetest.get_modpath("farming").."/papyrus.lua")
 -- ========= CACTUS =========
 dofile(minetest.get_modpath("farming").."/cactus.lua")
 
--- ========= CARROTS =========
-dofile(minetest.get_modpath("farming").."/carrots.lua")
-
--- ========= COCOA =========
-dofile(minetest.get_modpath("farming").."/cocoa.lua")
+if minetest.setting_get("log_mods") then
+	minetest.log("action", "farming loaded")
+end

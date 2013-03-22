@@ -27,7 +27,9 @@ minetest.register_tool("farming:hoe_wood", {
 	inventory_image = "farming_hoe_wood.png",
 	on_use = function(itemstack, user, pointed_thing)
 		if create_soil(pointed_thing.under, user:get_inventory(), 0) then
-			itemstack:add_wear(65535/30)
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/30)
+			end
 			return itemstack
 		end
 	end
@@ -47,7 +49,9 @@ minetest.register_tool("farming:hoe_stone", {
 	inventory_image = "farming_hoe_stone.png",
 	on_use = function(itemstack, user, pointed_thing)
 		if create_soil(pointed_thing.under, user:get_inventory(), 5) then
-			itemstack:add_wear(65535/50)
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/50)
+			end
 			return itemstack
 		end
 	end
@@ -67,7 +71,9 @@ minetest.register_tool("farming:hoe_steel", {
 	inventory_image = "farming_hoe_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
 		if create_soil(pointed_thing.under, user:get_inventory(), 10) then
-			itemstack:add_wear(65535/80)
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/80)
+			end
 			return itemstack
 		end
 	end

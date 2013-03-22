@@ -108,6 +108,15 @@ minetest.register_node("tnt:tnt", {
 			boom(pos, 4)
 		end
 	end,
+	
+	mesecons = {
+		effector = {
+			action_on = function(pos, node)
+				minetest.env:set_node(pos, {name="tnt:tnt_burning"})
+				boom(pos, 0)
+			end
+		},
+	},
 })
 
 minetest.register_node("tnt:tnt_burning", {
@@ -122,6 +131,8 @@ minetest.register_node("tnt:boom", {
 	tiles = {"tnt_boom.png"},
 	light_source = LIGHT_MAX,
 	walkable = false,
+	drop = "",
+	groups = {dig_immediate=3},
 })
 
 burn = function(pos)
@@ -233,9 +244,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "tnt:tnt",
 	recipe = {
-		{"", "default:wood", ""},
-		{"default:wood", "tnt:gunpowder", "default:wood"},
-		{"", "default:wood", ""}
+		{"", "group:wood", ""},
+		{"group:wood", "tnt:gunpowder", "group:wood"},
+		{"", "group:wood", ""}
 	}
 })
 
@@ -261,18 +272,6 @@ minetest.register_entity("tnt:smoke", {
 	end,
 })
 
-if minetest.get_modpath("mesecons") ~= nil then
-	minetest.after(0, function()
-		
-		--mesecon:add_rules("tnt_above", {{x=0,y=1,z=0}}) FIXME
-		mesecon:register_effector("tnt:tnt", "tnt:tnt") --, mesecon:get_rules("tnt_above"))
-		
-		mesecon:register_on_signal_on(function(pos, node)
-			if node.name == "tnt:tnt" then
-				minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-				boom(pos, 0)
-			end
-		end)
-		
-	end)
+if minetest.setting_get("log_mods") then
+	minetest.log("action", "tnt loaded")
 end

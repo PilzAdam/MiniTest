@@ -14,6 +14,7 @@ minetest.register_craftitem("farming:cotton_seed", {
 
 minetest.register_node("farming:cotton_1", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	drop = "",
@@ -30,6 +31,7 @@ minetest.register_node("farming:cotton_1", {
 
 minetest.register_node("farming:cotton_2", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	drop = "",
@@ -46,6 +48,7 @@ minetest.register_node("farming:cotton_2", {
 
 minetest.register_node("farming:cotton", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	tiles = {"farming_cotton.png"},

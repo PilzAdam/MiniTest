@@ -14,6 +14,7 @@ minetest.register_craftitem("farming:pumpkin_seed", {
 
 minetest.register_node("farming:pumpkin_1", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	drawtype = "nodebox",
 	drop = "",
 	tiles = {"farming_pumpkin_top.png", "farming_pumpkin_top.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png"},
@@ -35,6 +36,7 @@ minetest.register_node("farming:pumpkin_1", {
 
 minetest.register_node("farming:pumpkin_2", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	drawtype = "nodebox",
 	drop = "",
 	tiles = {"farming_pumpkin_top.png", "farming_pumpkin_top.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png"},
@@ -190,6 +192,7 @@ minetest.register_node("farming:big_pumpkin", {
 
 minetest.register_node("farming:big_pumpkin_side", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	tiles = {"farming_pumpkin_big_top_side.png", "farming_pumpkin_big_side.png"},
 	drawtype = "nodebox",
@@ -209,6 +212,7 @@ minetest.register_node("farming:big_pumpkin_side", {
 })
 minetest.register_node("farming:big_pumpkin_corner", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	tiles = {"farming_pumpkin_big_top_corner.png", "farming_pumpkin_big_side.png"},
 	drawtype = "nodebox",
@@ -229,6 +233,7 @@ minetest.register_node("farming:big_pumpkin_corner", {
 
 minetest.register_node("farming:big_pumpkin_top", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	tiles = {"farming_pumpkin_big_top.png"},
 	selection_box = {
 		type = "fixed",
@@ -276,6 +281,7 @@ end
 minetest.register_node("farming:scarecrow", {
 	description = "Scarecrow",
 	paramtype = "light",
+	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	tiles = {"farming_scarecrow_top.png", "farming_scarecrow_top.png", "farming_scarecrow_side.png", "farming_scarecrow_side.png", "farming_scarecrow_side.png", "farming_scarecrow_front.png"},
 	drawtype = "nodebox",
@@ -321,6 +327,7 @@ minetest.register_node("farming:scarecrow", {
 
 minetest.register_node("farming:scarecrow_bottom", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	tiles = {"default_wood.png"},
 	drawtype = "nodebox",
@@ -349,6 +356,7 @@ minetest.register_craft({
 minetest.register_node("farming:scarecrow_light", {
 	description = "Scarecrow",
 	paramtype = "light",
+	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	light_source = LIGHT_MAX-2,
 	tiles = {"farming_scarecrow_top.png", "farming_scarecrow_top.png", "farming_scarecrow_side.png", "farming_scarecrow_side.png", "farming_scarecrow_side.png", "farming_scarecrow_front_light.png"},

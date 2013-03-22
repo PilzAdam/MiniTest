@@ -1,9 +1,8 @@
-===BEDS MOD for MINETEST-C55===
+=== THROWING-MOD for MINETEST-C55 ===
 by PilzAdam
 
-Introduction:
-This mods brings beds to Minetest. You can use them to sleep at night
-to prevent attacks by evil mobs.
+Inroduction:
+This mod adds bows and arrows to Minetest.
 
 How to install:
 Unzip the archive an place it in minetest-base-directory/mods/minetest/
@@ -15,19 +14,20 @@ For further information or help see:
 http://wiki.minetest.com/wiki/Installing_Mods
 
 How to use the mod:
-Craft a bed like this:
-white wool  white wool   white wool
-stick                    stick
-After placing it anywhere you can go to sleep with a leftklick with your
-hand on the bed. If it is night a chatmessage wishs you "Good night" and
-you sleep until the next morning. To go outside the bed it is recommended
-to hit the bed again with a leftklick (it also works if you just go away
-but its not so safe).
-After dying the player will respawn at the last bed he has slept.
+Craft a bow with the strings from the farming mod:
+string wood
+string      wood
+string wood
+Craft arrows with:
+stick stick steel
+Select the bow and shoot with left mouse click. Every shoot will take 1
+arrow from your inventory and wears out the bow (you have around 50
+shoots).
 
 License:
+This mod was originally published by Jeija.
 Sourcecode: WTFPL (see below)
-Graphics: WTFPL (see below)
+Grahpics: WTFPL (see below)
 
 See also:
 http://minetest.net/
