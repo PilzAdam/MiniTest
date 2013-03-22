@@ -1,5 +1,5 @@
 ===MiniTest - a game for MINETEST-C55===
-by PilzAdam
+by PilzAdam & Traxie21
 
 Introduction:
 This game tries to copy some elements of the Minecraft gameplay.
