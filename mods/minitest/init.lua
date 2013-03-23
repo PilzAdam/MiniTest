@@ -34,6 +34,11 @@ minetest.register_craftitem(":default:mese_crystal_fragment", {
 	inventory_image = "minitest_diamond_fragment.png",
 })
 
+minetest.register_alias("default:desert_stone", "default:sandstone")
+minetest.register_alias("default:desert_sand", "default:sand")
+minetest.register_alias("mapgen_desert_sand", "default:sand")
+minetest.register_alias("mapgen_desert_stone", "default:sandstone")
+
 --Tool Conversions
 
 minetest.register_tool(":default:pick_mese", {
