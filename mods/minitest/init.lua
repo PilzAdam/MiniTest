@@ -85,9 +85,11 @@ minetest.register_tool("minitest:sword_diamond", {
 	inventory_image = "minitest_diamondsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.65,
-		max_drop_level=3,
+		max_drop_level=0,
 		groupcaps={
-			fleshy = {times={[2]=0.6, [3]=0.5}, uses=80, maxlevel=1}
+			fleshy = {times={[2]=0.6, [3]=0.5}, uses=80, maxlevel=1},
+			snappy={times={[2]=0.60, [3]=0.30}, uses=80, maxlevel=1},
+			choppy={times={[3]=0.5}, uses=40, maxlevel=0}
 		}
 	},
 })
