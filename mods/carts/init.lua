@@ -59,14 +59,7 @@ function cart:on_punch(puncher, time_from_last_punch, tool_capabilities, directi
 	
 	if puncher:get_player_control().sneak then
 		self.object:remove()
-		local inv = puncher:get_inventory()
-		if minetest.setting_getbool("creative_mode") then
-			if not inv:contains_item("main", "carts:cart") then
-				inv:add_item("main", "carts:cart")
-			end
-		else
-			inv:add_item("main", "carts:cart")
-		end
+		puncher:get_inventory():add_item("main", "carts:cart")
 		return
 	end
 	
@@ -232,7 +225,7 @@ function cart:on_step(dtime)
 		if math.abs(self.velocity.x) < 0.1 and  math.abs(self.velocity.z) < 0.1 then
 			-- Start the cart if powered from mesecons
 			local a = tonumber(minetest.env:get_meta(pos):get_string("cart_acceleration"))
-			if a and a ~= 0 then
+			if a then
 				for _,y in ipairs({0,-1,1}) do
 					for _,z in ipairs({1,-1}) do
 						if cart_func.v3:equal(self:get_rail_direction(self.object:getpos(), {x=0, y=y, z=z}), {x=0, y=y, z=z}) then
@@ -426,15 +419,11 @@ minetest.register_craftitem("carts:cart", {
 		end
 		if cart_func:is_rail(pointed_thing.under) then
 			minetest.env:add_entity(pointed_thing.under, "carts:cart")
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:take_item()
-			end
+			itemstack:take_item()
 			return itemstack
 		elseif cart_func:is_rail(pointed_thing.above) then
 			minetest.env:add_entity(pointed_thing.above, "carts:cart")
-			if not minetest.setting_getbool("creative_mode") then
-				itemstack:take_item()
-			end
+			itemstack:take_item()
 			return itemstack
 		end
 	end,

@@ -132,3 +132,23 @@ end
 dyelocal = nil
 
 -- EOF
+
+-- Recipes Func
+function dye_noshape(color, recipeitem_1, recipeitem_2)
+	minetest.register_craft({
+		type = "shapeless",
+		output = color,
+		recipe = {
+		recipeitem_1,
+		recipeitem_2,
+		},
+	})
+end
+
+function dye_cook(color, recipeitem)
+	minetest.register_craft({
+		type = "cooking",
+		output = color,
+		recipe = recipeitem,
+	})
+end

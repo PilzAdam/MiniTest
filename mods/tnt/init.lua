@@ -1,13 +1,171 @@
-local destroy = function(pos)
-	if math.random(1,5) <= 4 then
-		minetest.env:add_entity({x=pos.x+math.random(0,10)/10-0.5, y=pos.y, z=pos.z+math.random(0,10)/10-0.5}, "tnt:smoke")
+local shared_autoban = minetest.get_modpath("shared_autoban")
+
+experimental = {}
+
+minetest.register_entity("tnt:smoke", {
+    physical = true,
+	visual_size = {x=0.05, y=0.05},
+	collisionbox = {-0.05,-0.05,-0.05,0.05,0.05,0.05},
+    visual = "sprite",
+    textures = {"tnt_smoke.png"},
+    shrink = false,
+    on_step = function(self, dtime)
+        self.object:setvelocity({x=0, y=0.5, z=0})
+        self.object:setacceleration({x=0, y=9.8, z = 0})
+        self.timer = self.timer + dtime
+        self.visual_size.x = self.visual_size.x + 0.025
+        self.visual_size.y = self.visual_size.x
+        if self.timer > 1 then
+           self.object:remove()
+        end
+    end,
+    timer = 0,
+})
+
+
+minetest.register_entity("tnt:smoke2", {
+    physical = true,
+	visual_size = {x=1, y=1},
+	collisionbox = {-0.05,-0.05,-0.05,0.05,0.05,0.05},
+    visual = "sprite",
+    textures = {"tnt_smokew.png"},
+    ft = true,
+    on_step = function(self, dtime)
+        self.timer = self.timer + dtime
+        if self.timer > 1.5 and self.ft==true then
+           self.object:setvelocity({x=0, y=0, z = 0})	   
+           self.object:setacceleration({x=0, y=2, z = 0})	   
+           self.ft = false
+        end
+           if self.timer > 3 then
+              self.object:remove()
+           end		
+    end,
+    timer = 0,
+})
+
+minetest.register_entity("tnt:explosion", {
+    physical = true,
+	visual_size = {x=1, y=1},
+	collisionbox = {-0.05,-0.05,-0.05,0.05,0.05,0.05},
+    visual = "sprite",
+	anim_step =0,
+	timer = 0,
+	animation_frames = 8,
+    on_step = function(self, dtime)
+        self.timer = self.timer + dtime
+        if self.timer > 2 then
+           self.object:remove()
+        end		
+		   local pos = self.object:getpos()
+		   self.object:setpos({x=pos.x+math.random(-1,1),y=pos.y+math.random(-1,1),z=pos.z+math.random(-1,1)})
+           self.visual_size.x = math.random(2)
+           self.visual_size.y = self.visual_size.x	
+		self.anim_step = (self.anim_step+1)%self.animation_frames
+		self.object:setacceleration({x=math.random(-2,2), y=math.random(-2,2), z=math.random(-2,2)})
+        self.object:set_properties({
+		textures = {
+	        "tnt_explosion.png^[verticalframe:"..self.animation_frames..":"..self.anim_step.."]"            
+        },
+    })		
+    end,
+    
+})
+
+
+--
+-- TNT (not functional)
+--
+
+minetest.register_craft({
+	output = "tnt:tnt",
+	recipe = {
+		{'minitest:sand','minitest:sulfer','minitest:sand'},
+		{'minitest:sulfer','minitest:sand','minitest:sulfer'},
+		{'minitest:sand','minitest:sulfer','minitest:sand'}
+	}
+})
+
+minetest.register_node("tnt:tnt", {
+	tile_images = {"default_tnt_top.png", "default_tnt_bottom.png",
+			"default_tnt_side.png", "default_tnt_side.png",
+			"default_tnt_side.png", "default_tnt_side.png"},
+	inventory_image = minetest.inventorycube("default_tnt_top.png",
+			"default_tnt_side.png", "default_tnt_side.png"),
+	drop = 'tnt:tnt', -- Get nothing
+	material = {
+		diggability = "not",
+	},
+	after_place_node = function(pos, placer, itemstack)
+	   meta = minetest.env:get_meta(pos) 
+	   if meta then
+	      meta:set_string("owner",placer:get_player_name())
+	   end   
+	end,
+})
+
+minetest.register_on_punchnode(function(p, node, puncher)
+local ttt = minetest.env:get_meta(p):get_string("owner")
+if ttt~="" then minetest.debug("At " .. minetest.pos_to_string(p).." was punched "..ttt) end
+	if (shared_autoban and puncher and puncher~="mob" and check_ownership_once(p,puncher:get_player_name()))
+	or (not shared_autoban)
+	or puncher == "mob"
+      then
+	if node.name == "tnt:tnt" then
+	    local meta = minetest.env:get_meta(p)
+	    if meta then
+           local ow = meta:get_string("owner")	       		   
+           minetest.env:remove_node(p)
+           local ent = minetest.env:add_entity(p, "tnt:tnt"):get_luaentity()
+           ent.visual_size.x = 1
+           ent.visual_size.y = 1
+           ent.owner = ow
+           minetest.debug("owner of tnt is " .. ow)
+           nodeupdate(p)
+		end
 	end
+    end
+	
+end)
+
+local TNT = {
+	-- Static definition
+	physical = true, -- Collides with things
+	-- weight = 5,
+	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
+	visual_size = {x=1, y=1},
+	visual = "cube",
+	textures = {"default_tnt_top.png", "default_tnt_bottom.png",
+			"default_tnt_side.png", "default_tnt_side.png",
+			"default_tnt_side.png", "default_tnt_side.png"},
+	-- Initial value for our timer
+	timer = 0,
+	-- Number of punches required to defuse
+	health = 1,
+	blinktimer = 0,
+    doomtimer = 0,
+    parttimer = 0,
+	blinkstatus = true,
+	placer = nil,
+	owner = "",
+}
+
+-- Called when a TNT object is created
+function TNT:on_activate(staticdata)
+	self.object:setvelocity({x=0, y=4, z=0})
+	self.object:setacceleration({x=0, y=-10, z=0})
+	self.object:settexturemod("^[brighten")
+	self.object:set_armor_groups({immortal=1})
+end
+
+
+local destroy = function(pos)
 	local nodename = minetest.env:get_node(pos).name
 	if nodename ~= "air" then
 		minetest.env:remove_node(pos)
 		nodeupdate(pos)
 		if minetest.registered_nodes[nodename].groups.flammable ~= nil then
-			minetest.env:set_node(pos, {name="fire:basic_flame"})
+			minetest.env:set_node(pos, {name="fire:flame_normal"})
 			return
 		end
 		local drop = minetest.get_node_drops(nodename, "")
@@ -35,20 +193,21 @@ local destroy = function(pos)
 	end
 end
 
-boom = function(pos, time)
-	minetest.after(time, function(pos)
-		if minetest.env:get_node(pos).name ~= "tnt:tnt_burning" then
-			return
-		end
+
+boom = function(pos, puncher)
+local po = {x= pos.x, y=pos.y, z=pos.z}
+minetest.debug("boom ".. minetest.pos_to_string(pos))
+minetest.debug("boom2 ".. puncher)
 		minetest.sound_play("tnt_explode", {pos=pos, gain=1.5, max_hear_distance=2*64})
-		minetest.env:set_node(pos, {name="tnt:boom"})
-		minetest.after(0.5, function(pos)
-			minetest.env:remove_node(pos)
-		end, {x=pos.x, y=pos.y, z=pos.z})
-		
 		local objects = minetest.env:get_objects_inside_radius(pos, 7)
 		for _,obj in ipairs(objects) do
-			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+			if obj:is_player() or (obj:get_luaentity() 
+			                       and obj:get_luaentity().name ~= "__builtin:item" 
+			                       and obj:get_luaentity().name ~= "tnt:tnt" 
+			                       and obj:get_luaentity().name ~= "tnt:smoke"
+			                       and obj:get_luaentity().name ~= "tnt:smoke2" 
+			                       and obj:get_luaentity().name ~= "tnt:explosion") 
+			   then
 				local obj_p = obj:getpos()
 				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
 				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
@@ -62,26 +221,50 @@ boom = function(pos, time)
 				}, nil)
 			end
 		end
+
 		
-		for dx=-2,2 do
+		for dx=-2,2 do		
 			for dz=-2,2 do
 				for dy=2,-2,-1 do
-					pos.x = pos.x+dx
-					pos.y = pos.y+dy
-					pos.z = pos.z+dz
+					local p = {}
+					p.x = po.x + dx
+					p.y = po.y + dy
+					p.z = po.z + dz
 					
-					local node =  minetest.env:get_node(pos)
-					if node.name == "tnt:tnt" or node.name == "tnt:tnt_burning" then
-						minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-						boom({x=pos.x, y=pos.y, z=pos.z}, 0)
-					elseif node.name == "fire:basic_flame" or string.find(node.name, "default:water_") or string.find(node.name, "default:lava_") or node.name == "tnt:boom" then
+					
+					local node = minetest.env:get_node(p)	
+                    owne = minetest.env:get_meta(p):get_string("owner")
+					pl = minetest.env:get_player_by_name(puncher)				
+					if node.name == "tnt:tnt" and pl 
+					then 
+	                   minetest.node_punch(p, node, pl)                       					
+					end
+					if node.name ~= "fire:flame_normal" 
+					    and not string.find(node.name, "default:water_") 
+					    and not string.find(node.name, "default:lava_") then
 						
-					else
-						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
-							destroy(pos)
+					
+						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then -- check for ownership
+							if shared_autoban ~= nil
+							    then 
+							        if check_ownership_once(p,puncher) 
+							           then
+							           	    destroy(p)							          
+							           end
+							    else
+							    destroy(p)
+							end
 						else
-							if math.random(1,5) <= 4 then
-								destroy(pos)
+							if math.random(1,5) <= 4 then -- check for ownership
+							if shared_autoban ~= nil
+							    then 
+							        if check_ownership_once(p,puncher) 
+							           then
+							           	    destroy(p)							          
+							           end
+							    else							    
+							    destroy(p)
+							end
 							end
 						end
 					end
@@ -92,186 +275,75 @@ boom = function(pos, time)
 				end
 			end
 		end
-	end, pos)
+
 end
 
-minetest.register_node("tnt:tnt", {
-	description = "TNT",
-	tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
-	groups = {dig_immediate=2, mesecon=2},
-	sounds = default.node_sound_wood_defaults(),
-	
-	on_punch = function(pos, node, puncher)
-		if puncher:get_wielded_item():get_name() == "default:torch" then
-			minetest.sound_play("tnt_ignite", {pos=pos})
-			minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-			boom(pos, 4)
-		end
-	end,
-	
-	mesecons = {
-		effector = {
-			action_on = function(pos, node)
-				minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-				boom(pos, 0)
-			end
-		},
-	},
-})
-
-minetest.register_node("tnt:tnt_burning", {
-	tiles = {{name="tnt_top_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}, "tnt_bottom.png", "tnt_side.png"},
-	light_source = 5,
-	drop = "",
-	sounds = default.node_sound_wood_defaults(),
-})
-
-minetest.register_node("tnt:boom", {
-	drawtype = "plantlike",
-	tiles = {"tnt_boom.png"},
-	light_source = LIGHT_MAX,
-	walkable = false,
-	drop = "",
-	groups = {dig_immediate=3},
-})
-
-burn = function(pos)
-	if minetest.env:get_node(pos).name == "tnt:tnt" then
-		minetest.sound_play("tnt_ignite", {pos=pos})
-		minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-		boom(pos, 1)
-		return
-	end
-	if minetest.env:get_node(pos).name ~= "tnt:gunpowder" then
-		return
-	end
-	minetest.sound_play("tnt_gunpowder_burning", {pos=pos, gain=2})
-	minetest.env:set_node(pos, {name="tnt:gunpowder_burning"})
-	
-	minetest.after(1, function(pos)
-		if minetest.env:get_node(pos).name ~= "tnt:gunpowder_burning" then
-			return
-		end
-		minetest.after(0.5, function(pos)
-			minetest.env:remove_node(pos)
-		end, {x=pos.x, y=pos.y, z=pos.z})
-		for dx=-1,1 do
-			for dz=-1,1 do
-				for dy=-1,1 do
-					pos.x = pos.x+dx
-					pos.y = pos.y+dy
-					pos.z = pos.z+dz
-					
-					if not (math.abs(dx) == 1 and math.abs(dz) == 1) then
-						if dy == 0 then
-							burn({x=pos.x, y=pos.y, z=pos.z})
-						else
-							if math.abs(dx) == 1 or math.abs(dz) == 1 then
-								burn({x=pos.x, y=pos.y, z=pos.z})
-							end
-						end
-					end
-					
-					pos.x = pos.x-dx
-					pos.y = pos.y-dy
-					pos.z = pos.z-dz
-				end
-			end
-		end
-	end, pos)
-end
-
-minetest.register_node("tnt:gunpowder", {
-	description = "Gun Powder",
-	drawtype = "raillike",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	tiles = {"tnt_gunpowder.png",},
-	inventory_image = "tnt_gunpowder_inventory.png",
-	wield_image = "tnt_gunpowder_inventory.png",
-	selection_box = {
-		type = "fixed",
-		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
-	},
-	groups = {dig_immediate=2},
-	sounds = default.node_sound_leaves_defaults(),
-	
-	on_punch = function(pos, node, puncher)
-		if puncher:get_wielded_item():get_name() == "default:torch" then
-			burn(pos)
-		end
-	end,
-})
-
-minetest.register_node("tnt:gunpowder_burning", {
-	drawtype = "raillike",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	light_source = 5,
-	tiles = {{name="tnt_gunpowder_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}},
-	selection_box = {
-		type = "fixed",
-		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
-	},
-	drop = "",
-	groups = {dig_immediate=2},
-	sounds = default.node_sound_leaves_defaults(),
-})
-
-minetest.register_abm({
-	nodenames = {"tnt:tnt", "tnt:gunpowder"},
-	neighbors = {"fire:basic_flame"},
-	interval = 2,
-	chance = 10,
-	action = function(pos, node)
-		if node.name == "tnt:tnt" then
-			minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-			boom({x=pos.x, y=pos.y, z=pos.z}, 0)
+-- Called periodically
+function TNT:on_step(dtime)
+	--print("TNT:on_step()")
+	self.timer = self.timer + dtime
+	self.blinktimer = self.blinktimer + dtime
+    self.doomtimer = self.doomtimer + dtime
+	if self.blinktimer > 0.5 then
+		self.blinktimer = self.blinktimer - 0.5
+		if self.blinkstatus then
+			self.object:settexturemod("")
 		else
-			burn(pos)
+			self.object:settexturemod("^[brighten")
 		end
+		self.blinkstatus = not self.blinkstatus
+
+	end	
+	if self.doomtimer > 3.5 then	
+       local i = self.visual_size.x + 0.05	   
+  			prop = {
+				visual_size = {x=i, y=i},
+			}
+			self.object:set_properties(prop)        	
+       
 	end
-})
 
-minetest.register_craft({
-	output = "tnt:gunpowder",
-	type = "shapeless",
-	recipe = {"default:coal_lump", "default:gravel"}
-})
-
-minetest.register_craft({
-	output = "tnt:tnt",
-	recipe = {
-		{"", "group:wood", ""},
-		{"group:wood", "tnt:gunpowder", "group:wood"},
-		{"", "group:wood", ""}
-	}
-})
-
-minetest.register_entity("tnt:smoke", {
-	physical = true,
-	visual = "sprite",
-	textures = {"tnt_smoke.png"},
-	collisionbox = {0,0,0,0,0,0},
-	
-	timer = 0,
-	time = 5,
-	
-	on_activate = function(self, staticdata)
-		self.object:setacceleration({x=math.random(0,10)/10-0.5, y=5, z=math.random(0,10)/10-0.5})
-		self.time = math.random(1, 10)/10
-	end,
-	
-	on_step = function(self, dtime)
-		self.timer = self.timer+dtime
-		if self.timer > self.time then
-			self.object:remove()
+	if self.doomtimer > 4 then	
+	   boom(self.object:getpos(),self.owner)
+	   self.object:remove()	   
+		local pos = self.object:getpos()
+		for i=1,10 do
+					local __x=math.random(-1,1)
+					local __y=math.random(-1,1)
+					local __z=math.random(-1,1)					
+		    minetest.env:add_entity({x=pos.x+__x, y=pos.y+__y, z=pos.z+__z},"tnt:explosion")		    
 		end
-	end,
-})
-
-if minetest.setting_get("log_mods") then
-	minetest.log("action", "tnt loaded")
+		
+		for _x=-1,1,0.4 do
+            for _y=-1,1,0.4 do
+                for _z=-1,1,0.4 do
+				    minetest.env:add_entity({x=pos.x+_x*0.1, y=pos.y+_y*0.1, z=pos.z+_z*0.1},"tnt:smoke2"):setacceleration({x=_x*3, y=_y*3, z=_z*3})
+				end
+			end
+		end       
+	end
+	self.parttimer = self.parttimer + dtime
+    if self.parttimer > 0.25 then
+	   self.parttimer = self.parttimer - 0.25
+       local pos = self.object:getpos()        
+	   local ent = minetest.env:add_entity({x=pos.x, y=pos.y+0.5, z=pos.z}, "tnt:smoke")		
+	   ent:get_luaentity().visual_size.x = 0.05
+	   ent:get_luaentity().visual_size.y = 0.05
+	end
 end
+
+
+function TNT:on_punch(hitter)
+	print("TNT:on_punch()")
+	self.health = self.health - 1
+	if self.health <= 0 then
+		self.object:remove()
+		--hitter:get_inventory():add_item("main", "experimental:tnt")
+		--hitter:set_hp(hitter:get_hp() - 1)
+	end
+
+	
+end
+
+minetest.register_entity("tnt:tnt", TNT)
+minetest.register_alias("TNT", "tnt:tnt")
