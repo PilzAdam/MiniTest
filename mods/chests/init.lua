@@ -1,4 +1,4 @@
-minetest.register_node("chests:chest", {
+minetest.register_node(":default:chest", {
 	description = "Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "default_chest_front.png"},
@@ -51,7 +51,7 @@ local function has_locked_chest_privilege(meta, player)
 	return true
 end
 
-minetest.register_node("chests:chest_locked", {
+minetest.register_node(":default:chest_locked", {
 	description = "Locked Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "default_chest_lock.png"},
@@ -136,6 +136,3 @@ minetest.register_node("chests:chest_locked", {
 				" takes stuff from locked chest at "..minetest.pos_to_string(pos))
 	end,
 })
-
-minetest.register_alias("default:chest", "chests:chest")
-minetest.register_alias("default:chest_locked", "chests:chest_locked")
