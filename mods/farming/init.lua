@@ -201,12 +201,6 @@ dofile(minetest.get_modpath("farming").."/pumpkin.lua")
 -- ========= WEED =========
 dofile(minetest.get_modpath("farming").."/weed.lua")
 
--- ========= PAPYRUS =========
-dofile(minetest.get_modpath("farming").."/papyrus.lua")
-
--- ========= CACTUS =========
-dofile(minetest.get_modpath("farming").."/cactus.lua")
-
 if minetest.setting_get("log_mods") then
 	minetest.log("action", "farming loaded")
 end

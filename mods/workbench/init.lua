@@ -22,7 +22,6 @@ minetest.register_node("workbench:3x3", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	legacy_facedir_simple = true,
-	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
 		meta:set_string("formspec",
@@ -149,7 +148,7 @@ minetest.register_node("workbench:3x3", {
 minetest.register_craft({
 	output = '"workbench:3x3"',
 	recipe = {
-		{'"default:wood"','"default:wood"'},
-		{'"default:wood"','"default:wood"'},
+		{'group:wood','group:wood'},
+		{'group:wood','group:wood'},
 	}
 })

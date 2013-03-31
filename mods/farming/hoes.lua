@@ -87,3 +87,47 @@ minetest.register_craft({
 		{"", "default:stick"}
 	}
 })
+
+minetest.register_tool("farming:hoe_gold", {
+	description = "Gold Hoe",
+	inventory_image = "farming_hoe_gold.png",
+	on_use = function(itemstack, user, pointed_thing)
+		if create_soil(pointed_thing.under, user:get_inventory(), 7) then
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/60)
+			end
+			return itemstack
+		end
+	end
+})
+
+minetest.register_craft({
+	output = "farming:hoe_gold",
+	recipe = {
+		{"default:gold_ingot", "default:gold_ingot"},
+		{"", "default:stick"},
+		{"", "default:stick"}
+	}
+})
+
+minetest.register_tool("farming:hoe_diamond", {
+	description = "Diamond Hoe",
+	inventory_image = "farming_hoe_diamond.png",
+	on_use = function(itemstack, user, pointed_thing)
+		if create_soil(pointed_thing.under, user:get_inventory(), 15) then
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/120)
+			end
+			return itemstack
+		end
+	end
+})
+
+minetest.register_craft({
+	output = "farming:hoe_diamond",
+	recipe = {
+		{"default:diamond", "default:diamond"},
+		{"", "default:stick"},
+		{"", "default:stick"}
+	}
+})
