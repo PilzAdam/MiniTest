@@ -694,15 +694,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "minitest:tnt",
-	recipe = {
-		{'minitest:sand','minitest:sulfer','minitest:sand'},
-		{'minitest:sulfer','minitest:sand','minitest:sulfer'},
-		{'minitest:sand','minitest:sulfer','minitest:sand'}
-	}
-})
-
-minetest.register_craft({
 	output = 'minitest:flint_and_steel',
 	recipe = {
 		{'minitest:steel_ingot', ''},
@@ -1940,17 +1931,6 @@ minetest.register_abm({
 	end,
 })
 
-minetest.register_node("minitest:tnt", {
-	tile_images = {"default_tnt_top.png", "default_tnt_bottom.png",
-			"default_tnt_side.png", "default_tnt_side.png",
-			"default_tnt_side.png", "default_tnt_side.png"},
-	dug_item = '', -- Get nothing
-	material = {
-		diggability = "not",
-	},
-	description = "TNT",
-})
-
 minetest.register_node("minitest:cobble", {
 	description = "Cobblestone",
 	tiles = {"default_cobble.png"},
@@ -2188,17 +2168,17 @@ minetest.register_craftitem("minitest:book", {
 
 minetest.register_craftitem("minitest:coal_lump", {
 	description = "Coal Lump",
-	inventory_image = "default_mineral_coal.png",
+	inventory_image = "default_coal_lump.png",
 })
 
 minetest.register_craftitem("minitest:iron_lump", {
 	description = "Iron Lump",
-	inventory_image = "default_mineral_iron.png",
+	inventory_image = "default_iron_lump.png",
 })
 
 minetest.register_craftitem("minitest:gold_lump", {
 	description = "Gold Lump",
-	inventory_image = "default_gold_lump.png",
+	inventory_image = "default_iron_lump.png",
 })
 
 minetest.register_craftitem("minitest:diamond", {
@@ -2238,7 +2218,7 @@ minetest.register_craftitem("minitest:flint", {
 
 minetest.register_craftitem("minitest:sulfer", {
 	description = "Sulfer",
-	inventoery_image = "default_sulfer.png",
+	inventoery_image = "default_sulphur.png",
 })
 
 -- Support old code
@@ -2367,5 +2347,6 @@ minetest.register_abm({
 		end
 	end,
 })
+
 
 -- END
