@@ -87,11 +87,11 @@ minetest.register_craft({
 })
 
 minetest.register_node("tnt:tnt", {
-	tile_images = {"tnt_tnt_top.png", "tnt_tnt_bottom.png",
-			"tnt_tnt_side.png", "tnt_tnt_side.png",
-			"tnt_tnt_side.png", "tnt_tnt_side.png"},
-	inventory_image = minetest.inventorycube("tnt_tnt_top.png",
-			"tnt_tnt_side.png", "tnt_tnt_side.png"),
+	tile_images = {"default_tnt_top.png", "default_tnt_bottom.png",
+			"default_tnt_side.png", "default_tnt_side.png",
+			"default_tnt_side.png", "default_tnt_side.png"},
+	inventory_image = minetest.inventorycube("default_tnt_top.png",
+			"default_tnt_side.png", "default_tnt_side.png"),
 	drop = 'tnt:tnt', -- Get nothing
 	material = {
 		diggability = "not",
@@ -135,9 +135,9 @@ local TNT = {
 	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
 	visual_size = {x=1, y=1},
 	visual = "cube",
-	textures = {"tnt_tnt_top_burning.png", "tnt_tnt_bottom.png",
-			"tnt_tnt_side.png", "tnt_tnt_side.png",
-			"tnt_tnt_side.png", "tnt_tnt_side.png"},
+	textures = {"default_tnt_top.png", "default_tnt_bottom.png",
+			"default_tnt_side.png", "default_tnt_side.png",
+			"default_tnt_side.png", "default_tnt_side.png"},
 	-- Initial value for our timer
 	timer = 0,
 	-- Number of punches required to defuse

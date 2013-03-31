@@ -152,13 +152,3 @@ function dye_cook(color, recipeitem)
 		recipe = recipeitem,
 	})
 end
-
--- Recipe Def
-dye_cook("dye:white", "default:glass")
-dye_cook("dye:grey", "default:stone")
-dye_cook("dye:red 2", "flowers:flower_rose")
-dye_cook("dye:orange 2", "flowers:flower_tulip")
-dye_cook("dye:yellow 2", "flowers_dandelion_yellow")
-dye_cook("dye:blue 2", "flowers:flower_waterlily")
-dye_cook("dye:black 10", "default:obsidian")
-dye_cook("dye:dark_grey 5", "default:onsidian_glass")

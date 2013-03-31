@@ -75,9 +75,9 @@ minetest.register_tool("minitest:pick_steel", {
 		damage_groups = {fleshy=4},
 	},
 })
-minetest.register_tool("minitest:pick_mese", {
+minetest.register_tool("minitest:pick_gold", {
 	description = "Gold Pickaxe",
-	inventory_image = "default_tool_mesepick.png",
+	inventory_image = "default_tool_goldpick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.3,
 		max_drop_level=0,
@@ -140,10 +140,10 @@ minetest.register_tool("minitest:shovel_steel", {
 		damage_groups = {fleshy=3},
 	},
 })
-minetest.register_tool("minitest:shovel_mese", {
+minetest.register_tool("minitest:shovel_gold", {
 	description = "Gold Shovel",
-	inventory_image = "default_tool_meseshovel.png",
-	wield_image = "default_tool_meseshovel.png^[transformR90",
+	inventory_image = "default_tool_goldshovel.png",
+	wield_image = "default_tool_goldshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.4,
 		max_drop_level=0,
@@ -204,9 +204,9 @@ minetest.register_tool("minitest:axe_steel", {
 		damage_groups = {fleshy=4},
 	},
 })
-minetest.register_tool("minitest:axe_mese", {
+minetest.register_tool("minitest:axe_gold", {
 	description = "Gold Axe",
-	inventory_image = "default_tool_meseaxe.png",
+	inventory_image = "default_tool_goldaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -266,9 +266,9 @@ minetest.register_tool("minitest:sword_steel", {
 		damage_groups = {fleshy=6},
 	}
 })
-minetest.register_tool("minitest:sword_mese", {
+minetest.register_tool("minitest:sword_gold", {
 	description = "Gold Sword",
-	inventory_image = "default_tool_mesesword.png",
+	inventory_image = "default_tool_goldsword.png",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -393,7 +393,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'minitest:pick_mese',
+	output = 'minitest:pick_gold',
 	recipe = {
 		{'minitest:gold_ingot', 'minitest:gold_ingot', 'minitest:gold_ingot'},
 		{'', 'minitest:stick', ''},
@@ -438,7 +438,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'minitest:shovel_mese',
+	output = 'minitest:shovel_gold',
 	recipe = {
 		{'minitest:gold_ingot'},
 		{'minitest:stick'},
@@ -483,7 +483,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'minitest:axe_mese',
+	output = 'minitest:axe_gold',
 	recipe = {
 		{'minitest:gold_ingot', 'minitest:gold_ingot'},
 		{'minitest:gold_ingot', 'minitest:stick'},
@@ -528,7 +528,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'minitest:sword_mese',
+	output = 'minitest:sword_gold',
 	recipe = {
 		{'minitest:gold_ingot'},
 		{'minitest:gold_ingot'},
