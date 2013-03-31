@@ -1084,11 +1084,11 @@ minetest.register_node("minitest:gravel", {
 		max_items = 1,
 		items = {
 			{
-				items = {':minitest:flint'},
+				items = {'minitest:flint'},
 				rarity = 10,
 			},
 			{
-				items = {':minitest:gravel'},
+				items = {'minitest:gravel'},
 			}
 		}
 	},
@@ -2178,7 +2178,7 @@ minetest.register_craftitem("minitest:iron_lump", {
 
 minetest.register_craftitem("minitest:gold_lump", {
 	description = "Gold Lump",
-	inventory_image = "default_iron_lump.png",
+	inventory_image = "default_gold_lump.png",
 })
 
 minetest.register_craftitem("minitest:diamond", {
