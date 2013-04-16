@@ -9,6 +9,8 @@ SURVIVAL_FORMSPEC = "size[8,8.5]"..
 	"list[current_player;main;0,4.5;8,4;]"..
 	"list[current_player;craft;4,1;2,2;]"..
 	"list[current_player;craftpreview;7,1.5;1,1;]"
+	
+minetest.register_alias("workbench:3x3", "crafting:workbench")
 
 
 function weg(player, pos)
