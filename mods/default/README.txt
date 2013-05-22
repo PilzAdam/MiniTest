@@ -27,61 +27,38 @@ Originating from work by kddekadenz/Dogers:
   default_dig_crumbly.{1,2}.ogg
 
 Cisoun's WTFPL texture pack:
-  default_stone_brick.png
-  default_water.png
-
-Originating from G4JC's Almost MC Texture Pack (CC BY-SA):
-  default_cobble.png
-  default_apple.png
-  default_bookshelf.png
-  default_brick.png
-  default_cactus_side.png
-  default_cactus_top.png
   default_chest_front.png
   default_chest_lock.png
   default_chest_side.png
   default_chest_top.png
-  default_clay_brick.png
-  default_clay_lump.png
-  default_coal_lump.png
-  default_desert_sand.png
-  default_desert_stone.png
+  default_stone_brick.png
   default_dirt.png
-  default_fence.png
-  default_furnace_front.png
-  default_furnace_side.png
-  default_glass.png
   default_grass.png
-  default_grass_footsteps.png
   default_grass_side.png
-  default_gravel.png
-  default_iron_lump.png
-  default_junglegrass.png
   default_jungletree.png
   default_jungletree_top.png
   default_lava.png
   default_leaves.png
-  default_mossycobble.png
-  default_sand.png
-  default_sandstone.png
   default_sapling.png
   default_sign_wall.png
   default_stone.png
   default_tool_mesepick.png
-  default_tool_steelaxe.png
+  default_tool_steelpick.png
   default_tool_steelshovel.png
-  default_tool_steelsword.png
-  default_tool_stoneaxe.png
   default_tool_stonepick.png
   default_tool_stoneshovel.png
-  default_tool_woodaxe.png
   default_tool_woodpick.png
   default_tool_woodshovel.png
   default_tree.png
   default_tree_top.png
+  default_water.png
+
+Originating from G4JC's Almost MC Texture Pack:
   default_wood.png
-  heart.png
-  wieldhand.png
+  default_torch.png
+  default_torch_on_ceiling.png
+  default_torch_on_floor.png
+  default_cobble.png
 
 VanessaE's animated torches (WTFPL):
   default_torch_animated.png
@@ -99,10 +76,15 @@ VanessaE (WTFPL):
   default_nc_rb.png
   default_nc_side.png
   default_grass_*.png
+  default_desert_sand.png
+  default_desert_stone.png
   default_desert_stone_brick.png
+  default_sand.png
   default_sandstone_brick.png
 
 Calinou (CC BY-SA):
+  default_brick.png
+  default_clay_brick.png
   default_papyrus.png
   default_tool_steelsword.png
 
@@ -118,6 +100,7 @@ PilzAdam (WTFPL):
   default_junglewood.png
   default_obsidian_glass.png
   default_obsidian_shard.png
+  default_mossycobble.png
   default_gold_block.png
   default_gold_ingot.png
   default_gold_lump.png
