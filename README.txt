@@ -6,4 +6,4 @@ License
 See README.txt of each mod for License information.
 
 License of menu/icon.png
-Copyright (C) 2012 Calinou
+Copyright (C) 2012 Calinou WTFPL
