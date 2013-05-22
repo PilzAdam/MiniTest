@@ -1,6 +1,6 @@
 local destroy = function(pos)
 	local nodename = minetest.env:get_node(pos).name
-	if nodename ~= "air" then
+	if nodename ~= "air" and nodename ~= "default:bedrock" then
 		minetest.env:remove_node(pos)
 		nodeupdate(pos)
 		if minetest.registered_nodes[nodename].groups.flammable ~= nil then
@@ -115,8 +115,9 @@ minetest.register_node("tnt:tnt", {
 	groups = {dig_immediate=2, mesecon=2},
 	sounds = default.node_sound_wood_defaults(),
 	
-	on_punch = function(pos, node, puncher)
-		if puncher:get_wielded_item():get_name() == "default:torch" then
+	on_rightclick = function(pos, node, puncher)
+		local name = puncher:get_wielded_item():get_name()
+		if name == "default:torch" or name == "fire:flint_and_steel" then
 			minetest.sound_play("tnt_ignite", {pos=pos})
 			minetest.env:set_node(pos, {name="tnt:tnt_burning"})
 			boom(pos, 4)
