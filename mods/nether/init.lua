@@ -373,9 +373,9 @@ end
 
 replace("default:stone", "nether:rack")
 replace("default:stone_with_coal", "air")
-replace("default:stone_with_iron", "air")
+replace("default:iron", "air")
 replace("default:stone_with_diamond", "default:lava_source")
-replace("default:stone_with_gold", "nether:glowstone")
+replace("default:gold", "nether:glowstone")
 replace("default:gravel", "nether:sand")
 replace("default:dirt", "nether:sand")
 replace("default:sand", "nether:sand")
