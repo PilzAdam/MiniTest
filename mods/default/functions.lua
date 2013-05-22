@@ -109,8 +109,15 @@ function on_placenode(p, node)
 end
 minetest.register_on_placenode(on_placenode)
 
+-- Remove all papyrus/cactus above
 function on_dignode(p, node)
-	--print("on_dignode")
+	if node.name == "default:cactus" or node.name == "default:papyrus" then
+		p.y = p.y+1
+		local name = minetest.env:get_node(p).name
+		if name == "default:cactus" or name == "default:papyrus" then
+			minetest.env:dig_node(p)
+		end
+	end
 end
 minetest.register_on_dignode(on_dignode)
 
