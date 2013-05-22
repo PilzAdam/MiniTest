@@ -121,6 +121,9 @@ Splizard (CC BY-SA 3.0):
   default_snow_side.png
   default_ice.png
 
+Zeg9 (CC BY-SA 3.0):
+  default_bedrock.png
+
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
   2: http://www.freesound.org/people/Tomlija/sounds/97669/

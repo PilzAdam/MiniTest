@@ -1092,3 +1092,9 @@ minetest.register_node("default:snowblock", {
 		footstep = {name="default_grass_footstep", gain=0.4},
 	}),
 })
+
+minetest.register_node("default:bedrock", {
+	description = "Bedrock",
+	tiles = {"default_bedrock.png"},
+	sounds = default.node_sound_stone_defaults(),
+})
