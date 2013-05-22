@@ -63,13 +63,6 @@ minetest.register_node("default:stonebrick", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:desert_stonebrick", {
-	description = "Desert Stone Brick",
-	tiles = {"default_desert_stone_brick.png"},
-	groups = {cracky=2, stone=1},
-	sounds = default.node_sound_stone_defaults(),
-})
-
 minetest.register_node("default:dirt_with_grass", {
 	description = "Dirt with Grass",
 	tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
@@ -143,14 +136,6 @@ minetest.register_node("default:sandstone", {
 	tiles = {"default_sandstone.png"},
 	is_ground_content = true,
 	groups = {crumbly=2,cracky=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("default:sandstonebrick", {
-	description = "Sandstone Brick",
-	tiles = {"default_sandstone_brick.png"},
-	is_ground_content = true,
-	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -372,7 +357,7 @@ minetest.register_node("default:ladder", {
 		--wall_bottom = = <default>
 		--wall_side = = <default>
 	},
-	groups = {choppy=2,oddly_breakable_by_hand=3,flammable=2},
+	groups = {choppy=2,oddly_breakable_by_hand=3,flammable=2,attached_node=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -616,96 +601,6 @@ minetest.register_node("default:chest", {
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name()..
 				" takes stuff from chest at "..minetest.pos_to_string(pos))
-	end,
-})
-
-local function has_locked_chest_privilege(meta, player)
-	if player:get_player_name() ~= meta:get_string("owner") then
-		return false
-	end
-	return true
-end
-
-minetest.register_node("default:chest_locked", {
-	description = "Locked Chest",
-	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
-		"default_chest_side.png", "default_chest_side.png", "default_chest_lock.png"},
-	paramtype2 = "facedir",
-	groups = {choppy=2,oddly_breakable_by_hand=2},
-	legacy_facedir_simple = true,
-	sounds = default.node_sound_wood_defaults(),
-	after_place_node = function(pos, placer)
-		local meta = minetest.env:get_meta(pos)
-		meta:set_string("owner", placer:get_player_name() or "")
-		meta:set_string("infotext", "Locked Chest (owned by "..
-				meta:get_string("owner")..")")
-	end,
-	on_construct = function(pos)
-		local meta = minetest.env:get_meta(pos)
-		meta:set_string("infotext", "Locked Chest")
-		meta:set_string("owner", "")
-		local inv = meta:get_inventory()
-		inv:set_size("main", 8*4)
-	end,
-	can_dig = function(pos,player)
-		local meta = minetest.env:get_meta(pos);
-		local inv = meta:get_inventory()
-		return inv:is_empty("main") and has_locked_chest_privilege(meta, player)
-	end,
-	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		local meta = minetest.env:get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
-			minetest.log("action", player:get_player_name()..
-					" tried to access a locked chest belonging to "..
-					meta:get_string("owner").." at "..
-					minetest.pos_to_string(pos))
-			return 0
-		end
-		return count
-	end,
-    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		local meta = minetest.env:get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
-			minetest.log("action", player:get_player_name()..
-					" tried to access a locked chest belonging to "..
-					meta:get_string("owner").." at "..
-					minetest.pos_to_string(pos))
-			return 0
-		end
-		return stack:get_count()
-	end,
-    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
-		local meta = minetest.env:get_meta(pos)
-		if not has_locked_chest_privilege(meta, player) then
-			minetest.log("action", player:get_player_name()..
-					" tried to access a locked chest belonging to "..
-					meta:get_string("owner").." at "..
-					minetest.pos_to_string(pos))
-			return 0
-		end
-		return stack:get_count()
-	end,
-	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		minetest.log("action", player:get_player_name()..
-				" moves stuff in locked chest at "..minetest.pos_to_string(pos))
-	end,
-    on_metadata_inventory_put = function(pos, listname, index, stack, player)
-		minetest.log("action", player:get_player_name()..
-				" moves stuff to locked chest at "..minetest.pos_to_string(pos))
-	end,
-    on_metadata_inventory_take = function(pos, listname, index, stack, player)
-		minetest.log("action", player:get_player_name()..
-				" takes stuff from locked chest at "..minetest.pos_to_string(pos))
-	end,
-	on_rightclick = function(pos, node, clicker)
-		local meta = minetest.env:get_meta(pos)
-		if has_locked_chest_privilege(meta, clicker) then
-			local pos = pos.x .. "," .. pos.y .. "," ..pos.z
-			minetest.show_formspec(clicker:get_player_name(), "default:chest_locked",
-				"size[8,9]"..
-				"list[nodemeta:".. pos .. ";main;0,0;8,4;]"..
-				"list[current_player;main;0,5;8,4;]")
-		end
 	end,
 })
 
@@ -984,14 +879,6 @@ minetest.register_node("default:mossycobble", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:coalblock", {
-	description = "Coal Block",
-	tiles = {"default_coal_block.png"},
-	is_ground_content = true,
-	groups = {cracky=3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
 minetest.register_node("default:steelblock", {
 	description = "Steel Block",
 	tiles = {"default_steel_block.png"},
@@ -1016,39 +903,12 @@ minetest.register_node("default:diamondblock", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:obsidian_glass", {
-	description = "Obsidian Glass",
-	drawtype = "glasslike",
-	tiles = {"default_obsidian_glass.png"},
-	paramtype = "light",
-	sunlight_propagates = true,
-	sounds = default.node_sound_glass_defaults(),
-	groups = {cracky=3,oddly_breakable_by_hand=3},
-})
-
 minetest.register_node("default:obsidian", {
 	description = "Obsidian",
 	tiles = {"default_obsidian.png"},
 	is_ground_content = true,
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky=1,level=2},
-})
-
-minetest.register_node("default:nyancat", {
-	description = "Nyan Cat",
-	tiles = {"default_nc_side.png", "default_nc_side.png", "default_nc_side.png",
-		"default_nc_side.png", "default_nc_back.png", "default_nc_front.png"},
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	legacy_facedir_simple = true,
-	sounds = default.node_sound_defaults(),
-})
-
-minetest.register_node("default:nyancat_rainbow", {
-	description = "Nyan Cat Rainbow",
-	tiles = {"default_nc_rb.png"},
-	groups = {cracky=2},
-	sounds = default.node_sound_defaults(),
 })
 
 minetest.register_node("default:sapling", {

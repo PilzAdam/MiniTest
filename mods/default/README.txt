@@ -28,7 +28,6 @@ Originating from work by kddekadenz/Dogers:
 
 Cisoun's WTFPL texture pack:
   default_chest_front.png
-  default_chest_lock.png
   default_chest_side.png
   default_chest_top.png
   default_stone_brick.png
@@ -71,16 +70,10 @@ RealBadAngel's animated water (WTFPL):
   default_water_flowing_animated.png
 
 VanessaE (WTFPL):
-  default_nc_back.png
-  default_nc_front.png
-  default_nc_rb.png
-  default_nc_side.png
   default_grass_*.png
   default_desert_sand.png
   default_desert_stone.png
-  default_desert_stone_brick.png
   default_sand.png
-  default_sandstone_brick.png
 
 Calinou (CC BY-SA):
   default_brick.png
@@ -98,8 +91,6 @@ PilzAdam (WTFPL):
   default_jungleleaves.png
   default_junglesapling.png
   default_junglewood.png
-  default_obsidian_glass.png
-  default_obsidian_shard.png
   default_mossycobble.png
   default_gold_block.png
   default_gold_ingot.png
@@ -130,9 +121,6 @@ Splizard (CC BY-SA 3.0):
   default_snow.png
   default_snow_side.png
   default_ice.png
-
-Zeg9 (CC BY-SA 3.0):
-  default_coal_block.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
