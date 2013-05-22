@@ -71,8 +71,6 @@ RealBadAngel's animated water (WTFPL):
 
 VanessaE (WTFPL):
   default_grass_*.png
-  default_desert_sand.png
-  default_desert_stone.png
   default_sand.png
 
 Calinou (CC BY-SA):
