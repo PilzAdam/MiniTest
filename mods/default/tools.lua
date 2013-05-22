@@ -69,18 +69,6 @@ minetest.register_tool("default:pick_bronze", {
 		damage_groups = {fleshy=4},
 	},
 })
-minetest.register_tool("default:pick_mese", {
-	description = "Mese Pickaxe",
-	inventory_image = "default_tool_mesepick.png",
-	tool_capabilities = {
-		full_punch_interval = 0.9,
-		max_drop_level=3,
-		groupcaps={
-			cracky = {times={[1]=2.4, [2]=1.2, [3]=0.60}, uses=20, maxlevel=3},
-		},
-		damage_groups = {fleshy=5},
-	},
-})
 minetest.register_tool("default:pick_diamond", {
 	description = "Diamond Pickaxe",
 	inventory_image = "default_tool_diamondpick.png",
@@ -150,19 +138,6 @@ minetest.register_tool("default:shovel_bronze", {
 		damage_groups = {fleshy=3},
 	},
 })
-minetest.register_tool("default:shovel_mese", {
-	description = "Mese Shovel",
-	inventory_image = "default_tool_meseshovel.png",
-	wield_image = "default_tool_meseshovel.png^[transformR90",
-	tool_capabilities = {
-		full_punch_interval = 1.0,
-		max_drop_level=3,
-		groupcaps={
-			crumbly = {times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=20, maxlevel=3},
-		},
-		damage_groups = {fleshy=4},
-	},
-})
 minetest.register_tool("default:shovel_diamond", {
 	description = "Diamond Shovel",
 	inventory_image = "default_tool_diamondshovel.png",
@@ -229,18 +204,6 @@ minetest.register_tool("default:axe_bronze", {
 		damage_groups = {fleshy=4},
 	},
 })
-minetest.register_tool("default:axe_mese", {
-	description = "Mese Axe",
-	inventory_image = "default_tool_meseaxe.png",
-	tool_capabilities = {
-		full_punch_interval = 0.9,
-		max_drop_level=1,
-		groupcaps={
-			choppy={times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=20, maxlevel=3},
-		},
-		damage_groups = {fleshy=6},
-	},
-})
 minetest.register_tool("default:axe_diamond", {
 	description = "Diamond Axe",
 	inventory_image = "default_tool_diamondaxe.png",
@@ -304,18 +267,6 @@ minetest.register_tool("default:sword_bronze", {
 			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=40, maxlevel=2},
 		},
 		damage_groups = {fleshy=6},
-	}
-})
-minetest.register_tool("default:sword_mese", {
-	description = "Mese Sword",
-	inventory_image = "default_tool_mesesword.png",
-	tool_capabilities = {
-		full_punch_interval = 0.7,
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=30, maxlevel=3},
-		},
-		damage_groups = {fleshy=7},
 	}
 })
 minetest.register_tool("default:sword_diamond", {
