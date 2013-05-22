@@ -208,11 +208,12 @@ minetest.register_node(":default:grass_1", {
 		max_items = 1,
 		items = {
 			{items = {'farming:seed'},rarity = 20},
-			{items = {'default:grass_1'}},
 		}
 	},
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1},
-	sounds = default.node_sound_leaves_defaults(),
+	groups = {dig_immediate=3,flammable=3,flora=1,attached_node=1},
+	sounds = default.node_sound_leaves_defaults({
+		dug = {name="default_dig_crumbly", gain=0.4}
+	}),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
@@ -240,11 +241,12 @@ for i=2,5 do
 			max_items = 1,
 			items = {
 				{items = {'farming:seed_wheat'},rarity = 20},
-				{items = {'default:grass_1'}},
 			}
 		},
-		groups = {snappy=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
-		sounds = default.node_sound_leaves_defaults(),
+		groups = {dig_immediate=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
+		sounds = default.node_sound_leaves_defaults({
+			dug = {name="default_dig_crumbly", gain=0.4}
+		}),
 		selection_box = {
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},

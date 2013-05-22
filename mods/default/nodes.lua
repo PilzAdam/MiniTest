@@ -945,7 +945,7 @@ minetest.register_node("default:dry_shrub", {
 	},
 })
 
-minetest.register_node("default:grass_1", {
+minetest.register_node(":default:grass_1", {
 	description = "Grass",
 	drawtype = "plantlike",
 	tiles = {"default_grass_1.png"},
@@ -955,8 +955,11 @@ minetest.register_node("default:grass_1", {
 	paramtype = "light",
 	walkable = false,
 	buildable_to = true,
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1},
-	sounds = default.node_sound_leaves_defaults(),
+	drop = "",
+	groups = {dig_immediate=3,flammable=3,flora=1,attached_node=1},
+	sounds = default.node_sound_leaves_defaults({
+		dug = {name="default_dig_crumbly", gain=0.4}
+	}),
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
@@ -969,80 +972,28 @@ minetest.register_node("default:grass_1", {
 	end,
 })
 
-minetest.register_node("default:grass_2", {
-	description = "Grass",
-	drawtype = "plantlike",
-	tiles = {"default_grass_2.png"},
-	inventory_image = "default_grass_2.png",
-	wield_image = "default_grass_2.png",
-	paramtype = "light",
-	walkable = false,
-	buildable_to = true,
-	is_ground_content = true,
-	drop = "default:grass_1",
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
-	sounds = default.node_sound_leaves_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
-	},
-})
-minetest.register_node("default:grass_3", {
-	description = "Grass",
-	drawtype = "plantlike",
-	tiles = {"default_grass_3.png"},
-	inventory_image = "default_grass_3.png",
-	wield_image = "default_grass_3.png",
-	paramtype = "light",
-	walkable = false,
-	buildable_to = true,
-	is_ground_content = true,
-	drop = "default:grass_1",
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
-	sounds = default.node_sound_leaves_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
-	},
-})
-
-minetest.register_node("default:grass_4", {
-	description = "Grass",
-	drawtype = "plantlike",
-	tiles = {"default_grass_4.png"},
-	inventory_image = "default_grass_4.png",
-	wield_image = "default_grass_4.png",
-	paramtype = "light",
-	walkable = false,
-	buildable_to = true,
-	is_ground_content = true,
-	drop = "default:grass_1",
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
-	sounds = default.node_sound_leaves_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
-	},
-})
-
-minetest.register_node("default:grass_5", {
-	description = "Grass",
-	drawtype = "plantlike",
-	tiles = {"default_grass_5.png"},
-	inventory_image = "default_grass_5.png",
-	wield_image = "default_grass_5.png",
-	paramtype = "light",
-	walkable = false,
-	buildable_to = true,
-	is_ground_content = true,
-	drop = "default:grass_1",
-	groups = {snappy=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
-	sounds = default.node_sound_leaves_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
-	},
-})
+for i=2,5 do
+	minetest.register_node(":default:grass_"..i, {
+		description = "Grass",
+		drawtype = "plantlike",
+		tiles = {"default_grass_"..i..".png"},
+		inventory_image = "default_grass_"..i..".png",
+		wield_image = "default_grass_"..i..".png",
+		paramtype = "light",
+		walkable = false,
+		buildable_to = true,
+		is_ground_content = true,
+		drop = "",
+		groups = {dig_immediate=3,flammable=3,flora=1,attached_node=1,not_in_creative_inventory=1},
+		sounds = default.node_sound_leaves_defaults({
+			dug = {name="default_dig_crumbly", gain=0.4}
+		}),
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+		},
+	})
+end
 
 minetest.register_node("default:ice", {
 	description = "Ice",
