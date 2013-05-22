@@ -128,12 +128,21 @@ minetest.register_tool("farming:hoe_steel", {
 	end,
 })
 
-minetest.register_tool("farming:hoe_bronze", {
-	description = "Bronze Hoe",
-	inventory_image = "farming_tool_bronzehoe.png",
+minetest.register_tool("farming:hoe_gold", {
+	description = "Gold Hoe",
+	inventory_image = "farming_tool_goldhoe.png",
 	
 	on_use = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 220)
+	end,
+})
+
+minetest.register_tool("farming:hoe_diamond", {
+	description = "Diamond Hoe",
+	inventory_image = "farming_tool_diamondhoe.png",
+	
+	on_use = function(itemstack, user, pointed_thing)
+		return hoe_on_use(itemstack, user, pointed_thing, 400)
 	end,
 })
 
@@ -165,9 +174,18 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "farming:hoe_bronze",
+	output = "farming:hoe_gold",
 	recipe = {
-		{"default:bronze_ingot", "default:bronze_ingot"},
+		{"default:gold_ingot", "default:gold_ingot"},
+		{"", "default:stick"},
+		{"", "default:stick"},
+	}
+})
+
+minetest.register_craft({
+	output = "farming:hoe_diamond",
+	recipe = {
+		{"default:diamond", "default:diamond"},
 		{"", "default:stick"},
 		{"", "default:stick"},
 	}
