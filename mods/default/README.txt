@@ -105,11 +105,6 @@ VanessaE (WTFPL):
 Calinou (CC BY-SA):
   default_papyrus.png
   default_tool_steelsword.png
-  default_bronze_block.png
-  default_bronze_ingot.png
-  default_copper_ingot.png
-  default_copper_lump.png
-  default_mineral_copper.png
 
 MirceaKitsune (WTFPL):
   character.x
@@ -129,7 +124,6 @@ PilzAdam (WTFPL):
   default_mineral_gold.png
   default_diamond.png
   default_diamond_block.png
-  default_copper_block.png
   default_tool_diamondpick.png
   default_tool_diamondsword.png
   default_tool_diamondshovel.png
@@ -137,10 +131,10 @@ PilzAdam (WTFPL):
   default_tool_meseaxe.png
   default_tool_meseshovel.png
   default_tool_mesesword.png
-  default_tool_bronzeaxe.png
-  default_tool_bronzepick.png
-  default_tool_bronzeshovel.png
-  default_tool_bronzesword.png
+  default_tool_goldaxe.png
+  default_tool_goldpick.png
+  default_tool_goldshovel.png
+  default_tool_goldsword.png
   default_snowball.png
 
 jojoa1997 (WTFPL):

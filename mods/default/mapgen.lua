@@ -147,29 +147,6 @@ minetest.register_ore({
 	flags          = "absheight",
 })
 
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "default:stone_with_copper",
-	wherein        = "default:stone",
-	clust_scarcity = 12*12*12,
-	clust_num_ores = 4,
-	clust_size     = 3,
-	height_min     = -63,
-	height_max     = -16,
-})
-
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "default:stone_with_copper",
-	wherein        = "default:stone",
-	clust_scarcity = 9*9*9,
-	clust_num_ores = 5,
-	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -64,
-	flags          = "absheight",
-})
-
 if minetest.setting_get("mg_name") == "indev" then
 	-- Floatlands and high mountains springs
 	minetest.register_ore({
