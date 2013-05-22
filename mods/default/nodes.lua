@@ -232,18 +232,8 @@ minetest.register_node("default:leaves", {
 	paramtype = "light",
 	groups = {snappy=3, leafdecay=3, flammable=2, leaves=1},
 	drop = {
-		max_items = 1,
 		items = {
-			{
-				-- player will get sapling with 1/20 chance
-				items = {'default:sapling'},
-				rarity = 20,
-			},
-			{
-				-- player will get leaves only if he get no saplings,
-				-- this is because max_items is 1
-				items = {'default:leaves'},
-			}
+			{items = {'default:sapling'},rarity = 20},
 		}
 	},
 	sounds = default.node_sound_leaves_defaults(),
