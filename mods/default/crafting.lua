@@ -425,13 +425,13 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	output = "default:steel_ingot",
-	recipe = "default:iron_lump",
+	recipe = "default:iron",
 })
 
 minetest.register_craft({
 	type = "cooking",
 	output = "default:gold_ingot",
-	recipe = "default:gold_lump",
+	recipe = "default:gold",
 })
 
 minetest.register_craft({

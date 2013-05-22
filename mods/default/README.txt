@@ -93,7 +93,6 @@ PilzAdam (WTFPL):
   default_mossycobble.png
   default_gold_block.png
   default_gold_ingot.png
-  default_gold_lump.png
   default_mineral_gold.png
   default_diamond.png
   default_diamond_block.png

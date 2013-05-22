@@ -52,7 +52,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_iron",
+	ore            = "default:iron",
 	wherein        = "default:stone",
 	clust_scarcity = 12*12*12,
 	clust_num_ores = 3,
@@ -63,7 +63,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_iron",
+	ore            = "default:iron",
 	wherein        = "default:stone",
 	clust_scarcity = 9*9*9,
 	clust_num_ores = 5,
@@ -74,7 +74,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_iron",
+	ore            = "default:iron",
 	wherein        = "default:stone",
 	clust_scarcity = 7*7*7,
 	clust_num_ores = 5,
@@ -85,7 +85,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_iron",
+	ore            = "default:iron",
 	wherein        = "default:stone",
 	clust_scarcity = 24*24*24,
 	clust_num_ores = 27,
@@ -96,7 +96,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_gold",
+	ore            = "default:gold",
 	wherein        = "default:stone",
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 3,
@@ -107,7 +107,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_gold",
+	ore            = "default:gold",
 	wherein        = "default:stone",
 	clust_scarcity = 13*13*13,
 	clust_num_ores = 5,
@@ -360,9 +360,9 @@ end
 replace("air", "default:bedrock", -280, -256)
 replace("default:stone", "default:bedrock", -280, -256)
 replace("default:stone_with_coal", "default:bedrock", -280, -256)
-replace("default:stone_with_iron", "default:bedrock", -280, -256)
+replace("default:iron", "default:bedrock", -280, -256)
 replace("default:stone_with_diamond", "default:bedrock", -280, -256)
-replace("default:stone_with_gold", "default:bedrock", -280, -256)
+replace("default:gold", "default:bedrock", -280, -256)
 replace("default:gravel", "default:bedrock", -280, -256)
 replace("default:dirt", "default:bedrock", -280, -256)
 replace("default:sand", "default:bedrock", -280, -256)

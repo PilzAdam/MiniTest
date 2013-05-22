@@ -19,21 +19,19 @@ minetest.register_node("default:stone_with_coal", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:stone_with_iron", {
+minetest.register_node("default:iron", {
 	description = "Iron Ore",
 	tiles = {"default_stone.png^default_mineral_iron.png"},
 	is_ground_content = true,
 	groups = {cracky=2},
-	drop = 'default:iron_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:stone_with_gold", {
+minetest.register_node("default:gold", {
 	description = "Gold Ore",
 	tiles = {"default_stone.png^default_mineral_gold.png"},
 	is_ground_content = true,
 	groups = {cracky=2},
-	drop = "default:gold_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
 	
