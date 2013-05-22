@@ -190,3 +190,46 @@ minetest.register_abm({
 	end,
 })
 
+
+minetest.register_tool("fire:flint_and_steel", {
+	description = "Flint and Steel",
+	inventory_image = "fire_flint_and_steel.png",
+	on_place = function(stack, placer, pt)
+		if not pt.type == "node" then
+			return
+		end
+		local under = minetest.env:get_node(pt.under)
+		local above = minetest.env:get_node(pt.above)
+		if minetest.registered_nodes[under.name] and minetest.registered_nodes[under.name].on_rightclick then
+			stack = minetest.registered_nodes[under.name].on_rightclick(pt.under, under, placer, stack) or stack
+			return stack
+		end
+		if under.name == "default:obsidian" then
+			local done = nether.make_portal(pt.under)
+			if done and not minetest.setting_getbool("creative_mode") then
+				stack:add_wear(65535/(39))
+			end
+			return stack
+		end
+		if minetest.registered_nodes[under.name] and minetest.registered_nodes[under.name].buildable_to then
+			minetest.env:set_node(pt.under, {name="fire:basic_flame"})
+			if not minetest.setting_getbool("creative_mode") then
+				stack:add_wear(65535/(39))
+			end
+			return stack
+		end
+		if minetest.registered_nodes[above.name] and minetest.registered_nodes[above.name].buildable_to then
+			minetest.env:set_node(pt.above, {name="fire:basic_flame"})
+			if not minetest.setting_getbool("creative_mode") then
+				stack:add_wear(65535/(39))
+			end
+			return stack
+		end
+	end,
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "fire:flint_and_steel",
+	recipe = {"default:flint", "default:steel_ingot"},
+})

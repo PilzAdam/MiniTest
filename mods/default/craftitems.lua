@@ -54,3 +54,8 @@ minetest.register_craftitem("default:clay_brick", {
 	description = "Clay Brick",
 	inventory_image = "default_clay_brick.png",
 })
+
+minetest.register_craftitem("default:flint", {
+	description = "Flint",
+	inventory_image = "default_flint.png",
+})

@@ -30,3 +30,6 @@ fire_large.ogg sampled from:
 
 fire_basic_flame_animated.png:
   Muadtralk
+
+VanessaE (WTFPL):
+  fire_flint_and_steel.png

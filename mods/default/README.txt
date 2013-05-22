@@ -72,6 +72,7 @@ RealBadAngel's animated water (WTFPL):
 VanessaE (WTFPL):
   default_grass_*.png
   default_sand.png
+  default_flint.png
 
 Calinou (CC BY-SA):
   default_brick.png
