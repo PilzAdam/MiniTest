@@ -64,7 +64,7 @@ minetest.register_tool("default:pick_gold", {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={
-			cracky = {times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=30, maxlevel=2},
+			cracky = {times={[1]=3.00, [2]=1.30, [3]=0.65}, uses=10, maxlevel=2},
 		},
 		damage_groups = {fleshy=4},
 	},
@@ -133,7 +133,7 @@ minetest.register_tool("default:shovel_gold", {
 		full_punch_interval = 1.1,
 		max_drop_level=1,
 		groupcaps={
-			crumbly = {times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=40, maxlevel=2},
+			crumbly = {times={[1]=1.30, [2]=0.70, [3]=0.35}, uses=20, maxlevel=2},
 		},
 		damage_groups = {fleshy=3},
 	},
@@ -199,7 +199,7 @@ minetest.register_tool("default:axe_gold", {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=2.50, [2]=1.40, [3]=1.00}, uses=30, maxlevel=2},
+			choppy={times={[1]=2.30, [2]=1.10, [3]=0.70}, uses=10, maxlevel=2},
 		},
 		damage_groups = {fleshy=4},
 	},
@@ -264,7 +264,7 @@ minetest.register_tool("default:sword_gold", {
 		full_punch_interval = 0.8,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=40, maxlevel=2},
+			snappy={times={[1]=2.2, [2]=1.05, [3]=0.32}, uses=20, maxlevel=2},
 		},
 		damage_groups = {fleshy=6},
 	}

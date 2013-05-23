@@ -133,7 +133,7 @@ minetest.register_tool("farming:hoe_gold", {
 	inventory_image = "farming_tool_goldhoe.png",
 	
 	on_use = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 220)
+		return hoe_on_use(itemstack, user, pointed_thing, 150)
 	end,
 })
 
