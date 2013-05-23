@@ -343,15 +343,38 @@ minetest.register_node("nether:sand", {
 	}),
 })
 
+minetest.register_craftitem("nether:glowstone_dust", {
+	description = "Glowstone Dust",
+	inventory_image = "nether_glowstone_dust.png",
+	stack_max = 64,
+})
+
 minetest.register_node("nether:glowstone", {
 	description = "Glowstone",
 	tiles = {"nether_glowstone.png"},
 	is_ground_content = true,
 	light_source = 13,
 	stack_max = 64,
-	groups = {cracky=3,oddly_breakable_by_hand=3},
+	drop = {
+		items = {
+			{items = {'nether:glowstone_dust'}},
+			{items = {'nether:glowstone_dust'}},
+			{items = {'nether:glowstone_dust'}},
+			{items = {'nether:glowstone_dust'},rarity=2},
+			{items = {'nether:glowstone_dust'},rarity=4},
+		}
+	},
+	groups = {cracky=3},
 	sounds = default.node_sound_glass_defaults(),
 })
+
+minetest.register_craft{
+	output = "nether:glowstone",
+	recipe = {
+		{"nether:glowstone_dust", "nether:glowstone_dust"},
+		{"nether:glowstone_dust", "nether:glowstone_dust"},
+	}
+}
 
 minetest.register_node("nether:brick", {
 	description = "Nether Brick",
