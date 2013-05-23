@@ -101,13 +101,6 @@ function minetest.handle_node_drops(pos, drops, digger)
 						z = -z
 					end
 					obj:setvelocity({x=1/x, y=obj:getvelocity().y, z=1/z})
-					
-					-- FIXME this doesnt work for deactiveted objects
-					if minetest.setting_get("remove_items") and tonumber(minetest.setting_get("remove_items")) then
-						minetest.after(tonumber(minetest.setting_get("remove_items")), function(obj)
-							obj:remove()
-						end, obj)
-					end
 				end
 			end
 		end
@@ -130,6 +123,7 @@ minetest.register_entity(":__builtin:item", {
 	itemstring = '',
 	physical_state = true,
 	flying = false,
+	time = 0,
 
 	set_item = function(self, itemstring)
 		self.itemstring = itemstring
@@ -168,15 +162,19 @@ minetest.register_entity(":__builtin:item", {
 		return minetest.serialize({
 			itemstring = self.itemstring,
 			always_collect = self.always_collect,
+			time = self.time
 		})
 	end,
 
-	on_activate = function(self, staticdata)
+	on_activate = function(self, staticdata, dtime_s)
 		if string.sub(staticdata, 1, string.len("return")) == "return" then
 			local data = minetest.deserialize(staticdata)
 			if data and type(data) == "table" then
 				self.itemstring = data.itemstring
 				self.always_collect = data.always_collect
+				if data.time then
+					self.time = data.time + dtime_s
+				end
 			end
 		else
 			self.itemstring = staticdata
@@ -189,6 +187,11 @@ minetest.register_entity(":__builtin:item", {
 
 	on_step = function(self, dtime)
 		if self.flying then
+			return
+		end
+		self.time = self.time + dtime
+		if self.time > 300 then
+			self.object:remove()
 			return
 		end
 		local p = self.object:getpos()
