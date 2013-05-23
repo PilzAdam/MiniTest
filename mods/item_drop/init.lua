@@ -81,8 +81,13 @@ function minetest.handle_node_drops(pos, drops, digger)
 	for _,item in ipairs(drops) do
 		local count, name
 		if type(item) == "string" then
-			count = 1
-			name = item
+			name, count = item:match("^([a-zA-Z0-9_:]*) ([0-9]*)$")
+			if not name then
+				name = item
+			end
+			if not count then
+				count = 1
+			end
 		else
 			count = item:get_count()
 			name = item:get_name()
