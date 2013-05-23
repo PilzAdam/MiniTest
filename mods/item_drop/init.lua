@@ -57,7 +57,7 @@ minetest.register_globalstep(function(dtime)
 									object:remove()
 								else
 									object:setvelocity({x=0,y=0,z=0})
-									bject:get_luaentity().physical_state = true
+									object:get_luaentity().physical_state = true
 									object:get_luaentity().object:set_properties({
 										physical = true,
 										collisionbox = {-0.17,-0.17,-0.17, 0.17,0.17,0.17},
