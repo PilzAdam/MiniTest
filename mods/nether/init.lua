@@ -260,6 +260,7 @@ minetest.register_node(":default:obsidian", {
 	description = "Obsidian",
 	tiles = {"default_obsidian.png"},
 	is_ground_content = true,
+	stack_max = 64,
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky=1,level=2},
 	
@@ -326,6 +327,7 @@ minetest.register_node("nether:rack", {
 			items = {"nether:rack"},
 		}}
 	},
+	stack_max = 64,
 	groups = {cracky=3,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -334,6 +336,7 @@ minetest.register_node("nether:sand", {
 	description = "Nethersand",
 	tiles = {"nether_sand.png"},
 	is_ground_content = true,
+	stack_max = 64,
 	groups = {crumbly=3,level=2,falling_node=1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_gravel_footstep", gain=0.45},
@@ -345,6 +348,7 @@ minetest.register_node("nether:glowstone", {
 	tiles = {"nether_glowstone.png"},
 	is_ground_content = true,
 	light_source = 13,
+	stack_max = 64,
 	groups = {cracky=3,oddly_breakable_by_hand=3},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -352,6 +356,7 @@ minetest.register_node("nether:glowstone", {
 minetest.register_node("nether:brick", {
 	description = "Nether Brick",
 	tiles = {"nether_brick.png"},
+	stack_max = 64,
 	groups = {cracky=2,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })

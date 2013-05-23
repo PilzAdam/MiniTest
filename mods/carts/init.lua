@@ -419,6 +419,7 @@ minetest.register_craftitem("carts:cart", {
 	description = "Minecart",
 	inventory_image = minetest.inventorycube("cart_top.png", "cart_side.png", "cart_side.png"),
 	wield_image = "cart_side.png",
+	stack_max = 1,
 	
 	on_place = function(itemstack, placer, pointed_thing)
 		if not pointed_thing.type == "node" then
@@ -462,6 +463,7 @@ minetest.register_node(":default:rail", {
 	paramtype = "light",
 	is_ground_content = true,
 	walkable = false,
+	stack_max = 64,
 	selection_box = {
 		type = "fixed",
 		-- but how to specify the dimensions for curved and sideways rails?
@@ -479,6 +481,7 @@ minetest.register_node("carts:powerrail", {
 	paramtype = "light",
 	is_ground_content = true,
 	walkable = false,
+	stack_max = 64,
 	selection_box = {
 		type = "fixed",
 		-- but how to specify the dimensions for curved and sideways rails?
@@ -514,6 +517,7 @@ minetest.register_node("carts:brakerail", {
 	paramtype = "light",
 	is_ground_content = true,
 	walkable = false,
+	stack_max = 64,
 	selection_box = {
 		type = "fixed",
 		-- but how to specify the dimensions for curved and sideways rails?

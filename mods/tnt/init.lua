@@ -112,6 +112,7 @@ end
 minetest.register_node("tnt:tnt", {
 	description = "TNT",
 	tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
+	stack_max = 64,
 	groups = {dig_immediate=2, mesecon=2},
 	sounds = default.node_sound_wood_defaults(),
 	
@@ -209,6 +210,7 @@ minetest.register_node("tnt:gunpowder", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
+	stack_max = 64,
 	groups = {dig_immediate=2,attached_node=1},
 	sounds = default.node_sound_leaves_defaults(),
 	

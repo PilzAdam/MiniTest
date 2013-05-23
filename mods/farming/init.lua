@@ -214,6 +214,7 @@ minetest.register_node(":default:grass_1", {
 	sounds = default.node_sound_leaves_defaults({
 		dug = {name="default_dig_crumbly", gain=0.4}
 	}),
+	stack_max = 64,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
@@ -247,6 +248,7 @@ for i=2,5 do
 		sounds = default.node_sound_leaves_defaults({
 			dug = {name="default_dig_crumbly", gain=0.4}
 		}),
+		stack_max = 64,
 		selection_box = {
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
@@ -272,6 +274,7 @@ minetest.register_node(":default:junglegrass", {
 			{items = {'default:junglegrass'}},
 		}
 	},
+	stack_max = 64,
 	groups = {snappy=3,flammable=2,flora=1,attached_node=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
@@ -333,6 +336,7 @@ end
 minetest.register_craftitem("farming:seed_wheat", {
 	description = "Wheat Seed",
 	inventory_image = "farming_wheat_seed.png",
+	stack_max = 64,
 	on_place = function(itemstack, placer, pointed_thing)
 		return place_seed(itemstack, placer, pointed_thing, "farming:wheat_1")
 	end,
@@ -341,16 +345,19 @@ minetest.register_craftitem("farming:seed_wheat", {
 minetest.register_craftitem("farming:wheat", {
 	description = "Wheat",
 	inventory_image = "farming_wheat.png",
+	stack_max = 64,
 })
 
 minetest.register_craftitem("farming:flour", {
 	description = "Flour",
 	inventory_image = "farming_flour.png",
+	stack_max = 64,
 })
 
 minetest.register_craftitem("farming:bread", {
 	description = "Bread",
 	inventory_image = "farming_bread.png",
+	stack_max = 64,
 	on_use = minetest.item_eat(4),
 })
 
@@ -432,6 +439,7 @@ minetest.register_abm({
 minetest.register_craftitem("farming:seed_cotton", {
 	description = "Cotton Seed",
 	inventory_image = "farming_cotton_seed.png",
+	stack_max = 64,
 	on_place = function(itemstack, placer, pointed_thing)
 		return place_seed(itemstack, placer, pointed_thing, "farming:cotton_1")
 	end,
@@ -440,6 +448,7 @@ minetest.register_craftitem("farming:seed_cotton", {
 minetest.register_craftitem("farming:string", {
 	description = "String",
 	inventory_image = "farming_string.png",
+	stack_max = 64,
 })
 
 minetest.register_craft({

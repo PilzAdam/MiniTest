@@ -36,6 +36,7 @@ function doors:register_door(name, def)
 	minetest.register_craftitem(name, {
 		description = def.description,
 		inventory_image = def.inventory_image,
+		stack_max = 1,
 		
 		on_place = function(itemstack, placer, pointed_thing)
 			if not pointed_thing.type == "node" then
