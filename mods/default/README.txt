@@ -108,6 +108,9 @@ PilzAdam (WTFPL):
   default_tool_goldshovel.png
   default_tool_goldsword.png
   default_snowball.png
+  default_chest_front_big.png
+  default_chest_side_big.png
+  default_chest_top_big.png
 
 jojoa1997 (WTFPL):
   default_obsidian.png
