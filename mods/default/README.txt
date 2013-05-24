@@ -31,16 +31,12 @@ Cisoun's WTFPL texture pack:
   default_chest_side.png
   default_chest_top.png
   default_stone_brick.png
-  default_dirt.png
-  default_grass.png
-  default_grass_side.png
   default_jungletree.png
   default_jungletree_top.png
   default_lava.png
   default_leaves.png
   default_sapling.png
   default_sign_wall.png
-  default_stone.png
   default_tool_mesepick.png
   default_tool_steelpick.png
   default_tool_steelshovel.png
@@ -57,7 +53,6 @@ Originating from G4JC's Almost MC Texture Pack:
   default_torch.png
   default_torch_on_ceiling.png
   default_torch_on_floor.png
-  default_cobble.png
 
 VanessaE's animated torches (WTFPL):
   default_torch_animated.png
@@ -71,7 +66,6 @@ RealBadAngel's animated water (WTFPL):
 
 VanessaE (WTFPL):
   default_grass_*.png
-  default_sand.png
   default_flint.png
 
 Calinou (CC BY-SA):
@@ -125,6 +119,15 @@ Splizard (CC BY-SA 3.0):
 
 Zeg9 (CC BY-SA 3.0):
   default_bedrock.png
+  default_cobble.png
+  default_dirt.png
+  default_grass.png
+  default_grass_side.png
+  default_sand.png
+  default_sandstone_bottom.png
+  default_sandstone_side.png
+  default_sandstone_top.png
+  default_stone.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/

@@ -234,7 +234,7 @@ stairs.register_stair_and_slab("brick", "default:brick",
 
 stairs.register_stair_and_slab("sandstone", "default:sandstone",
 		{crumbly=2,cracky=2},
-		{"default_sandstone.png"},
+		{"default_sandstone_bottom.png"},
 		"Sandstone Stair",
 		"Sandstone Slab",
 		default.node_sound_stone_defaults())
