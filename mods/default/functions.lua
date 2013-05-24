@@ -104,8 +104,11 @@ function on_step(dtime)
 end
 minetest.register_globalstep(on_step)
 
-function on_placenode(p, node)
-	--print("on_placenode")
+function on_placenode(pos, newnode, placer, oldnode, itemstack)
+	if pos.y > 256 then
+		minetest.env:set_node(pos, oldnode)
+		return true
+	end
 end
 minetest.register_on_placenode(on_placenode)
 
