@@ -30,7 +30,6 @@ Cisoun's WTFPL texture pack:
   default_chest_front.png
   default_chest_side.png
   default_chest_top.png
-  default_stone_brick.png
   default_jungletree.png
   default_jungletree_top.png
   default_lava.png
@@ -84,11 +83,8 @@ PilzAdam (WTFPL):
   default_jungleleaves.png
   default_junglesapling.png
   default_junglewood.png
-  default_mossycobble.png
   default_gold_ingot.png
-  default_mineral_gold.png
   default_diamond.png
-  default_diamond_block.png
   default_tool_diamondpick.png
   default_tool_diamondsword.png
   default_tool_diamondshovel.png
@@ -105,9 +101,6 @@ PilzAdam (WTFPL):
   default_chest_side_big.png
   default_chest_top_big.png
 
-jojoa1997 (WTFPL):
-  default_obsidian.png
-
 InfinityProject (WTFPL):
   default_mineral_diamond.png
 
@@ -119,6 +112,8 @@ Splizard (CC BY-SA 3.0):
 Zeg9 (CC BY-SA 3.0):
   default_bedrock.png
   default_cobble.png
+  default_mossycobble.png
+  default_stone_brick.png
   default_dirt.png
   default_grass.png
   default_grass_side.png
@@ -127,8 +122,12 @@ Zeg9 (CC BY-SA 3.0):
   default_sandstone_side.png
   default_sandstone_top.png
   default_stone.png
-  default_steel_block.png
+  default_obsidian.png
+  default_diamond_block.png
   default_gold_block.png
+  default_steel_block.png
+  default_mineral_gold.png
+  default_mineral_iron.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
