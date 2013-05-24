@@ -301,7 +301,8 @@ minetest.register_abm({
 						y = p0.y - 0.5 + math.random(),
 						z = p0.z - 0.5 + math.random(),
 					}
-					minetest.env:add_item(p_drop, itemname)
+					local obj = minetest.env:add_item(p_drop, itemname)
+					obj:get_luaentity().collect = true
 				end
 			end
 			-- Remove node
