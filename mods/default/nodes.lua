@@ -132,7 +132,7 @@ minetest.register_node("default:gravel", {
 
 minetest.register_node("default:sandstone", {
 	description = "Sandstone",
-	tiles = {"default_sandstone.png"},
+	tiles = {"default_sandstone_top.png","default_sandstone.png","default_sandstone_side.png"},
 	is_ground_content = true,
 	stack_max = 64,
 	groups = {crumbly=2,cracky=3},
