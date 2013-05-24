@@ -85,7 +85,6 @@ PilzAdam (WTFPL):
   default_junglesapling.png
   default_junglewood.png
   default_mossycobble.png
-  default_gold_block.png
   default_gold_ingot.png
   default_mineral_gold.png
   default_diamond.png
@@ -128,6 +127,8 @@ Zeg9 (CC BY-SA 3.0):
   default_sandstone_side.png
   default_sandstone_top.png
   default_stone.png
+  default_steel_block.png
+  default_gold_block.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
