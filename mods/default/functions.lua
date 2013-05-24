@@ -105,7 +105,7 @@ end
 minetest.register_globalstep(on_step)
 
 function on_placenode(pos, newnode, placer, oldnode, itemstack)
-	if pos.y > 256 then
+	if pos.y > 192 then
 		minetest.env:set_node(pos, oldnode)
 		return true
 	end

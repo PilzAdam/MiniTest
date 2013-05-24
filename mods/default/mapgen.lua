@@ -68,7 +68,7 @@ minetest.register_ore({
 	clust_scarcity = 9*9*9,
 	clust_num_ores = 5,
 	clust_size     = 3,
-	height_min     = -63,
+	height_min     = -31,
 	height_max     = -16,
 })
 
@@ -80,7 +80,7 @@ minetest.register_ore({
 	clust_num_ores = 5,
 	clust_size     = 3,
 	height_min     = -31000,
-	height_max     = -64,
+	height_max     = -32,
 })
 
 minetest.register_ore({
@@ -91,7 +91,7 @@ minetest.register_ore({
 	clust_num_ores = 27,
 	clust_size     = 6,
 	height_min     = -31000,
-	height_max     = -64,
+	height_max     = -48,
 })
 
 minetest.register_ore({
@@ -101,7 +101,7 @@ minetest.register_ore({
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 3,
 	clust_size     = 2,
-	height_min     = -63,
+	height_min     = -47,
 	height_max     = -32,
 })
 
@@ -113,7 +113,7 @@ minetest.register_ore({
 	clust_num_ores = 5,
 	clust_size     = 3,
 	height_min     = -31000,
-	height_max     = -64,
+	height_max     = -48,
 })
 
 minetest.register_ore({
@@ -124,7 +124,7 @@ minetest.register_ore({
 	clust_num_ores = 4,
 	clust_size     = 3,
 	height_min     = -31000,
-	height_max     = -246,
+	height_max     = -56,
 })
 
 function default.generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume, chunk_size, ore_per_chunk, height_min, height_max)
@@ -356,16 +356,15 @@ local function replace(old, new, min, max)
 		})
 	end
 end
---replace("air", "ignore", 256, 260)
-replace("air", "default:bedrock", -280, -256)
-replace("default:stone", "default:bedrock", -280, -256)
-replace("default:stone_with_coal", "default:bedrock", -280, -256)
-replace("default:iron", "default:bedrock", -280, -256)
-replace("default:stone_with_diamond", "default:bedrock", -280, -256)
-replace("default:gold", "default:bedrock", -280, -256)
-replace("default:gravel", "default:bedrock", -280, -256)
-replace("default:dirt", "default:bedrock", -280, -256)
-replace("default:sand", "default:bedrock", -280, -256)
-replace("default:cobble", "default:bedrock", -280, -256)
-replace("default:mossycobble", "default:bedrock", -280, -256)
-replace("stairs:stair_cobble", "default:bedrock", -280, -256)
+replace("air", "default:bedrock", -80, -64)
+replace("default:stone", "default:bedrock", -80, -64)
+replace("default:stone_with_coal", "default:bedrock", -80, -64)
+replace("default:iron", "default:bedrock", -80, -64)
+replace("default:stone_with_diamond", "default:bedrock", -80, -64)
+replace("default:gold", "default:bedrock", -80, -64)
+replace("default:gravel", "default:bedrock", -80, -64)
+replace("default:dirt", "default:bedrock", -80, -64)
+replace("default:sand", "default:bedrock", -80, -64)
+replace("default:cobble", "default:bedrock", -80, -64)
+replace("default:mossycobble", "default:bedrock", -80, -64)
+replace("stairs:stair_cobble", "default:bedrock", -80, -64)
