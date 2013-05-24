@@ -22,22 +22,20 @@ minetest.register_node("workbench:workbench", {
 		inv:set_size("craft", 9)
 		inv:set_size("result", 1)
 		meta:set_string("formspec", 
-			"size[8,7.5;]"..
-			"list[current_player;main;0,3.5;8,4;]"..
-			"list[current_name;craft;3,0;3,3;]"..
-			"list[current_name;result;6.5,1;1,1;]"
+			"size[9,7.5;]"..
+			"list[current_player;main;0,3.5;9,4;]"..
+			"list[current_name;craft;4,0;3,3;]"..
+			"list[current_name;result;7.5,1;1,1;]"
 		)
 	end,
 	allow_metadata_inventory_move = function(pos, from_list, from_index,to_list, to_index, count, player)
 		if to_list == "result" then
-			print("Nope")
 			return 0
 		end
 		return count
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		if listname == "result" then
-			print("Nope")
 			return 0
 		end
 		return stack:get_count()
