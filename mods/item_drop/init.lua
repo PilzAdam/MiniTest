@@ -146,19 +146,11 @@ minetest.register_entity(":__builtin:item", {
 		end
 		prop = {
 			is_visible = true,
-			visual = "sprite",
-			textures = {"unknown_item.png"}
+			visual = "wielditem",
+			textures = {itemname},
+			visual_size = {x=0.20, y=0.20},
+			automatic_rotate = math.pi * 0.25,
 		}
-		if item_texture and item_texture ~= "" then
-			prop.visual = "sprite"
-			prop.textures = {item_texture}
-			prop.visual_size = {x=0.50, y=0.50}
-		else
-			prop.visual = "wielditem"
-			prop.textures = {itemname}
-			prop.visual_size = {x=0.20, y=0.20}
-			prop.automatic_rotate = math.pi * 0.25
-		end
 		self.object:set_properties(prop)
 	end,
 
@@ -167,7 +159,8 @@ minetest.register_entity(":__builtin:item", {
 		return minetest.serialize({
 			itemstring = self.itemstring,
 			always_collect = self.always_collect,
-			time = self.time
+			time = self.time,
+			collect = self.collect,
 		})
 	end,
 
@@ -177,6 +170,7 @@ minetest.register_entity(":__builtin:item", {
 			if data and type(data) == "table" then
 				self.itemstring = data.itemstring
 				self.always_collect = data.always_collect
+				self.collect = data.collect
 				if data.time then
 					self.time = data.time + dtime_s
 				end
@@ -200,6 +194,9 @@ minetest.register_entity(":__builtin:item", {
 			return
 		end
 		local p = self.object:getpos()
+		if minetest.get_item_group(minetest.env:get_node(p).name, "lava") ~= 0 then
+			self.object:remove()
+		end
 		p.y = p.y - 0.3
 		local nn = minetest.env:get_node(p).name
 		-- If node is not registered or node is walkably solid and resting on nodebox
