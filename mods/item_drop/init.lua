@@ -228,3 +228,27 @@ minetest.register_entity(":__builtin:item", {
 	end,
 
 })
+
+minetest.register_on_dieplayer(function(player)
+	if minetest.setting_getbool("creative_mode") then
+		return
+	end
+	local inv = player:get_inventory()
+	local pos = player:getpos()
+	for _,list in ipairs({"main", "craft"}) do
+		for i,stack in ipairs(inv:get_list(list)) do
+			local x = math.random(0, 9)/3 - 1.5
+			local z = math.random(0, 9)/3 - 1.5
+			pos.x = pos.x + x
+			pos.z = pos.z + z
+			local obj = minetest.env:add_item(pos, stack)
+			if obj then
+				obj:get_luaentity().collect = true
+			end
+			stack:clear()
+			inv:set_stack(list, i, stack)
+			pos.x = pos.x - x
+			pos.z = pos.z - z
+		end
+	end
+end)
