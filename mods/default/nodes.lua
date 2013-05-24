@@ -592,13 +592,14 @@ local function get_chest_neighborpos(pos, param2, side)
 	end
 end
 
-local function hacky_swap_node(pos,name)
+local function hacky_swap_node(pos,name, param2)
 	local node = minetest.env:get_node(pos)
 	local meta = minetest.env:get_meta(pos)
 	if node.name == name then
 		return
 	end
 	node.name = name
+	node.param2 = param2 or node.param2
 	local meta0 = meta:to_table()
 	minetest.env:set_node(pos,node)
 	meta = minetest.env:get_meta(pos)
@@ -626,7 +627,7 @@ minetest.register_node("default:chest", {
 					"list[current_name;main;0,3;9,3;]"..
 					"list[current_player;main;0,7;9,4;]")
 			meta:set_string("infotext", "Large Chest")
-			hacky_swap_node(p, "default:chest_left")
+			hacky_swap_node(p, "default:chest_left", param2)
 			local m = minetest.env:get_meta(p)
 			m:set_string("formspec",
 					"size[9,11]"..
@@ -643,7 +644,7 @@ minetest.register_node("default:chest", {
 					"list[nodemeta:"..p.x..","..p.y..","..p.z..";main;0,3;9,3;]"..
 					"list[current_player;main;0,7;9,4;]")
 			meta:set_string("infotext", "Large Chest")
-			hacky_swap_node(p, "default:chest_right")
+			hacky_swap_node(p, "default:chest_right", param2)
 			local m = minetest.env:get_meta(p)
 			m:set_string("formspec",
 					"size[9,11]"..
