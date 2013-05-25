@@ -114,11 +114,12 @@ minetest.register_tool("farming:hoe_wood", {
 	end,
 	
 	tool_capabilities = {
-		full_punch_interval = 1,
 		max_drop_level=0,
 		groupcaps={
 			snappy={times={[2]=1.6, [3]=0.35}, uses=10, maxlevel=1},
 		},
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
 	},
 })
 
@@ -131,11 +132,12 @@ minetest.register_tool("farming:hoe_stone", {
 	end,
 	
 	tool_capabilities = {
-		full_punch_interval = 1.2,
 		max_drop_level=0,
 		groupcaps={
 			snappy={times={[2]=1.4, [3]=0.3}, uses=20, maxlevel=1},
 		},
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
 	},
 })
 
@@ -148,11 +150,12 @@ minetest.register_tool("farming:hoe_steel", {
 	end,
 	
 	tool_capabilities = {
-		full_punch_interval = 0.8,
 		max_drop_level=1,
 		groupcaps={
 			snappy={times={[1]=2.5, [2]=1.20, [3]=0.25}, uses=30, maxlevel=2},
 		},
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
 	},
 })
 
@@ -165,11 +168,12 @@ minetest.register_tool("farming:hoe_gold", {
 	end,
 	
 	tool_capabilities = {
-		full_punch_interval = 0.8,
 		max_drop_level=1,
 		groupcaps={
 			snappy={times={[1]=1.9, [2]=0.9, [3]=0.2}, uses=20, maxlevel=2},
 		},
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
 	},
 })
 
@@ -182,11 +186,12 @@ minetest.register_tool("farming:hoe_diamond", {
 	end,
 	
 	tool_capabilities = {
-		full_punch_interval = 0.7,
 		max_drop_level=1,
 		groupcaps={
 			snappy={times={[1]=1.90, [2]=0.90, [3]=0.2}, uses=40, maxlevel=3},
 		},
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
 	},
 })
 
