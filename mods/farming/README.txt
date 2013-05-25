@@ -56,7 +56,7 @@ Created by VanessaE (License: WTFPL):
 Created by Zeg9 (License: CC BY-SA):
   farming_tool_diamondhoe.png
   farming_tool_goldhoe.png
-  farming_tool_steelhoe.png
+  farming_tool_ironhoe.png
   farming_tool_stonehoe.png
   farming_tool_woodhoe.png
 

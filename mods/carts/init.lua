@@ -445,8 +445,8 @@ minetest.register_craft({
 	output = "carts:cart",
 	recipe = {
 		{"", "", ""},
-		{"default:steel_ingot", "", "default:steel_ingot"},
-		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"default:iron_ingot", "", "default:iron_ingot"},
+		{"default:iron_ingot", "default:iron_ingot", "default:iron_ingot"},
 	},
 })
 
@@ -547,35 +547,35 @@ minetest.register_node("carts:brakerail", {
 minetest.register_craft({
 	output = "carts:powerrail 2",
 	recipe = {
-		{"default:steel_ingot", "default:mese_crystal_fragment", "default:steel_ingot"},
-		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
-		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"default:iron_ingot", "default:mese_crystal_fragment", "default:iron_ingot"},
+		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
+		{"default:iron_ingot", "", "default:iron_ingot"},
 	}
 })
 
 minetest.register_craft({
 	output = "carts:powerrail 2",
 	recipe = {
-		{"default:steel_ingot", "", "default:steel_ingot"},
-		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
-		{"default:steel_ingot", "default:mese_crystal_fragment", "default:steel_ingot"},
+		{"default:iron_ingot", "", "default:iron_ingot"},
+		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
+		{"default:iron_ingot", "default:mese_crystal_fragment", "default:iron_ingot"},
 	}
 })
 
 minetest.register_craft({
 	output = "carts:brakerail 2",
 	recipe = {
-		{"default:steel_ingot", "default:coal_lump", "default:steel_ingot"},
-		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
-		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"default:iron_ingot", "default:coal_lump", "default:iron_ingot"},
+		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
+		{"default:iron_ingot", "", "default:iron_ingot"},
 	}
 })
 
 minetest.register_craft({
 	output = "carts:brakerail 2",
 	recipe = {
-		{"default:steel_ingot", "", "default:steel_ingot"},
-		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
-		{"default:steel_ingot", "default:coal_lump", "default:steel_ingot"},
+		{"default:iron_ingot", "", "default:iron_ingot"},
+		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
+		{"default:iron_ingot", "default:coal_lump", "default:iron_ingot"},
 	}
 })

@@ -272,21 +272,21 @@ minetest.register_craft({
 	}
 })
 
-doors:register_door("doors:door_steel", {
-	description = "Steel Door",
-	inventory_image = "door_steel.png",
+doors:register_door("doors:door_iron", {
+	description = "Iron Door",
+	inventory_image = "door_iron.png",
 	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2,door=1},
-	tiles_bottom = {"door_steel_b.png", "door_grey.png"},
-	tiles_top = {"door_steel_a.png", "door_grey.png"},
+	tiles_bottom = {"door_iron_b.png", "door_grey.png"},
+	tiles_top = {"door_iron_a.png", "door_grey.png"},
 	only_placer_can_open = true,
 })
 
 minetest.register_craft({
-	output = "doors:door_steel",
+	output = "doors:door_iron",
 	recipe = {
-		{"default:steel_ingot", "default:steel_ingot"},
-		{"default:steel_ingot", "default:steel_ingot"},
-		{"default:steel_ingot", "default:steel_ingot"}
+		{"default:iron_ingot", "default:iron_ingot"},
+		{"default:iron_ingot", "default:iron_ingot"},
+		{"default:iron_ingot", "default:iron_ingot"}
 	}
 })
 

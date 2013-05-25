@@ -283,7 +283,6 @@ minetest.register_node("default:sugar_cane", {
 	groups = {snappy=3,flammable=2},
 	sounds = default.node_sound_leaves_defaults(),
 })
-minetest.register_alias("default:papyrus", "default:sugar_cane")
 
 minetest.register_node("default:bookshelf", {
 	description = "Bookshelf",
@@ -1060,9 +1059,9 @@ minetest.register_node("default:mossycobble", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:steelblock", {
-	description = "Steel Block",
-	tiles = {"default_steel_block.png"},
+minetest.register_node("default:ironblock", {
+	description = "Iron Block",
+	tiles = {"default_iron_block.png"},
 	is_ground_content = true,
 	stack_max = 64,
 	groups = {cracky=1,level=2},
