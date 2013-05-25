@@ -499,42 +499,46 @@ minetest.register_node("default:lava_source", {
 	groups = {lava=3, liquid=2, hot=3, igniter=1},
 })
 
-minetest.register_node("default:torch", {
-	description = "Torch",
-	drawtype = "torchlike",
-	tiles = {
-		{name="default_torch_on_floor_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
-		{name="default_torch_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
-	},
-	inventory_image = "default_torch_on_floor.png",
-	wield_image = "default_torch_on_floor.png",
+minetest.register_node("default:torch_floor", {
+	drawtype = "nodebox",
+	tiles = {"default_torches_torch.png^[transformfy", "default_wood.png", "default_torches_torch.png",
+		"default_torches_torch.png^[transformfx", "default_torches_torch.png", "default_torches_torch.png"},
 	paramtype = "light",
-	paramtype2 = "wallmounted",
-	sunlight_propagates = true,
+	drop = "default:torch",
 	walkable = false,
-	light_source = LIGHT_MAX-1,
-	selection_box = {
-		type = "wallmounted",
-		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
-		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
+	light_source = LIGHT_MAX - 1,
+	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1,not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {-1/16, -0.5, -1/16, 1/16, 2/16, 1/16},
 	},
-	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1},
-	legacy_wallmounted = true,
-	stack_max = 64,
-	sounds = default.node_sound_defaults(),
-	on_place = function(itemstack, placer, pointed_thing)
-		if pointed_thing.type ~= "node" then
-			return itemstack
-		end
+})
 
-		local p0 = pointed_thing.under
-		local p1 = pointed_thing.above
-		if p0.y-1 == p1.y then
-			return itemstack
-		end
+local wall_ndbx = {
+			{-1/16,-6/16, 6/16, 1/16, -5/16, 0.5},
+			{-1/16,-5/16, 5/16, 1/16, -4/16, 7/16},
+			{-1/16,-4/16, 4/16, 1/16, -3/16, 6/16},
+			{-1/16,-3/16, 3/16, 1/16, -2/16, 5/16},
+			{-1/16,-2/16, 2/16, 1/16, -1/16, 4/16},
+			{-1/16,-1/16, 1/16, 1/16, 0, 3/16},
+			{-1/16,0, 1/16, 1/16, 1/16, 2/16},
+			{-1/16, 0, -1/16, 1/16, 2/16, 1/16},
+}
 
-		return minetest.item_place(itemstack, placer, pointed_thing)
-	end,
+minetest.register_node("default:torch_wall", {
+	drawtype = "nodebox",
+	tiles = {"default_torches_torch.png^[transformfy", "default_wood.png", "default_torches_side.png",
+		"default_torches_side.png^[transformfx", "default_wood.png", "default_torches_torch.png"},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = false,
+	light_source = LIGHT_MAX - 1,
+	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1,not_in_creative_inventory=1},
+	drop = "default:torch",
+	node_box = {
+		type = "fixed",
+		fixed =	wall_ndbx
+	},
 })
 
 minetest.register_node("default:sign", {

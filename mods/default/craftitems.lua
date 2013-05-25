@@ -74,3 +74,29 @@ minetest.register_craftitem("default:apple", {
 	stack_max = 64,
 	on_use = minetest.item_eat(1),
 })
+
+minetest.register_craftitem("default:torch", {
+	description = "Torch",
+	inventory_image = "default_torches_torch.png",
+	stack_max = 64,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type ~= "node" then
+			return itemstack
+		end
+		local above = pointed_thing.above
+		local under = pointed_thing.under
+		local wdir = minetest.dir_to_wallmounted({x = under.x - above.x, y = under.y - above.y, z = under.z - above.z})
+		if wdir == 1 then
+			local tmpstack = ItemStack("default:torch_floor "..itemstack:get_count())
+			tmpstack = minetest.item_place(tmpstack, placer, pointed_thing)
+			itemstack = ItemStack(itemstack:get_name().." "..tmpstack:get_count())
+			--minetest.env:add_node(above, {name = "default:torch_floor"})
+		else
+			local tmpstack = ItemStack("default:torch_wall "..itemstack:get_count())
+			tmpstack = minetest.item_place(tmpstack, placer, pointed_thing)
+			itemstack = ItemStack(itemstack:get_name().." "..tmpstack:get_count())
+			--minetest.env:add_node(above, {name = "default:torch_wall", param2 = default.is_wall(wdir)})
+		end
+		return itemstack
+	end,
+})
