@@ -315,6 +315,12 @@ minetest.register_node("default:fence_wood", {
 		type = "fixed",
 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, 1.0, 0.2},
+		},
+	},
 	stack_max = 64,
 	groups = {choppy=2,oddly_breakable_by_hand=2,flammable=2},
 	sounds = default.node_sound_wood_defaults(),
