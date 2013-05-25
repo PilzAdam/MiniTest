@@ -343,7 +343,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:paper 3',
 	recipe = {
-		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
+		{'default:sugar_cane', 'default:sugar_cane', 'default:sugar_cane'},
 	}
 })
 
@@ -470,7 +470,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:papyrus",
+	recipe = "default:sugar_cane",
 	burntime = 1,
 })
 

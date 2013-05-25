@@ -115,7 +115,7 @@ Zeg9 (CC BY-SA 3.0):
   default_mineral_gold.png
   default_mineral_iron.png
   default_clay.png
-  default_papyrus.png
+  default_sugar_cane.png
   default_stick.png
   default_tool_diamondaxe.png
   default_tool_diamondpick.png

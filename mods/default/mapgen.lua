@@ -169,13 +169,13 @@ function default.generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume
 	--print("generate_ore done")
 end
 
-function default.make_papyrus(pos, size)
+function default.make_sugar_cane(pos, size)
 	for y=0,size-1 do
 		local p = {x=pos.x, y=pos.y+y, z=pos.z}
 		local nn = minetest.env:get_node(p).name
 		if minetest.registered_nodes[nn] and
 			minetest.registered_nodes[nn].buildable_to then
-			minetest.env:set_node(p, {name="default:papyrus"})
+			minetest.env:set_node(p, {name="default:sugar_cane"})
 		else
 			return
 		end
@@ -232,7 +232,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			end
 		end
 		end
-		-- Generate papyrus
+		-- Generate sugar_cane
 		local perlin1 = minetest.env:get_perlin(354, 3, 0.7, 100)
 		-- Assume X and Z lengths are equal
 		local divlen = 8
@@ -243,16 +243,16 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local z0 = minp.z + math.floor((divz+0)*divlen)
 			local x1 = minp.x + math.floor((divx+1)*divlen)
 			local z1 = minp.z + math.floor((divz+1)*divlen)
-			-- Determine papyrus amount from perlin noise
-			local papyrus_amount = math.floor(perlin1:get2d({x=x0, y=z0}) * 45 - 20)
-			-- Find random positions for papyrus based on this random
+			-- Determine sugar_cane amount from perlin noise
+			local sugar_cane_amount = math.floor(perlin1:get2d({x=x0, y=z0}) * 45 - 20)
+			-- Find random positions for sugar_cane based on this random
 			local pr = PseudoRandom(seed+1)
-			for i=0,papyrus_amount do
+			for i=0,sugar_cane_amount do
 				local x = pr:next(x0, x1)
 				local z = pr:next(z0, z1)
 				if minetest.env:get_node({x=x,y=1,z=z}).name == "default:dirt_with_grass" and
 						minetest.env:find_node_near({x=x,y=1,z=z}, 1, "default:water_source") then
-					default.make_papyrus({x=x,y=2,z=z}, pr:next(2, 4))
+					default.make_sugar_cane({x=x,y=2,z=z}, pr:next(2, 4))
 				end
 			end
 		end

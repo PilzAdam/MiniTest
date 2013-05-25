@@ -112,12 +112,12 @@ function on_placenode(pos, newnode, placer, oldnode, itemstack)
 end
 minetest.register_on_placenode(on_placenode)
 
--- Remove all papyrus/cactus above
+-- Remove all sugar_canes/cactus above
 function on_dignode(p, node)
-	if node.name == "default:cactus" or node.name == "default:papyrus" then
+	if node.name == "default:cactus" or node.name == "default:sugar_cane" then
 		p.y = p.y+1
 		local name = minetest.env:get_node(p).name
-		if name == "default:cactus" or name == "default:papyrus" then
+		if name == "default:cactus" or name == "default:sugar_cane" then
 			minetest.env:dig_node(p)
 		end
 	end
@@ -161,7 +161,7 @@ minetest.register_abm({
 })
 
 --
--- Papyrus and cactus growing
+-- Sugar cane and cactus growing
 --
 
 minetest.register_abm({
@@ -189,7 +189,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"default:papyrus"},
+	nodenames = {"default:sugar_cane"},
 	neighbors = {"default:dirt", "default:dirt_with_grass"},
 	interval = 50,
 	chance = 20,
@@ -202,13 +202,13 @@ minetest.register_abm({
 			end
 			pos.y = pos.y+1
 			local height = 0
-			while minetest.env:get_node(pos).name == "default:papyrus" and height < 4 do
+			while minetest.env:get_node(pos).name == "default:sugar_cane" and height < 4 do
 				height = height+1
 				pos.y = pos.y+1
 			end
 			if height < 4 then
 				if minetest.env:get_node(pos).name == "air" then
-					minetest.env:set_node(pos, {name="default:papyrus"})
+					minetest.env:set_node(pos, {name="default:sugar_cane"})
 				end
 			end
 		end

@@ -266,12 +266,12 @@ minetest.register_node("default:cactus", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
-minetest.register_node("default:papyrus", {
-	description = "Papyrus",
+minetest.register_node("default:sugar_cane", {
+	description = "Sugar Cane",
 	drawtype = "plantlike",
-	tiles = {"default_papyrus.png"},
-	inventory_image = "default_papyrus.png",
-	wield_image = "default_papyrus.png",
+	tiles = {"default_sugar_cane.png"},
+	inventory_image = "default_sugar_cane.png",
+	wield_image = "default_sugar_cane.png",
 	paramtype = "light",
 	walkable = false,
 	is_ground_content = true,
@@ -283,6 +283,7 @@ minetest.register_node("default:papyrus", {
 	groups = {snappy=3,flammable=2},
 	sounds = default.node_sound_leaves_defaults(),
 })
+minetest.register_alias("default:papyrus", "default:sugar_cane")
 
 minetest.register_node("default:bookshelf", {
 	description = "Bookshelf",
