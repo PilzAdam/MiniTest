@@ -314,3 +314,49 @@ minetest.register_abm({
 		end
 	end
 })
+
+--torches functions
+
+local null = {x=0, y=0, z=0}
+
+function default.add_fire(pos)
+	pos.y = pos.y+0.19
+	minetest.add_particle(pos, null, null, 1.1,
+   					1.5, true, "default_torches_fire"..tostring(math.random(1,2)) ..".png")
+	pos.y = pos.y +0.01
+	minetest.add_particle(pos, null, null, 0.8,
+   					1.5, true, "default_torches_fire"..tostring(math.random(1,2)) ..".png")
+end
+
+function default.is_wall(wallparam)
+	if wallparam == 0 then return false end
+	local para2 = 0
+	if wallparam == 2 then
+		para2 = 1
+	elseif wallparam == 3 then
+		para2 = 3
+	elseif wallparam == 4 then
+		para2 = 0
+	elseif wallparam == 5 then
+		para2 = 2
+	end
+	return para2
+end
+
+minetest.register_abm({
+	nodenames = {"default:torch_floor"},
+	interval = 1,
+	chance = 1,
+	action = function(pos)
+		--add_fire(pos)
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"default:torch_wall"},
+	interval = 1,
+	chance = 1,
+	action = function(pos)	
+		--add_fire(pos)
+	end
+})
