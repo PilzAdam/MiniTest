@@ -30,9 +30,6 @@ Created by PilzAdam (License: WTFPL):
 
 Created by Calinou (License: CC BY-SA):
   farming_tool_bronzehoe.png
-  farming_tool_steelhoe.png
-  farming_tool_stonehoe.png
-  farming_tool_woodhoe.png
 
 Created by VanessaE (License: WTFPL):
   farming_cotton_seed.png
@@ -55,3 +52,11 @@ Created by VanessaE (License: WTFPL):
   farming_cotton_6.png
   farming_cotton_7.png
   farming_cotton_8.png
+
+Created by Zeg9 (License: CC BY-SA):
+  farming_tool_diamondhoe.png
+  farming_tool_goldhoe.png
+  farming_tool_steelhoe.png
+  farming_tool_stonehoe.png
+  farming_tool_woodhoe.png
+
