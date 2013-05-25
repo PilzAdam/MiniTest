@@ -530,6 +530,19 @@ minetest.register_node("default:torch", {
 	legacy_wallmounted = true,
 	stack_max = 64,
 	sounds = default.node_sound_defaults(),
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type ~= "node" then
+			return itemstack
+		end
+
+		local p0 = pointed_thing.under
+		local p1 = pointed_thing.above
+		if p0.y-1 == p1.y then
+			return itemstack
+		end
+
+		return minetest.item_place(itemstack, placer, pointed_thing)
+	end,
 })
 
 minetest.register_node("default:sign_wall", {
