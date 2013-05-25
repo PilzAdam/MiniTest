@@ -67,3 +67,10 @@ minetest.register_craftitem("default:flint", {
 	inventory_image = "default_flint.png",
 	stack_max = 64,
 })
+
+minetest.register_craftitem("default:apple", {
+	description = "Apple",
+	inventory_image = "default_apple.png",
+	stack_max = 64,
+	on_use = minetest.item_eat(1),
+})
