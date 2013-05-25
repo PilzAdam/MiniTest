@@ -37,12 +37,6 @@ Cisoun's WTFPL texture pack:
   default_sapling.png
   default_sign_wall.png
   default_tool_mesepick.png
-  default_tool_steelpick.png
-  default_tool_steelshovel.png
-  default_tool_stonepick.png
-  default_tool_stoneshovel.png
-  default_tool_woodpick.png
-  default_tool_woodshovel.png
   default_tree.png
   default_tree_top.png
   default_water.png
@@ -70,7 +64,6 @@ VanessaE (WTFPL):
 Calinou (CC BY-SA):
   default_brick.png
   default_clay_brick.png
-  default_papyrus.png
   default_tool_steelsword.png
 
 MirceaKitsune (WTFPL):
@@ -85,17 +78,10 @@ PilzAdam (WTFPL):
   default_junglewood.png
   default_gold_ingot.png
   default_diamond.png
-  default_tool_diamondpick.png
   default_tool_diamondsword.png
-  default_tool_diamondshovel.png
-  default_tool_diamondaxe.png
   default_tool_meseaxe.png
   default_tool_meseshovel.png
   default_tool_mesesword.png
-  default_tool_goldaxe.png
-  default_tool_goldpick.png
-  default_tool_goldshovel.png
-  default_tool_goldsword.png
   default_snowball.png
   default_chest_front_big.png
   default_chest_side_big.png
@@ -128,6 +114,25 @@ Zeg9 (CC BY-SA 3.0):
   default_steel_block.png
   default_mineral_gold.png
   default_mineral_iron.png
+  default_clay.png
+  default_papyrus.png
+  default_stick.png
+  default_tool_diamondaxe.png
+  default_tool_diamondpick.png
+  default_tool_diamondshovel.png
+  default_tool_goldaxe.png
+  default_tool_goldpick.png
+  default_tool_goldshovel.png
+  default_tool_steelaxe.png
+  default_tool_steelpick.png
+  default_tool_steelshovel.png
+  default_tool_stoneaxe.png
+  default_tool_stonepick.png
+  default_tool_stoneshovel.png
+  default_tool_woodaxe.png
+  default_tool_woodpick.png
+  default_tool_woodshovel.png
+
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
