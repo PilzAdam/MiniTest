@@ -81,6 +81,10 @@ local function hoe_on_use(itemstack, user, pointed_thing, uses)
 		return
 	end
 	
+	if minetest.registered_nodes[under.name].on_rightclick then
+		return minetest.registered_nodes[under.name].on_rightclick(pt.under, under, user, itemstack)
+	end
+	
 	-- check if the node above the pointed thing is air
 	if above.name ~= "air" then
 		return
@@ -105,45 +109,85 @@ minetest.register_tool("farming:hoe_wood", {
 	description = "Wooden Hoe",
 	inventory_image = "farming_tool_woodhoe.png",
 	
-	on_use = function(itemstack, user, pointed_thing)
+	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 30)
 	end,
+	
+	tool_capabilities = {
+		full_punch_interval = 1,
+		max_drop_level=0,
+		groupcaps={
+			snappy={times={[2]=1.6, [3]=0.35}, uses=10, maxlevel=1},
+		},
+	},
 })
 
 minetest.register_tool("farming:hoe_stone", {
 	description = "Stone Hoe",
 	inventory_image = "farming_tool_stonehoe.png",
 	
-	on_use = function(itemstack, user, pointed_thing)
+	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 90)
 	end,
+	
+	tool_capabilities = {
+		full_punch_interval = 1.2,
+		max_drop_level=0,
+		groupcaps={
+			snappy={times={[2]=1.4, [3]=0.3}, uses=20, maxlevel=1},
+		},
+	},
 })
 
 minetest.register_tool("farming:hoe_steel", {
 	description = "Steel Hoe",
 	inventory_image = "farming_tool_steelhoe.png",
 	
-	on_use = function(itemstack, user, pointed_thing)
+	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 200)
 	end,
+	
+	tool_capabilities = {
+		full_punch_interval = 0.8,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.5, [2]=1.20, [3]=0.25}, uses=30, maxlevel=2},
+		},
+	},
 })
 
 minetest.register_tool("farming:hoe_gold", {
 	description = "Gold Hoe",
 	inventory_image = "farming_tool_goldhoe.png",
 	
-	on_use = function(itemstack, user, pointed_thing)
+	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 150)
 	end,
+	
+	tool_capabilities = {
+		full_punch_interval = 0.8,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=1.9, [2]=0.9, [3]=0.2}, uses=20, maxlevel=2},
+		},
+	},
 })
 
 minetest.register_tool("farming:hoe_diamond", {
 	description = "Diamond Hoe",
 	inventory_image = "farming_tool_diamondhoe.png",
 	
-	on_use = function(itemstack, user, pointed_thing)
+	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 400)
 	end,
+	
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=1.90, [2]=0.90, [3]=0.2}, uses=40, maxlevel=3},
+		},
+	},
 })
 
 minetest.register_craft({
