@@ -64,7 +64,7 @@ VanessaE (WTFPL):
 Calinou (CC BY-SA):
   default_brick.png
   default_clay_brick.png
-  default_tool_steelsword.png
+  default_tool_ironsword.png
 
 MirceaKitsune (WTFPL):
   character.x
@@ -111,7 +111,7 @@ Zeg9 (CC BY-SA 3.0):
   default_obsidian.png
   default_diamond_block.png
   default_gold_block.png
-  default_steel_block.png
+  default_iron_block.png
   default_mineral_gold.png
   default_mineral_iron.png
   default_clay.png
@@ -123,9 +123,9 @@ Zeg9 (CC BY-SA 3.0):
   default_tool_goldaxe.png
   default_tool_goldpick.png
   default_tool_goldshovel.png
-  default_tool_steelaxe.png
-  default_tool_steelpick.png
-  default_tool_steelshovel.png
+  default_tool_ironaxe.png
+  default_tool_ironpick.png
+  default_tool_ironshovel.png
   default_tool_stoneaxe.png
   default_tool_stonepick.png
   default_tool_stoneshovel.png

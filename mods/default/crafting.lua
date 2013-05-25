@@ -66,9 +66,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:pick_steel',
+	output = 'default:pick_iron',
 	recipe = {
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
 		{'', 'default:stick', ''},
 		{'', 'default:stick', ''},
 	}
@@ -111,9 +111,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:shovel_steel',
+	output = 'default:shovel_iron',
 	recipe = {
-		{'default:steel_ingot'},
+		{'default:iron_ingot'},
 		{'default:stick'},
 		{'default:stick'},
 	}
@@ -156,10 +156,10 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:axe_steel',
+	output = 'default:axe_iron',
 	recipe = {
-		{'default:steel_ingot', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:stick'},
+		{'default:iron_ingot', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:stick'},
 		{'', 'default:stick'},
 	}
 })
@@ -201,10 +201,10 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:sword_steel',
+	output = 'default:sword_iron',
 	recipe = {
-		{'default:steel_ingot'},
-		{'default:steel_ingot'},
+		{'default:iron_ingot'},
+		{'default:iron_ingot'},
 		{'default:stick'},
 	}
 })
@@ -230,9 +230,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:rail 15',
 	recipe = {
-		{'default:steel_ingot', '', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:stick', 'default:steel_ingot'},
-		{'default:steel_ingot', '', 'default:steel_ingot'},
+		{'default:iron_ingot', '', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:stick', 'default:iron_ingot'},
+		{'default:iron_ingot', '', 'default:iron_ingot'},
 	}
 })
 
@@ -255,18 +255,18 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:steelblock',
+	output = 'default:ironblock',
 	recipe = {
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
 	}
 })
 
 minetest.register_craft({
-	output = 'default:steel_ingot 9',
+	output = 'default:iron_ingot 9',
 	recipe = {
-		{'default:steelblock'},
+		{'default:ironblock'},
 	}
 })
 
@@ -424,7 +424,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "default:steel_ingot",
+	output = "default:iron_ingot",
 	recipe = "default:iron",
 })
 

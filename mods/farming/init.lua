@@ -139,9 +139,9 @@ minetest.register_tool("farming:hoe_stone", {
 	},
 })
 
-minetest.register_tool("farming:hoe_steel", {
-	description = "Steel Hoe",
-	inventory_image = "farming_tool_steelhoe.png",
+minetest.register_tool("farming:hoe_iron", {
+	description = "Iron Hoe",
+	inventory_image = "farming_tool_ironhoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
 		return hoe_on_use(itemstack, user, pointed_thing, 200)
@@ -209,9 +209,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "farming:hoe_steel",
+	output = "farming:hoe_iron",
 	recipe = {
-		{"default:steel_ingot", "default:steel_ingot"},
+		{"default:iron_ingot", "default:iron_ingot"},
 		{"", "default:stick"},
 		{"", "default:stick"},
 	}
