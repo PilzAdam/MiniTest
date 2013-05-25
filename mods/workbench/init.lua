@@ -31,11 +31,12 @@ minetest.register_on_joinplayer(function(player)
 			minetest.after(0, player.hud_set_hotbar_itemcount, player, 9)
 		end
 		player:set_inventory_formspec(
-			"size[9,7.5;]"..
-			"list[current_player;main;0,3.5;9,4;]"..
+			"size[9,8;]"..
+			
+			"list[current_player;main;0,3.5;9,4;9]"..
+			"list[current_player;main;0,7;9,1;]"..
 			
 			"list[current_player;craft;5,0.5;2,1;1]"..
-			
 			"list[current_player;craft;5,1.5;2,1;4]"..
 			
 			"list[current_player;craftpreview;7.5,1;1,1;]"
