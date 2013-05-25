@@ -27,6 +27,9 @@ minetest.register_on_joinplayer(function(player)
 		player:get_inventory():set_width("craft", 3)
 		player:get_inventory():set_size("craft", 9)
 		player:get_inventory():set_size("main", 9*4)
+		if player.hud_set_hotbar_itemcount then
+			minetest.after(0, player.hud_set_hotbar_itemcount, player, 9)
+		end
 		player:set_inventory_formspec(
 			"size[9,7.5;]"..
 			"list[current_player;main;0,3.5;9,4;]"..
