@@ -30,19 +30,13 @@ Cisoun's WTFPL texture pack:
   default_chest_front.png
   default_chest_side.png
   default_chest_top.png
-  default_jungletree.png
-  default_jungletree_top.png
   default_lava.png
-  default_leaves.png
   default_sapling.png
   default_sign_wall.png
   default_tool_mesepick.png
-  default_tree.png
-  default_tree_top.png
   default_water.png
 
 Originating from G4JC's Almost MC Texture Pack:
-  default_wood.png
   default_torch.png
   default_torch_on_ceiling.png
   default_torch_on_floor.png
@@ -73,9 +67,7 @@ Jordach (CC BY-SA 3.0):
   character.png
 
 PilzAdam (WTFPL):
-  default_jungleleaves.png
   default_junglesapling.png
-  default_junglewood.png
   default_gold_ingot.png
   default_diamond.png
   default_tool_diamondsword.png
@@ -116,6 +108,14 @@ Zeg9 (CC BY-SA 3.0):
   default_mineral_iron.png
   default_clay.png
   default_papyrus.png
+  default_jungleleaves.png
+  default_jungletree.png
+  default_jungletree_top.png
+  default_junglewood.png
+  default_leaves.png
+  default_tree.png
+  default_tree_top.png
+  default_wood.png
   default_stick.png
   default_tool_diamondaxe.png
   default_tool_diamondpick.png
