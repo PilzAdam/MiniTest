@@ -255,7 +255,7 @@ minetest.register_abm({
 minetest.register_craft({
 	output = "tnt:gunpowder",
 	type = "shapeless",
-	recipe = {"default:coal_lump", "default:gravel"}
+	recipe = {"group:coal", "default:gravel"}
 })
 
 minetest.register_craft({

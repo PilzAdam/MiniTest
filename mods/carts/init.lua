@@ -565,7 +565,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "carts:brakerail 2",
 	recipe = {
-		{"default:iron_ingot", "default:coal_lump", "default:iron_ingot"},
+		{"default:iron_ingot", "group:coal", "default:iron_ingot"},
 		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
 		{"default:iron_ingot", "", "default:iron_ingot"},
 	}
@@ -576,6 +576,6 @@ minetest.register_craft({
 	recipe = {
 		{"default:iron_ingot", "", "default:iron_ingot"},
 		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
-		{"default:iron_ingot", "default:coal_lump", "default:iron_ingot"},
+		{"default:iron_ingot", "group:coal", "default:iron_ingot"},
 	}
 })
