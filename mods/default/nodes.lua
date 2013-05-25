@@ -499,42 +499,97 @@ minetest.register_node("default:lava_source", {
 	groups = {lava=3, liquid=2, hot=3, igniter=1},
 })
 
-minetest.register_node("default:torch", {
+minetest.register_craftitem("default:torch", {
 	description = "Torch",
-	drawtype = "torchlike",
-	tiles = {
-		{name="default_torch_on_floor_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
-		{name="default_torch_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
-	},
-	inventory_image = "default_torch_on_floor.png",
-	wield_image = "default_torch_on_floor.png",
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	sunlight_propagates = true,
-	walkable = false,
-	light_source = LIGHT_MAX-1,
-	selection_box = {
-		type = "wallmounted",
-		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
-		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
-	},
-	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1},
-	legacy_wallmounted = true,
+	inventory_image = "default_torches_torch.png",
+	wield_image = "default_torches_torch.png",
+	wield_scale = {x=1,y=1,z=1+1/16},
+	liquids_pointable = false,   	
 	stack_max = 64,
 	sounds = default.node_sound_defaults(),
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type ~= "node" then
 			return itemstack
 		end
-
-		local p0 = pointed_thing.under
-		local p1 = pointed_thing.above
-		if p0.y-1 == p1.y then
-			return itemstack
+		local above = pointed_thing.above
+		local under = pointed_thing.under
+		local wdir = minetest.dir_to_wallmounted({x = under.x - above.x, y = under.y - above.y, z = under.z - above.z})
+		if wdir == 1 then
+			minetest.env:add_node(above, {name = "default:torch_floor"})			
+		else
+			minetest.env:add_node(above, {name = "default:torch_wall", param2 = default.is_wall(wdir)})
 		end
-
-		return minetest.item_place(itemstack, placer, pointed_thing)
+		if not wdir == 0 or not minetest.setting_getbool("creative_mode") then
+			itemstack:take_item()
+		end
+		return itemstack
 	end,
+})
+
+minetest.register_node("default:torch_floor", {
+	--description = "Fakel",
+	inventory_image = "default_torches_torch.png",
+	wield_image = "default_torches_torch.png",
+	wield_scale = {x=1,y=1,z=1+2/16},
+	drawtype = "nodebox",
+	tiles = {"default_torches_torch.png^[transformfy", "default_wood.png", "default_torches_torch.png",
+		"default_torches_torch.png^[transformfx", "default_torches_torch.png", "default_torches_torch.png"},
+	paramtype = "light",
+	paramtype2 = "none",
+	sunlight_propagates = true,
+	drop = "default:torch",
+	walkable = false,
+	light_source = 13,
+	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1,not_in_creative_inventory=1},
+	legacy_wallmounted = true,
+	node_box = {
+		type = "fixed",
+		fixed = {-1/16, -0.5, -1/16, 1/16, 2/16, 1/16},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {-1/16, -0.5, -1/16, 1/16, 2/16, 1/16},
+	}
+})
+
+local wall_ndbx = {
+			{-1/16,-6/16, 6/16, 1/16, -5/16, 0.5},
+			{-1/16,-5/16, 5/16, 1/16, -4/16, 7/16},
+			{-1/16,-4/16, 4/16, 1/16, -3/16, 6/16},
+			{-1/16,-3/16, 3/16, 1/16, -2/16, 5/16},
+			{-1/16,-2/16, 2/16, 1/16, -1/16, 4/16},
+			{-1/16,-1/16, 1/16, 1/16, 0, 3/16},
+			{-1/16,0, 1/16, 1/16, 1/16, 2/16},
+			{-1/16, 0, -1/16, 1/16, 2/16, 1/16},
+}
+
+minetest.register_node("default:torch_wall", {
+	--description = "Fakel",
+	inventory_image = "default_torches_torch.png",
+	wield_image = "default_torches_torch.png",
+	wield_scale = {x=1,y=1,z=1+1/16},
+	drawtype = "nodebox",
+	tiles = {"default_torches_torch.png^[transformfy", "default_wood.png", "default_torches_side.png",
+		"default_torches_side.png^[transformfx", "default_wood.png", "default_torches_torch.png"},
+
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	walkable = false,
+	light_source = 13,
+	groups = {choppy=2,dig_immediate=3,flammable=1,attached_node=1,not_in_creative_inventory=1},
+	legacy_wallmounted = true,
+	drop = "default:torch",
+	node_box = {
+		type = "fixed",
+		fixed =	wall_ndbx
+	},
+	selection_box = {
+		type = "fixed",
+		fixed =	wall_ndbx
+	},
+
+
 })
 
 minetest.register_node("default:sign", {
