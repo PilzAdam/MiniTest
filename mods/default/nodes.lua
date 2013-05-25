@@ -16,7 +16,7 @@ minetest.register_node("default:stone_with_coal", {
 	tiles = {"default_stone.png^default_mineral_coal.png"},
 	is_ground_content = true,
 	groups = {cracky=3},
-	drop = 'default:coal_lump',
+	drop = 'default:coal',
 	stack_max = 64,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -62,18 +62,6 @@ minetest.register_node("default:dirt_with_grass", {
 	tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	is_ground_content = true,
 	groups = {crumbly=3,soil=1},
-	drop = 'default:dirt',
-	stack_max = 64,
-	sounds = default.node_sound_dirt_defaults({
-		footstep = {name="default_grass_footstep", gain=0.4},
-	}),
-})
-
-minetest.register_node("default:dirt_with_grass_footsteps", {
-	description = "Dirt with Grass and Footsteps",
-	tiles = {"default_grass_footsteps.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
-	is_ground_content = true,
-	groups = {crumbly=3,soil=1,not_in_creative_inventory=1},
 	drop = 'default:dirt',
 	stack_max = 64,
 	sounds = default.node_sound_dirt_defaults({
@@ -304,7 +292,7 @@ minetest.register_node("default:glass", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
-minetest.register_node("default:fence_wood", {
+minetest.register_node("default:fence", {
 	description = "Wooden Fence",
 	drawtype = "fencelike",
 	tiles = {"default_wood.png"},
@@ -547,7 +535,7 @@ minetest.register_node("default:torch", {
 	end,
 })
 
-minetest.register_node("default:sign_wall", {
+minetest.register_node("default:sign", {
 	description = "Sign",
 	drawtype = "signlike",
 	tiles = {"default_sign_wall.png"},

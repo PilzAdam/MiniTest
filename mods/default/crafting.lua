@@ -23,7 +23,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:fence_wood 2',
+	output = 'default:fence 2',
 	recipe = {
 		{'default:stick', 'default:stick', 'default:stick'},
 		{'default:stick', 'default:stick', 'default:stick'},
@@ -31,7 +31,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:sign_wall 2',
+	output = 'default:sign 2',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
@@ -442,7 +442,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "default:charcoal_lump",
+	output = "default:charcoal",
 	recipe = "group:tree",
 })
 
@@ -488,7 +488,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:fence_wood",
+	recipe = "default:fence",
 	burntime = 15,
 })
 
@@ -518,7 +518,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:sign_wall",
+	recipe = "default:sign",
 	burntime = 10,
 })
 
