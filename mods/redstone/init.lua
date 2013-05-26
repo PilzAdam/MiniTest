@@ -416,7 +416,6 @@ minetest.register_node("redstone:button", {
 	on_rightclick = function(pos, node)
 		redstone.set_level(pos, 16, true)
 		redstone.set_level(get_facedir_node(pos, node.param2), 16, true)
-		print("Setting at: "..minetest.pos_to_string(pos).." and "..minetest.pos_to_string(get_facedir_node(pos, node.param2)))
 		minetest.after(1, function(p1, p2)
 			redstone.set_level(p1, 0, true)
 			redstone.set_level(p2, 0, true)
