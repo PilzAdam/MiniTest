@@ -494,6 +494,9 @@ minetest.register_node("carts:powerrail_off", {
 			minetest.env:set_node(pos, {name="carts:powerrail_on"})
 			local m = minetest.env:get_meta(pos)
 			m:set_string("cart_acceleration", "0.5")
+		else
+			local m = minetest.env:get_meta(pos)
+			m:set_string("cart_acceleration", "-0.8")
 		end
 	end,
 	redstone_update = function(pos)
@@ -523,6 +526,8 @@ minetest.register_node("carts:powerrail_on", {
 		local level = redstone.level_at(pos)
 		if level <= 0 then
 			minetest.env:set_node(pos, {name="carts:powerrail_off"})
+			local m = minetest.env:get_meta(pos)
+			m:set_string("cart_acceleration", "-0.8")
 		end
 	end,
 })
