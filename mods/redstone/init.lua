@@ -43,6 +43,20 @@ local function get_wallmounted_node(pos, param2)
 	return add(pos, get_wallmounted_dir(pos, param2))
 end
 
+local function get_facedir_node(pos, param2)
+	local d = {x=0,y=0,z=0}
+	if param2 == 0 then
+		d.z = 1
+	elseif param2 == 1 then
+		d.x = 1
+	elseif param2 == 2 then
+		d.z = -1
+	elseif param2 == 3 then
+		d.x = -1
+	end
+	return add(pos, d)
+end
+
 function redstone.level_at(pos, rule)
 	rule  = rule or {
 		{x= 1, y= 0, z=0},
@@ -381,4 +395,31 @@ minetest.register_ore({
 	clust_size     = 3,
 	height_min     = -31000,
 	height_max     = -48,
+})
+
+minetest.register_node("redstone:button", {
+	description = "Button",
+	tiles = {"default_stone.png"},
+	inventory_image = "redstone_button_inventory.png",
+	wield_image = "redstone_button_inventory.png",
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {dig_immediate=2},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.15, -0.1, 0.4,   0.15, 0.1, 0.5},
+		},
+	},
+	
+	on_rightclick = function(pos, node)
+		redstone.set_level(pos, 16, true)
+		redstone.set_level(get_facedir_node(pos, node.param2), 16, true)
+		print("Setting at: "..minetest.pos_to_string(pos).." and "..minetest.pos_to_string(get_facedir_node(pos, node.param2)))
+		minetest.after(1, function(p1, p2)
+			redstone.set_level(p1, 0, true)
+			redstone.set_level(p2, 0, true)
+		end, pos, get_facedir_node(pos, node.param2))
+	end,
 })

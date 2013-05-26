@@ -14,3 +14,11 @@ minetest.register_craft({
 		{"default:cobble"},
 	},
 })
+
+minetest.register_craft({
+	output = "redstone:button",
+	recipe = {
+		{"default:stone"},
+		{"default:stone"},
+	},
+})
