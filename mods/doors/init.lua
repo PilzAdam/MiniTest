@@ -122,15 +122,17 @@ function doors:register_door(name, def)
 		meta = minetest.env:get_meta(pos):to_table()
 		minetest.env:set_node(pos, {name=replace, param2=p2})
 		minetest.env:get_meta(pos):from_table(meta)
-	end
-	
-	local function check_player_priv(pos, player)
-		if not def.only_placer_can_open then
-			return true
+		
+		local m = minetest.env:get_meta(pos)
+		pos.y = pos.y+dir
+		m2 = minetest.env:get_meta(pos)
+		if m2:get_string("open") == "true" then
+			m:set_string("open", "false")
+			m2:set_string("open", "false")
+		else
+			m:set_string("open", "true")
+			m2:set_string("open", "true")
 		end
-		local meta = minetest.env:get_meta(pos)
-		local pn = player:get_player_name()
-		return meta:get_string("doors_owner") == pn
 	end
 	
 	minetest.register_node(name.."_b_1", {
@@ -155,12 +157,17 @@ function doors:register_door(name, def)
 		end,
 		
 		on_rightclick = function(pos, node, clicker)
-			if check_player_priv(pos, clicker) then
+			if def.rightclickable then
 				on_rightclick(pos, 1, name.."_t_1", name.."_b_2", name.."_t_2", {1,2,3,0})
 			end
 		end,
-		
-		can_dig = check_player_priv,
+		redstone_update = function(pos)
+			local level = redstone.level_at(pos)
+			local m = minetest.env:get_meta(pos)
+			if (level > 0 and m:get_string("open") ~= "true") or (level <= 0 and m:get_string("open") == "true") then
+				on_rightclick(pos, 1, name.."_t_1", name.."_b_2", name.."_t_2", {1,2,3,0})
+			end
+		end,
 	})
 	
 	minetest.register_node(name.."_t_1", {
@@ -185,12 +192,17 @@ function doors:register_door(name, def)
 		end,
 		
 		on_rightclick = function(pos, node, clicker)
-			if check_player_priv(pos, clicker) then
+			if def.rightclickable then
 				on_rightclick(pos, -1, name.."_b_1", name.."_t_2", name.."_b_2", {1,2,3,0})
 			end
 		end,
-		
-		can_dig = check_player_priv,
+		redstone_update = function(pos)
+			local level = redstone.level_at(pos)
+			local m = minetest.env:get_meta(pos)
+			if (level > 0 and m:get_string("open") ~= "true") or (level <= 0 and m:get_string("open") == "true") then
+				on_rightclick(pos, -1, name.."_b_1", name.."_t_2", name.."_b_2", {1,2,3,0})
+			end
+		end,
 	})
 	
 	minetest.register_node(name.."_b_2", {
@@ -215,12 +227,17 @@ function doors:register_door(name, def)
 		end,
 		
 		on_rightclick = function(pos, node, clicker)
-			if check_player_priv(pos, clicker) then
+			if def.rightclickable then
 				on_rightclick(pos, 1, name.."_t_2", name.."_b_1", name.."_t_1", {3,0,1,2})
 			end
 		end,
-		
-		can_dig = check_player_priv,
+		redstone_update = function(pos)
+			local level = redstone.level_at(pos)
+			local m = minetest.env:get_meta(pos)
+			if (level > 0 and m:get_string("open") ~= "true") or (level <= 0 and m:get_string("open") == "true") then
+				on_rightclick(pos, 1, name.."_t_2", name.."_b_1", name.."_t_1", {3,0,1,2})
+			end
+		end,
 	})
 	
 	minetest.register_node(name.."_t_2", {
@@ -245,12 +262,17 @@ function doors:register_door(name, def)
 		end,
 		
 		on_rightclick = function(pos, node, clicker)
-			if check_player_priv(pos, clicker) then
+			if def.rightclickable then
 				on_rightclick(pos, -1, name.."_b_2", name.."_t_1", name.."_b_1", {3,0,1,2})
 			end
 		end,
-		
-		can_dig = check_player_priv,
+		redstone_update = function(pos)
+			local level = redstone.level_at(pos)
+			local m = minetest.env:get_meta(pos)
+			if (level > 0 and m:get_string("open") ~= "true") or (level <= 0 and m:get_string("open") == "true") then
+				on_rightclick(pos, -1, name.."_b_2", name.."_t_1", name.."_b_1", {3,0,1,2})
+			end
+		end,
 	})
 	
 end
@@ -261,6 +283,7 @@ doors:register_door("doors:door_wood", {
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=2,door=1},
 	tiles_bottom = {"door_wood_b.png", "door_brown.png"},
 	tiles_top = {"door_wood_a.png", "door_brown.png"},
+	rightclickable = true,
 })
 
 minetest.register_craft({
@@ -278,7 +301,7 @@ doors:register_door("doors:door_iron", {
 	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2,door=1},
 	tiles_bottom = {"door_iron_b.png", "door_grey.png"},
 	tiles_top = {"door_iron_a.png", "door_grey.png"},
-	only_placer_can_open = true,
+	rightclickable = false,
 })
 
 minetest.register_craft({
@@ -289,8 +312,3 @@ minetest.register_craft({
 		{"default:iron_ingot", "default:iron_ingot"}
 	}
 })
-
-minetest.register_alias("doors:door_wood_a_c", "doors:door_wood_t_1")
-minetest.register_alias("doors:door_wood_a_o", "doors:door_wood_t_1")
-minetest.register_alias("doors:door_wood_b_c", "doors:door_wood_b_1")
-minetest.register_alias("doors:door_wood_b_o", "doors:door_wood_b_1")
