@@ -89,7 +89,6 @@ minetest.register_tool("default:pick_diamond", {
 minetest.register_tool("default:shovel_wood", {
 	description = "Wooden Shovel",
 	inventory_image = "default_tool_woodshovel.png",
-	wield_image = "default_tool_woodshovel.png^[transformR90",
 	tool_capabilities = {
 		max_drop_level=0,
 		groupcaps={
@@ -102,7 +101,6 @@ minetest.register_tool("default:shovel_wood", {
 minetest.register_tool("default:shovel_stone", {
 	description = "Stone Shovel",
 	inventory_image = "default_tool_stoneshovel.png",
-	wield_image = "default_tool_stoneshovel.png^[transformR90",
 	tool_capabilities = {
 		max_drop_level=0,
 		groupcaps={
@@ -115,7 +113,6 @@ minetest.register_tool("default:shovel_stone", {
 minetest.register_tool("default:shovel_iron", {
 	description = "Iron Shovel",
 	inventory_image = "default_tool_ironshovel.png",
-	wield_image = "default_tool_ironshovel.png^[transformR90",
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
@@ -128,7 +125,6 @@ minetest.register_tool("default:shovel_iron", {
 minetest.register_tool("default:shovel_gold", {
 	description = "Gold Shovel",
 	inventory_image = "default_tool_goldshovel.png",
-	wield_image = "default_tool_goldshovel.png^[transformR90",
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
@@ -141,7 +137,6 @@ minetest.register_tool("default:shovel_gold", {
 minetest.register_tool("default:shovel_diamond", {
 	description = "Diamond Shovel",
 	inventory_image = "default_tool_diamondshovel.png",
-	wield_image = "default_tool_diamondshovel.png^[transformR90",
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
