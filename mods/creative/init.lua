@@ -85,6 +85,9 @@ creative_inventory.set_creative_formspec = function(player, start_i, pagenum)
 	player:get_inventory():set_width("craft", 3)
 	player:get_inventory():set_size("craft", 9)
 	player:get_inventory():set_size("main", 9*4)
+	if player.hud_set_hotbar_itemcount then
+		minetest.after(0, player.hud_set_hotbar_itemcount, player, 9)
+	end
 end
 minetest.register_on_joinplayer(function(player)
 	-- If in creative mode, modify player's inventory forms
