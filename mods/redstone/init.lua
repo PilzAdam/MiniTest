@@ -1,6 +1,8 @@
 
 redstone = {}
 
+dofile(minetest.get_modpath("redstone").."/crafting.lua")
+
 local function add(v1, v2)
 	return {x=v1.x+v2.x, y=v1.y+v2.y, z=v1.z+v2.z}
 end
@@ -116,16 +118,26 @@ function redstone.set_level(pos, level, force)
 	end
 end
 
-minetest.register_node("redstone:redstone_off", {
+minetest.register_craftitem("redstone:redstone", {
 	description = "Redstone",
-	tiles = {"redstone_redstone_off.png"},
 	inventory_image = "redstone_redstone_item.png",
-	wield_image = "redstone_redstone_item.png",
+	stack_max = 64,
+	sounds = default.node_sound_defaults(),
+	
+	on_place = function(itemstack, placer, pointed_thing)
+		local tmpstack = ItemStack("redstone:redstone_off "..itemstack:get_count())
+		tmpstack = minetest.item_place(tmpstack, placer, pointed_thing)
+		return ItemStack("redstone:redstone "..tmpstack:get_count())
+	end,
+})
+
+minetest.register_node("redstone:redstone_off", {
+	tiles = {"redstone_redstone_off.png"},
 	drawtype = "raillike",
+	drop = "redstone:redstone",
 	walkable = false,
 	paramtype = "light",
-	stack_max = 64,
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -152,11 +164,11 @@ minetest.register_node("redstone:redstone_off", {
 minetest.register_node("redstone:redstone_on", {
 	tiles = {"redstone_redstone_on.png"},
 	drawtype = "raillike",
-	drop = "redstone:redstone_off",
+	drop = "redstone:redstone",
 	walkable = false,
 	paramtype = "light",
 	light_source = 5,
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -223,7 +235,7 @@ minetest.register_node("redstone:lever_on", {
 	paramtype2 = "wallmounted",
 	drop = "redstone:lever_off",
 	walkable = false,
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
 		type = "wallmounted",
@@ -322,7 +334,7 @@ minetest.register_node("redstone:torch_off", {
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
 		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
 	},
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	
 	redstone_update = function(pos)
@@ -336,4 +348,36 @@ minetest.register_node("redstone:torch_off", {
 			redstone.set_level(pos, 0)
 		end
 	end,
+})
+
+minetest.register_node("redstone:stone_with_redstone", {
+	description = "Redstone Ore",
+	tiles = {"default_stone.png^redstone_mineral_redstone.png"},
+	is_ground_content = true,
+	groups = {cracky=2},
+	drop = 'redstone:redstone 5',
+	stack_max = 64,
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "redstone:stone_with_redstone",
+	wherein        = "default:stone",
+	clust_scarcity = 14*14*14,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -47,
+	height_max     = -32,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "redstone:stone_with_redstone",
+	wherein        = "default:stone",
+	clust_scarcity = 12*12*12,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -48,
 })
