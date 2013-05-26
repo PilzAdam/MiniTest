@@ -329,6 +329,7 @@ minetest.register_node("redstone:torch_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	walkable = false,
+	drop = "redstone:torch_on",
 	selection_box = {
 		type = "wallmounted",
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},

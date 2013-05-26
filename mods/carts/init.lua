@@ -472,7 +472,7 @@ minetest.register_node(":default:rail", {
 	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1},
 })
 
-minetest.register_node("carts:powerrail", {
+minetest.register_node("carts:powerrail_off", {
 	description = "Powered Rail",
 	drawtype = "raillike",
 	tiles = {"carts_rail_pwr.png", "carts_rail_curved_pwr.png", "carts_rail_t_junction_pwr.png", "carts_rail_crossing_pwr.png"},
@@ -484,98 +484,54 @@ minetest.register_node("carts:powerrail", {
 	stack_max = 64,
 	selection_box = {
 		type = "fixed",
-		-- but how to specify the dimensions for curved and sideways rails?
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
 	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1},
 	
-	after_place_node = function(pos, placer, itemstack)
-		if not mesecon then
-			minetest.env:get_meta(pos):set_string("cart_acceleration", "0.5")
+	after_place_node = function(pos)
+		local level = redstone.level_at(pos)
+		if level > 0 then
+			minetest.env:set_node(pos, {name="carts:powerrail_on"})
+			local m = minetest.env:get_meta(pos)
+			m:set_string("cart_acceleration", "0.5")
 		end
 	end,
-	
-	mesecons = {
-		effector = {
-			action_on = function(pos, node)
-				minetest.env:get_meta(pos):set_string("cart_acceleration", "0.5")
-			end,
-			
-			action_off = function(pos, node)
-				minetest.env:get_meta(pos):set_string("cart_acceleration", "0")
-			end,
-		},
-	},
+	redstone_update = function(pos)
+		local level = redstone.level_at(pos)
+		if level > 0 then
+			minetest.env:set_node(pos, {name="carts:powerrail_on"})
+			local m = minetest.env:get_meta(pos)
+			m:set_string("cart_acceleration", "0.5")
+		end
+	end,
 })
 
-minetest.register_node("carts:brakerail", {
-	description = "Brake Rail",
+minetest.register_node("carts:powerrail_on", {
 	drawtype = "raillike",
-	tiles = {"carts_rail_brk.png", "carts_rail_curved_brk.png", "carts_rail_t_junction_brk.png", "carts_rail_crossing_brk.png"},
-	inventory_image = "carts_rail_brk.png",
-	wield_image = "carts_rail_brk.png",
+	tiles = {"carts_rail_pwr.png", "carts_rail_curved_pwr.png", "carts_rail_t_junction_pwr.png", "carts_rail_crossing_pwr.png"},
 	paramtype = "light",
 	is_ground_content = true,
 	walkable = false,
-	stack_max = 64,
+	drop = "carts:powerrail_off",
 	selection_box = {
 		type = "fixed",
-		-- but how to specify the dimensions for curved and sideways rails?
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1},
+	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1,not_in_creative_inventory=1},
 	
-	after_place_node = function(pos, placer, itemstack)
-		if not mesecon then
-			minetest.env:get_meta(pos):set_string("cart_acceleration", "-0.2")
+	redstone_update = function(pos)
+		local level = redstone.level_at(pos)
+		if level <= 0 then
+			minetest.env:set_node(pos, {name="carts:powerrail_off"})
 		end
 	end,
-	
-	mesecons = {
-		effector = {
-			action_on = function(pos, node)
-				minetest.env:get_meta(pos):set_string("cart_acceleration", "-0.2")
-			end,
-			
-			action_off = function(pos, node)
-				minetest.env:get_meta(pos):set_string("cart_acceleration", "0")
-			end,
-		},
-	},
 })
 
 minetest.register_craft({
-	output = "carts:powerrail 2",
+	output = "carts:powerrail_off 6",
 	recipe = {
-		{"default:iron_ingot", "default:mese_crystal_fragment", "default:iron_ingot"},
-		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
-		{"default:iron_ingot", "", "default:iron_ingot"},
-	}
-})
-
-minetest.register_craft({
-	output = "carts:powerrail 2",
-	recipe = {
-		{"default:iron_ingot", "", "default:iron_ingot"},
-		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
-		{"default:iron_ingot", "default:mese_crystal_fragment", "default:iron_ingot"},
-	}
-})
-
-minetest.register_craft({
-	output = "carts:brakerail 2",
-	recipe = {
-		{"default:iron_ingot", "group:coal", "default:iron_ingot"},
-		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
-		{"default:iron_ingot", "", "default:iron_ingot"},
-	}
-})
-
-minetest.register_craft({
-	output = "carts:brakerail 2",
-	recipe = {
-		{"default:iron_ingot", "", "default:iron_ingot"},
-		{"default:iron_ingot", "default:stick", "default:iron_ingot"},
-		{"default:iron_ingot", "group:coal", "default:iron_ingot"},
+		{"default:gold_ingot", "", "default:gold_ingot"},
+		{"default:gold_ingot", "default:stick", "default:gold_ingot"},
+		{"default:gold_ingot", "redstone:redstone", "default:gold_ingot"},
 	}
 })
