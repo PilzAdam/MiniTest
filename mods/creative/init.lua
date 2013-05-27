@@ -129,6 +129,14 @@ end)
 
 if minetest.setting_getbool("creative_mode") then
 	
+	local function get_list(num)
+		local table = {times={}, uses=0}
+		for i=1,num do
+			table.times[i] = 0
+		end
+		return table
+	end
+	
 	minetest.register_item(":", {
 		type = "none",
 		wield_image = "wieldhand.png",
@@ -137,10 +145,11 @@ if minetest.setting_getbool("creative_mode") then
 			full_punch_interval = 0.5,
 			max_drop_level = 3,
 			groupcaps = {
-				crumbly = {times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-				cracky = {times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-				snappy = {times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-				choppy = {times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
+				crumbly = get_list(8),
+				cracky = get_list(19),
+				snappy = get_list(2),
+				choppy = get_list(8),
+				dig_immediate = get_list(3), -- TODO doesnt work
 			},
 			damage_groups = {fleshy = 10},
 		}
