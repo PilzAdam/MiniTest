@@ -280,7 +280,7 @@ end
 doors:register_door("doors:door_wood", {
 	description = "Wooden Door",
 	inventory_image = "door_wood.png",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=2,door=1},
+	groups = {choppy=default.dig.wooden_door,flammable=2,door=1},
 	tiles_bottom = {"door_wood_b.png", "door_brown.png"},
 	tiles_top = {"door_wood_a.png", "door_brown.png"},
 	rightclickable = true,
@@ -298,7 +298,7 @@ minetest.register_craft({
 doors:register_door("doors:door_iron", {
 	description = "Iron Door",
 	inventory_image = "door_iron.png",
-	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2,door=1},
+	groups = {cracky=default.dig.iron_door},
 	tiles_bottom = {"door_iron_b.png", "door_grey.png"},
 	tiles_top = {"door_iron_a.png", "door_grey.png"},
 	rightclickable = false,

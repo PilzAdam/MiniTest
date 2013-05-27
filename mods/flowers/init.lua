@@ -23,7 +23,7 @@ minetest.register_node("flowers:dandelion_white", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_white=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_white=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -42,7 +42,7 @@ minetest.register_node("flowers:dandelion_yellow", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_yellow=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_yellow=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -61,7 +61,7 @@ minetest.register_node("flowers:geranium", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_blue=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_blue=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -80,7 +80,7 @@ minetest.register_node("flowers:rose", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_red=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_red=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -99,7 +99,7 @@ minetest.register_node("flowers:tulip", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_orange=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_orange=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -118,7 +118,7 @@ minetest.register_node("flowers:viola", {
 	walkable = false,
 	buildable_to = true,
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_violet=1},
+	groups = {dig_immediate=3,flammable=2,flower=1,flora=1,attached_node=1,color_violet=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",

@@ -205,49 +205,49 @@ function stairs.register_stair_and_slab(subname, recipeitem, groups, images, des
 end
 
 stairs.register_stair_and_slab("wood", "default:wood",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{choppy=default.dig.wood,flammable=3},
 		{"default_wood.png"},
 		"Wooden Stair",
 		"Wooden Slab",
 		default.node_sound_wood_defaults())
 
 stairs.register_stair_and_slab("stone", "default:stone",
-		{cracky=3},
+		{cracky=default.dig.stone},
 		{"default_stone.png"},
 		"Stone Stair",
 		"Stone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("cobble", "default:cobble",
-		{cracky=3},
+		{cracky=default.dig.cobble},
 		{"default_cobble.png"},
 		"Cobble Stair",
 		"Cobble Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("brick", "default:brick",
-		{cracky=3},
+		{cracky=default.dig.brick},
 		{"default_brick.png"},
 		"Brick Stair",
 		"Brick Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("sandstone", "default:sandstone",
-		{crumbly=2,cracky=2},
+		{cracky=default.dig.sandstone},
 		{"default_sandstone_bottom.png"},
 		"Sandstone Stair",
 		"Sandstone Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("junglewood", "default:junglewood",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{choppy=default.dig.wood,flammable=3},
 		{"default_junglewood.png"},
 		"Junglewood Stair",
 		"Junglewood Slab",
 		default.node_sound_wood_defaults())
 
 stairs.register_stair_and_slab("stonebrick", "default:stonebrick",
-		{cracky=3},
+		{cracky=default.dig.stone},
 		{"default_stone_brick.png"},
 		"Stone Brick Stair",
 		"Stone Brick Slab",

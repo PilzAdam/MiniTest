@@ -9,7 +9,7 @@ minetest.register_node("farming:soil", {
 	tiles = {"farming_soil.png", "default_dirt.png"},
 	drop = "default:dirt",
 	is_ground_content = true,
-	groups = {crumbly=3, not_in_creative_inventory=1, soil=2},
+	groups = {crumbly=default.dig.dirt_with_grass, not_in_creative_inventory=1, soil=2},
 	sounds = default.node_sound_dirt_defaults(),
 })
 
@@ -18,7 +18,7 @@ minetest.register_node("farming:soil_wet", {
 	tiles = {"farming_soil_wet.png", "farming_soil_wet_side.png"},
 	drop = "default:dirt",
 	is_ground_content = true,
-	groups = {crumbly=3, not_in_creative_inventory=1, soil=3},
+	groups = {crumbly=default.dig.dirt_with_grass, not_in_creative_inventory=1, soil=3},
 	sounds = default.node_sound_dirt_defaults(),
 })
 
@@ -110,17 +110,8 @@ minetest.register_tool("farming:hoe_wood", {
 	inventory_image = "farming_tool_woodhoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 30)
+		return hoe_on_use(itemstack, user, pointed_thing, 60)
 	end,
-	
-	tool_capabilities = {
-		max_drop_level=0,
-		groupcaps={
-			snappy={times={[2]=1.6, [3]=0.35}, uses=10, maxlevel=1},
-		},
-		full_punch_interval = 1,
-		damage_groups = {fleshy=1},
-	},
 })
 
 minetest.register_tool("farming:hoe_stone", {
@@ -128,17 +119,8 @@ minetest.register_tool("farming:hoe_stone", {
 	inventory_image = "farming_tool_stonehoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 90)
+		return hoe_on_use(itemstack, user, pointed_thing, 132)
 	end,
-	
-	tool_capabilities = {
-		max_drop_level=0,
-		groupcaps={
-			snappy={times={[2]=1.4, [3]=0.3}, uses=20, maxlevel=1},
-		},
-		full_punch_interval = 1,
-		damage_groups = {fleshy=1},
-	},
 })
 
 minetest.register_tool("farming:hoe_iron", {
@@ -146,17 +128,8 @@ minetest.register_tool("farming:hoe_iron", {
 	inventory_image = "farming_tool_ironhoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 200)
+		return hoe_on_use(itemstack, user, pointed_thing, 251)
 	end,
-	
-	tool_capabilities = {
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=2.5, [2]=1.20, [3]=0.25}, uses=30, maxlevel=2},
-		},
-		full_punch_interval = 1,
-		damage_groups = {fleshy=1},
-	},
 })
 
 minetest.register_tool("farming:hoe_gold", {
@@ -164,17 +137,8 @@ minetest.register_tool("farming:hoe_gold", {
 	inventory_image = "farming_tool_goldhoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 150)
+		return hoe_on_use(itemstack, user, pointed_thing, 33)
 	end,
-	
-	tool_capabilities = {
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=1.9, [2]=0.9, [3]=0.2}, uses=20, maxlevel=2},
-		},
-		full_punch_interval = 1,
-		damage_groups = {fleshy=1},
-	},
 })
 
 minetest.register_tool("farming:hoe_diamond", {
@@ -182,17 +146,8 @@ minetest.register_tool("farming:hoe_diamond", {
 	inventory_image = "farming_tool_diamondhoe.png",
 	
 	on_place = function(itemstack, user, pointed_thing)
-		return hoe_on_use(itemstack, user, pointed_thing, 400)
+		return hoe_on_use(itemstack, user, pointed_thing, 1562)
 	end,
-	
-	tool_capabilities = {
-		max_drop_level=1,
-		groupcaps={
-			snappy={times={[1]=1.90, [2]=0.90, [3]=0.2}, uses=40, maxlevel=3},
-		},
-		full_punch_interval = 1,
-		damage_groups = {fleshy=1},
-	},
 })
 
 minetest.register_craft({
@@ -324,7 +279,7 @@ minetest.register_node(":default:junglegrass", {
 		}
 	},
 	stack_max = 64,
-	groups = {snappy=3,flammable=2,flora=1,attached_node=1},
+	groups = {dig_immediate=3,flammable=2,flora=1,attached_node=1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -444,7 +399,7 @@ for i=1,8 do
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
 		},
-		groups = {snappy=3,flammable=2,plant=1,wheat=i,not_in_creative_inventory=1,attached_node=1},
+		groups = {dig_immediate=3,flammable=2,plant=1,wheat=i,not_in_creative_inventory=1,attached_node=1},
 		sounds = default.node_sound_leaves_defaults(),
 	})
 end
@@ -531,7 +486,7 @@ for i=1,8 do
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
 		},
-		groups = {snappy=3,flammable=2,plant=1,cotton=i,not_in_creative_inventory=1,attached_node=1},
+		groups = {dig_immediate=3,flammable=2,plant=1,cotton=i,not_in_creative_inventory=1,attached_node=1},
 		sounds = default.node_sound_leaves_defaults(),
 	})
 end

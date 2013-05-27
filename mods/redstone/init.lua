@@ -369,7 +369,7 @@ minetest.register_node("redstone:stone_with_redstone", {
 	description = "Redstone Ore",
 	tiles = {"default_stone.png^redstone_mineral_redstone.png"},
 	is_ground_content = true,
-	groups = {cracky=2},
+	groups = {cracky=default.dig.redstone_ore},
 	drop = 'redstone:redstone 5',
 	stack_max = 64,
 	sounds = default.node_sound_stone_defaults(),

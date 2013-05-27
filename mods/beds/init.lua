@@ -10,7 +10,7 @@ minetest.register_node("beds:bed_bottom", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	stack_max = 1,
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	groups = {dig_immediate=2,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
@@ -122,7 +122,7 @@ minetest.register_node("beds:bed_top", {
 	tiles = {"beds_bed_top_top.png^[transformR90", "beds_bed_empty.png",  "beds_bed_side_top_r.png",  "beds_bed_side_top_r.png^[transformfx",  "beds_bed_side_top.png", "beds_bed_empty.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	groups = {dig_immediate=2,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",

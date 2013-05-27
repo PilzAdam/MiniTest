@@ -35,7 +35,7 @@ for _, row in ipairs(wool.dyes) do
 		description = desc.." Wool",
 		tiles = {"wool_"..name..".png"},
 		stack_max = 64,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
+		groups = {snappy=default.dig.wool,flammable=3,wool=1},
 		sounds = default.node_sound_defaults(),
 	})
 	if craft_color_group then

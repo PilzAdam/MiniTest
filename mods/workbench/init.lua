@@ -2,7 +2,7 @@ minetest.register_node("workbench:workbench", {
 	description = "Workbench",
 	tiles = {"workbench_top.png", "workbench_side.png"},
 	stack_max = 64,
-	groups = {choppy=2,oddly_breakable_by_hand=2,flammable=3},
+	groups = {choppy=default.dig.workbench,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	on_rightclick = function(pos, node, clicker, itemstack)
 		minetest.show_formspec(clicker:get_player_name(), "workbench:workbench",
