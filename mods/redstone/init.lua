@@ -1,5 +1,21 @@
 
 redstone = {}
+redstone.tms = {}
+redstone.ltms = 1
+
+local function after_globalstep(func, ...)
+	redstone.tms[redstone.ltms] = {f = func, args = {...}}
+	redstone.ltms = redstone.ltms + 1
+end
+
+minetest.register_globalstep(function(dtime)
+	local tms = redstone.tms
+	redstone.tms = {}
+	for _, t in ipairs(tms) do
+		t.func(unpack(t.args or {}))
+	end
+end)
+
 
 dofile(minetest.get_modpath("redstone").."/crafting.lua")
 
@@ -118,7 +134,7 @@ function redstone.set_level(pos, level, force)
 				local p = add(pos, {x=dx, y=dy, z=dz})
 				local nn = minetest.env:get_node(p).name
 				if nn == "redstone:torch_off" or nn == "redstone:torch_on" then
-					minetest.after(0.5, function(p)
+					after_globalstep(function(p)
 						local nn = minetest.env:get_node(p).name
 						if nn == "redstone:torch_off" or nn == "redstone:torch_on" then
 							minetest.registered_nodes[nn].redstone_update(p)
