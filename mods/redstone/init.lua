@@ -377,24 +377,23 @@ minetest.register_node("redstone:stone_with_redstone", {
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "redstone:stone_with_redstone",
+	ore            = "default:stone_with_diamond",
 	wherein        = "default:stone",
-	clust_scarcity = 14*14*14,
-	clust_num_ores = 3,
-	clust_size     = 2,
-	height_min     = -47,
-	height_max     = -32,
+	clust_scarcity = 13*13*13,
+	clust_num_ores = 6,
+	clust_size     = 3,
+	height_min     = -59,
+	height_max     = -52,
 })
-
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "redstone:stone_with_redstone",
+	ore            = "default:stone_with_diamond",
 	wherein        = "default:stone",
-	clust_scarcity = 12*12*12,
-	clust_num_ores = 5,
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -48,
+	height_min     = -55,
+	height_max     = -53,
 })
 
 minetest.register_node("redstone:button", {

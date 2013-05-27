@@ -393,13 +393,40 @@ local function replace(old, new)
 end
 
 replace("default:stone", "nether:rack")
-replace("default:stone_with_coal", "air")
-replace("default:iron", "air")
-replace("default:stone_with_diamond", "default:lava_source")
-replace("default:gold", "nether:glowstone")
 replace("default:gravel", "nether:sand")
 replace("default:dirt", "nether:sand")
 replace("default:sand", "nether:sand")
 replace("default:cobble", "nether:brick")
 replace("default:mossycobble", "nether:brick")
 replace("stairs:stair_cobble", "nether:brick")
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "air",
+	wherein        = "nether:rack",
+	clust_scarcity = 10*10*10,
+	clust_num_ores = 8,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = NETHER_DEPTH,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:lava_source",
+	wherein        = "nether:rack",
+	clust_scarcity = 10*10*10,
+	clust_num_ores = 8,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = NETHER_DEPTH,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "nether:glowstone",
+	wherein        = "nether:rack",
+	clust_scarcity = 13*13*13,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -31000,
+	height_max     = NETHER_DEPTH,
+})

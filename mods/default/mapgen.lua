@@ -25,9 +25,8 @@ minetest.register_alias("mapgen_desert_sand", "default:sand")
 minetest.register_alias("mapgen_desert_stone", "default:sandstone")
 
 --
--- Ore generation
+-- Coal
 --
-
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:stone_with_coal",
@@ -35,32 +34,33 @@ minetest.register_ore({
 	clust_scarcity = 8*8*8,
 	clust_num_ores = 8,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = 64,
+	height_min     = -59,
+	height_max     = -12,
 })
-
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:stone_with_coal",
 	wherein        = "default:stone",
-	clust_scarcity = 24*24*24,
-	clust_num_ores = 27,
-	clust_size     = 6,
-	height_min     = -31000,
-	height_max     = 0,
+	clust_scarcity = 9*9*9,
+	clust_num_ores = 6,
+	clust_size     = 3,
+	height_min     = -11,
+	height_max     = 64,
 })
-
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:iron",
+	ore            = "default:stone_with_coal",
 	wherein        = "default:stone",
-	clust_scarcity = 12*12*12,
-	clust_num_ores = 3,
+	clust_scarcity = 11*11*11,
+	clust_num_ores = 4,
 	clust_size     = 2,
-	height_min     = -15,
-	height_max     = 2,
+	height_min     = 65,
+	height_max     = 67,
 })
 
+--
+-- Iron
+--
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:iron",
@@ -68,43 +68,33 @@ minetest.register_ore({
 	clust_scarcity = 9*9*9,
 	clust_num_ores = 5,
 	clust_size     = 3,
-	height_min     = -31,
-	height_max     = -16,
+	height_min     = -59,
+	height_max     = -10,
 })
-
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:iron",
 	wherein        = "default:stone",
-	clust_scarcity = 7*7*7,
-	clust_num_ores = 5,
-	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -32,
-})
-
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "default:iron",
-	wherein        = "default:stone",
-	clust_scarcity = 24*24*24,
-	clust_num_ores = 27,
-	clust_size     = 6,
-	height_min     = -31000,
-	height_max     = -48,
-})
-
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "default:gold",
-	wherein        = "default:stone",
-	clust_scarcity = 15*15*15,
+	clust_scarcity = 11*11*11,
 	clust_num_ores = 3,
 	clust_size     = 2,
-	height_min     = -47,
-	height_max     = -32,
+	height_min     = -9,
+	height_max     = 0,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:iron",
+	wherein        = "default:stone",
+	clust_scarcity = 13*13*13,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = 1,
+	height_max     = 3,
 })
 
+--
+-- Gold
+--
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:gold",
@@ -112,10 +102,23 @@ minetest.register_ore({
 	clust_scarcity = 13*13*13,
 	clust_num_ores = 5,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -48,
+	height_min     = -59,
+	height_max     = -35,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:gold",
+	wherein        = "default:stone",
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -35,
+	height_max     = -33,
 })
 
+--
+-- Diamond
+--
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:stone_with_diamond",
@@ -123,8 +126,18 @@ minetest.register_ore({
 	clust_scarcity = 17*17*17,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -56,
+	height_min     = -59,
+	height_max     = -52,
+})
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_diamond",
+	wherein        = "default:stone",
+	clust_scarcity = 19*19*19,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -55,
+	height_max     = -53,
 })
 
 function default.generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume, chunk_size, ore_per_chunk, height_min, height_max)
@@ -358,13 +371,38 @@ local function replace(old, new, min, max)
 end
 replace("air", "default:bedrock", -80, -64)
 replace("default:stone", "default:bedrock", -80, -64)
-replace("default:stone_with_coal", "default:bedrock", -80, -64)
-replace("default:iron", "default:bedrock", -80, -64)
-replace("default:stone_with_diamond", "default:bedrock", -80, -64)
-replace("default:gold", "default:bedrock", -80, -64)
 replace("default:gravel", "default:bedrock", -80, -64)
 replace("default:dirt", "default:bedrock", -80, -64)
 replace("default:sand", "default:bedrock", -80, -64)
 replace("default:cobble", "default:bedrock", -80, -64)
 replace("default:mossycobble", "default:bedrock", -80, -64)
 replace("stairs:stair_cobble", "default:bedrock", -80, -64)
+replace("default:lava_source", "default:bedrock", -80, -64)
+replace("default:lava_flowing", "default:bedrock", -80, -64)
+replace("default:water_source", "default:bedrock", -80, -64)
+replace("default:water_flowing", "default:bedrock", -80, -64)
+
+local function bedrock(old)
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:bedrock",
+		wherein        = old,
+		clust_scarcity = 5,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		height_min     = -64,
+		height_max     = -60,
+	})
+end
+bedrock("air")
+bedrock("default:stone")
+bedrock("default:gravel")
+bedrock("default:dirt")
+bedrock("default:sand")
+bedrock("default:cobble")
+bedrock("default:mossycobble")
+bedrock("stairs:stair_cobble")
+bedrock("default:lava_source")
+bedrock("default:lava_flowing")
+bedrock("default:water_source")
+bedrock("default:water_flowing")
