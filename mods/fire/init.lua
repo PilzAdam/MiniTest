@@ -229,7 +229,9 @@ minetest.register_tool("fire:flint_and_steel", {
 })
 
 minetest.register_craft({
-	type = "shapeless",
 	output = "fire:flint_and_steel",
-	recipe = {"default:flint", "default:iron_ingot"},
+	recipe = {
+		{"default:iron_ingot", ""},
+		{"", "default:flint"},
+	},
 })

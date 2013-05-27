@@ -352,9 +352,8 @@ minetest.register_node("nether:glowstone", {
 		items = {
 			{items = {'nether:glowstone_dust'}},
 			{items = {'nether:glowstone_dust'}},
-			{items = {'nether:glowstone_dust'}},
 			{items = {'nether:glowstone_dust'},rarity=2},
-			{items = {'nether:glowstone_dust'},rarity=4},
+			{items = {'nether:glowstone_dust'},rarity=0},
 		}
 	},
 	groups = {dig_immediate=2},
