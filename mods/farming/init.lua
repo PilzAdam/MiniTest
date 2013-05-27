@@ -275,7 +275,6 @@ minetest.register_node(":default:junglegrass", {
 		max_items = 1,
 		items = {
 			{items = {'farming:seed_cotton'},rarity = 20},
-			{items = {'default:junglegrass'}},
 		}
 	},
 	stack_max = 64,

@@ -220,6 +220,7 @@ minetest.register_node("default:junglegrass", {
 	walkable = false,
 	buildable_to = true,
 	is_ground_content = true,
+	drop = "",
 	stack_max = 64,
 	groups = {dig_immediate=3,flammable=2,flora=1,attached_node=1},
 	sounds = default.node_sound_leaves_defaults(),
