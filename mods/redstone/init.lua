@@ -421,4 +421,45 @@ minetest.register_node("redstone:button", {
 			redstone.set_level(p2, 0, true)
 		end, pos, get_facedir_node(pos, node.param2))
 	end,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type ~= "node" then
+			return itemstack
+		end
+
+		local pp = placer:getpos()
+		local dir = {
+			x = pointed_thing.above.x - pp.x,
+			y = pointed_thing.above.y - pp.y,
+			z = pointed_thing.above.z - pp.z
+		}
+		local nn = minetest.env:get_node(get_facedir_node(pointed_thing.above, minetest.dir_to_facedir(dir))).name
+		if not minetest.registered_nodes[nn].walkable then
+			return itemstack
+		end
+
+		return minetest.item_place(itemstack, placer, pointed_thing)
+	end,
 })
+
+local function update_button_attachment(p)
+	-- Round p to prevent falling entities to get stuck
+	p.x = math.floor(p.x+0.5)
+	p.y = math.floor(p.y+0.5)
+	p.z = math.floor(p.z+0.5)
+	
+	for x = -1,1 do
+	for y = -1,1 do
+	for z = -1,1 do
+		local n = minetest.env:get_node({x=p.x+x, y=p.y+y, z=p.z+z})
+		if n.name == "redstone:button" then
+			local nn = minetest.env:get_node(get_facedir_node({x=p.x+x, y=p.y+y, z=p.z+z}, n.param2)).name
+			if not minetest.registered_nodes[nn].walkable then
+				drop_attached_node({x=p.x+x, y=p.y+y, z=p.z+z})
+			end
+		end
+	end
+	end
+	end
+end
+minetest.register_on_dignode(update_button_attachment)
+minetest.register_on_placenode(update_button_attachment)
