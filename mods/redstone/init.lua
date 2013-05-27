@@ -1,6 +1,28 @@
 
 redstone = {}
 
+local timer = {length = 0}
+
+function redstone.after_redstone_tick(func, ...)
+	timer[timer.length+1] = {f = func, args = {...}}
+	timer.length = timer.length
+end
+
+local tick = 0
+TICKS = 10
+
+minetest.register_globalstep(function(dtime)
+	tick = tick + 1
+	if tick >= TICKS then
+		tick = 0
+		for _, t in ipairs(timer) do
+			t.f(unpack(t.args))
+		end
+		timer = {length=0}
+	end
+end)
+
+
 dofile(minetest.get_modpath("redstone").."/crafting.lua")
 
 local function add(v1, v2)
@@ -120,7 +142,7 @@ function redstone.set_level(pos, level, force)
 				local p = add(pos, {x=dx, y=dy, z=dz})
 				local nn = minetest.env:get_node(p).name
 				if nn == "redstone:torch_off" or nn == "redstone:torch_on" then
-					minetest.after(0.5, function(p)
+					redstone.after_redstone_tick(function(p)
 						local nn = minetest.env:get_node(p).name
 						if nn == "redstone:torch_off" or nn == "redstone:torch_on" then
 							minetest.registered_nodes[nn].redstone_update(p)
