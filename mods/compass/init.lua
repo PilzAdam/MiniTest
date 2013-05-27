@@ -25,7 +25,8 @@ minetest.register_globalstep(function(dtime)
 			local compass_image = math.floor((angle_relative/30) + 0.5)%12
 
 			for j,stack in ipairs(player:get_inventory():get_list("main")) do
-				if minetest.get_item_group(stack:get_name(), "compass") ~= 0 then
+				if minetest.get_item_group(stack:get_name(), "compass") ~= 0 and
+						minetest.get_item_group(stack:get_name(), "compass")-1 ~= compass_image then
 					player:get_inventory():set_stack("main", j, "compass:"..compass_image)
 				end
 			end
@@ -58,7 +59,7 @@ for i,img in ipairs(images) do
 		description = "Compass",
 		inventory_image = img,
 		wield_image = img,
-		groups = {not_in_creative_inventory=inv,compass=1}
+		groups = {not_in_creative_inventory=inv,compass=i}
 	})
 end
 
