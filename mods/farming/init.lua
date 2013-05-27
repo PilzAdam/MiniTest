@@ -361,7 +361,7 @@ minetest.register_craftitem("farming:bread", {
 
 minetest.register_craft({
 	output = "farming:bread",
-	recipe = {"farming:wheat", "farming:wheat", "farming:wheat"},
+	recipe = {{"farming:wheat", "farming:wheat", "farming:wheat"}},
 })
 
 for i=1,8 do

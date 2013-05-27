@@ -56,6 +56,12 @@ minetest.register_craftitem("default:gold_ingot", {
 	stack_max = 64,
 })
 
+minetest.register_craftitem("default:gold_nugget", {
+	description = "Gold Nugget",
+	inventory_image = "default_gold_nugget.png",
+	stack_max = 64,
+})
+
 minetest.register_craftitem("default:clay_brick", {
 	description = "Clay Brick",
 	inventory_image = "default_clay_brick.png",
@@ -73,4 +79,11 @@ minetest.register_craftitem("default:apple", {
 	inventory_image = "default_apple.png",
 	stack_max = 64,
 	on_use = minetest.item_eat(1),
+})
+
+minetest.register_craftitem("default:apple_gold", {
+	description = "Golden Apple",
+	inventory_image = "default_apple_gold.png",
+	stack_max = 64,
+	on_use = minetest.item_eat(6),
 })

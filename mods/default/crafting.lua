@@ -287,6 +287,30 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	type = 'shapeless',
+	output = 'default:gold_nugget 9',
+	recipe = {'default:gold_ingot'},
+})
+
+minetest.register_craft({
+	output = 'default:gold_ingot',
+	recipe = {
+		{'default:gold_nugget', 'default:gold_nugget', 'default:gold_nugget'},
+		{'default:gold_nugget', 'default:gold_nugget', 'default:gold_nugget'},
+		{'default:gold_nugget', 'default:gold_nugget', 'default:gold_nugget'},
+	},
+})
+
+minetest.register_craft({
+	output = 'default:apple_gold',
+	recipe = {
+		{'default:gold_nugget', 'default:gold_nugget', 'default:gold_nugget'},
+		{'default:gold_nugget', 'default:apple', 'default:gold_nugget'},
+		{'default:gold_nugget', 'default:gold_nugget', 'default:gold_nugget'},
+	},
+})
+
+minetest.register_craft({
 	output = 'default:diamondblock',
 	recipe = {
 		{'default:diamond', 'default:diamond', 'default:diamond'},
