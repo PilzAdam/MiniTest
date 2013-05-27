@@ -352,30 +352,16 @@ minetest.register_craftitem("farming:wheat", {
 	stack_max = 64,
 })
 
-minetest.register_craftitem("farming:flour", {
-	description = "Flour",
-	inventory_image = "farming_flour.png",
-	stack_max = 64,
-})
-
 minetest.register_craftitem("farming:bread", {
 	description = "Bread",
 	inventory_image = "farming_bread.png",
-	stack_max = 64,
-	on_use = minetest.item_eat(4),
+	stack_max = 1,
+	on_use = minetest.item_eat(5),
 })
 
 minetest.register_craft({
-	type = "shapeless",
-	output = "farming:flour",
-	recipe = {"farming:wheat", "farming:wheat", "farming:wheat", "farming:wheat"}
-})
-
-minetest.register_craft({
-	type = "cooking",
-	cooktime = 15,
 	output = "farming:bread",
-	recipe = "farming:flour"
+	recipe = {"farming:wheat", "farming:wheat", "farming:wheat"},
 })
 
 for i=1,8 do

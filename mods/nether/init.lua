@@ -320,13 +320,6 @@ minetest.register_node("nether:rack", {
 	description = "Netherrack",
 	tiles = {"nether_rack.png"},
 	is_ground_content = true,
-	drop = {
-		max_items = 1,
-		items = {{
-			rarity = 3,
-			items = {"nether:rack"},
-		}}
-	},
 	stack_max = 64,
 	groups = {cracky=default.dig.netherrack},
 	sounds = default.node_sound_stone_defaults(),
