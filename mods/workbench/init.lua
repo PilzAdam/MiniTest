@@ -7,7 +7,7 @@ minetest.register_node("workbench:workbench", {
 	on_rightclick = function(pos, node, clicker, itemstack)
 		minetest.show_formspec(clicker:get_player_name(), "workbench:workbench",
 			"size[9,8;]"..
-			"list[current_player;main;0,3.5;9,4;9]"..
+			"list[current_player;main;0,3.5;9,3;9]"..
 			"list[current_player;main;0,7;9,1;]"..
 			"list[current_player;craft;4,0;3,3;]"..
 			"list[current_player;craftpreview;7.5,1;1,1;]"
@@ -34,7 +34,7 @@ minetest.register_on_joinplayer(function(player)
 		player:set_inventory_formspec(
 			"size[9,8;]"..
 			
-			"list[current_player;main;0,3.5;9,4;9]"..
+			"list[current_player;main;0,3.5;9,3;9]"..
 			"list[current_player;main;0,7;9,1;]"..
 			
 			"list[current_player;craft;5,0.5;2,1;1]"..

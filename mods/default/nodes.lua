@@ -632,7 +632,7 @@ minetest.register_node("default:chest", {
 					"size[9,11.5]"..
 					"list[nodemeta:"..p.x..","..p.y..","..p.z..";main;0,0;9,3;]"..
 					"list[current_name;main;0,3;9,3;]"..
-					"list[current_player;main;0,7;9,4;9]"..
+					"list[current_player;main;0,7;9,3;9]"..
 					"list[current_player;main;0,10.5;9,1;]")
 			meta:set_string("infotext", "Large Chest")
 			hacky_swap_node(p, "default:chest_left", param2)
@@ -641,7 +641,7 @@ minetest.register_node("default:chest", {
 					"size[9,11.5]"..
 					"list[current_name;main;0,0;9,3;]"..
 					"list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";main;0,3;9,3;]"..
-					"list[current_player;main;0,7;9,4;9]"..
+					"list[current_player;main;0,7;9,3;9]"..
 					"list[current_player;main;0,10.5;9,1;]")
 			m:set_string("infotext", "Large Chest")
 		elseif minetest.env:get_node(get_chest_neighborpos(pos, param2, "left")).name == "default:chest" then
@@ -651,7 +651,7 @@ minetest.register_node("default:chest", {
 					"size[9,11.5]"..
 					"list[current_name;main;0,0;9,3;]"..
 					"list[nodemeta:"..p.x..","..p.y..","..p.z..";main;0,3;9,3;]"..
-					"list[current_player;main;0,7;9,4;9]"..
+					"list[current_player;main;0,7;9,3;9]"..
 					"list[current_player;main;0,10.5;9,1;]")
 			meta:set_string("infotext", "Large Chest")
 			hacky_swap_node(p, "default:chest_right", param2)
@@ -660,14 +660,14 @@ minetest.register_node("default:chest", {
 					"size[9,11.5]"..
 					"list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";main;0,0;9,3;]"..
 					"list[current_name;main;0,3;9,3;]"..
-					"list[current_player;main;0,7;9,4;9]"..
+					"list[current_player;main;0,7;9,3;9]"..
 					"list[current_player;main;0,10.5;9,1;]")
 			m:set_string("infotext", "Large Chest")
 		else
 			meta:set_string("formspec",
 					"size[9,8.5]"..
 					"list[current_name;main;0,0;9,3;]"..
-					"list[current_player;main;0,4;9,4;9]"..
+					"list[current_player;main;0,4;9,3;9]"..
 					"list[current_player;main;0,7.5.5;9,1;]")
 			meta:set_string("infotext", "Chest")
 		end
@@ -723,7 +723,7 @@ minetest.register_node("default:chest_left", {
 		meta:set_string("formspec",
 				"size[9,8.5]"..
 				"list[current_name;main;0,0;9,3;]"..
-				"list[current_player;main;0,4;9,4;9]"..
+				"list[current_player;main;0,4;9,3;9]"..
 				"list[current_player;main;0,7.5.5;9,1;]")
 		meta:set_string("infotext", "Chest")
 		hacky_swap_node(p, "default:chest")
@@ -777,7 +777,7 @@ minetest.register_node("default:chest_right", {
 		meta:set_string("formspec",
 				"size[9,8.5]"..
 				"list[current_name;main;0,0;9,3;]"..
-				"list[current_player;main;0,4;9,4;9]"..
+				"list[current_player;main;0,4;9,3;9]"..
 				"list[current_player;main;0,7.5.5;9,1;]")
 		meta:set_string("infotext", "Chest")
 		hacky_swap_node(p, "default:chest")
@@ -816,7 +816,7 @@ default.furnace_inactive_formspec =
 	"list[current_name;fuel;2,3;1,1;]"..
 	"list[current_name;src;2,1;1,1;]"..
 	"list[current_name;dst;5,1;2,2;]"..
-	"list[current_player;main;0,5;9,4;9]"..
+	"list[current_player;main;0,5;9,3;9]"..
 	"list[current_player;main;0,8.5.5;9,1;]"
 
 minetest.register_node("default:furnace", {
@@ -1016,7 +1016,7 @@ minetest.register_abm({
 				"list[current_name;fuel;2,3;1,1;]"..
 				"list[current_name;src;2,1;1,1;]"..
 				"list[current_name;dst;5,1;2,2;]"..
-				"list[current_player;main;0,5;9,4;9]"..
+				"list[current_player;main;0,5;9,3;9]"..
 				"list[current_player;main;0,8.5.5;9,1;]")
 			return
 		end
