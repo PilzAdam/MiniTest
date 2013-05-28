@@ -57,22 +57,24 @@ local function get_facedir_node(pos, param2)
 	return add(pos, d)
 end
 
+redstone.default_rule = {
+	{x= 1, y= 0, z=0},
+	{x=-1, y= 0, z=0},
+	{x= 1, y= 1, z=0},
+	{x=-1, y= 1, z=0},
+	{x= 1, y=-1, z=0},
+	{x=-1, y=-1, z=0},
+	
+	{x=0, y= 0, z= 1},
+	{x=0, y= 0, z=-1},
+	{x=0, y= 1, z= 1},
+	{x=0, y= 1, z=-1},
+	{x=0, y=-1, z= 1},
+	{x=0, y=-1, z=-1},
+}
+
 function redstone.level_at(pos, rule)
-	rule  = rule or {
-		{x= 1, y= 0, z=0},
-		{x=-1, y= 0, z=0},
-		{x= 1, y= 1, z=0},
-		{x=-1, y= 1, z=0},
-		{x= 1, y=-1, z=0},
-		{x=-1, y=-1, z=0},
-		
-		{x=0, y= 0, z= 1},
-		{x=0, y= 0, z=-1},
-		{x=0, y= 1, z= 1},
-		{x=0, y= 1, z=-1},
-		{x=0, y=-1, z= 1},
-		{x=0, y=-1, z=-1},
-	}
+	rule  = rule or redstone.default_rule
 	
 	local level = 0
 	for _,offset in ipairs(rule) do
@@ -295,7 +297,16 @@ minetest.register_node("redstone:torch_on", {
 		local n = minetest.env:get_node(pos)
 		local m = minetest.env:get_meta(pos)
 		m:set_string("redstone_level", tostring(0))
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		local dir = get_wallmounted_dir(pos, n.param2)
+		dir.x, dir.y, dir.z = -dir.x, -dir.y, -dir.z
+		local tmp = redstone.default_rule
+		table.insert(tmp, {x=0,y=-1,z=0})
+		for i,rule in ipairs(tmp) do
+			if rule.x == tmp.x and rule.y == tmp.y and rule.z == tmp.z then
+				table.remove(tmp, i)
+			end
+		end
+		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), tmp)
 		m:set_string("redstone_level", tostring(16))
 		if level > 0 then
 			n.name = "redstone:torch_off"
@@ -310,7 +321,16 @@ minetest.register_node("redstone:torch_on", {
 	end,
 	after_place_node = function(pos)
 		local n = minetest.env:get_node(pos)
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		local dir = get_wallmounted_dir(pos, n.param2)
+		dir.x, dir.y, dir.z = -dir.x, -dir.y, -dir.z
+		local tmp = redstone.default_rule
+		table.insert(tmp, {x=0,y=-1,z=0})
+		for i,rule in ipairs(tmp) do
+			if rule.x == tmp.x and rule.y == tmp.y and rule.z == tmp.z then
+				table.remove(tmp, i)
+			end
+		end
+		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), tmp)
 		if level > 0 then
 			n.name = "redstone:torch_off"
 			minetest.env:set_node(pos, n)
@@ -354,7 +374,16 @@ minetest.register_node("redstone:torch_off", {
 	
 	redstone_update = function(pos)
 		local n = minetest.env:get_node(pos)
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		local dir = get_wallmounted_dir(pos, n.param2)
+		dir.x, dir.y, dir.z = -dir.x, -dir.y, -dir.z
+		local tmp = redstone.default_rule
+		table.insert(tmp, {x=0,y=-1,z=0})
+		for i,rule in ipairs(tmp) do
+			if rule.x == tmp.x and rule.y == tmp.y and rule.z == tmp.z then
+				table.remove(tmp, i)
+			end
+		end
+		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), tmp)
 		if level <= 0 then
 			n.name = "redstone:torch_on"
 			minetest.env:set_node(pos, n)
