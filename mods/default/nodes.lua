@@ -140,7 +140,7 @@ minetest.register_node("default:clay", {
 })
 
 minetest.register_node("default:brick", {
-	description = "Brick Block",
+	description = "Bricks",
 	tiles = {"default_brick.png"},
 	stack_max = 64,
 	groups = {cracky=default.dig.brick},

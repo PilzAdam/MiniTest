@@ -63,7 +63,7 @@ minetest.register_craftitem("default:gold_nugget", {
 })
 
 minetest.register_craftitem("default:clay_brick", {
-	description = "Clay Brick",
+	description = "Brick",
 	inventory_image = "default_clay_brick.png",
 	stack_max = 64,
 })
