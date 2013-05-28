@@ -422,7 +422,12 @@ minetest.register_tool("default:sword_wood", {
 	description = "Wooden Sword",
 	inventory_image = "default_tool_woodsword.png",
 	tool_capabilities = {
-		groupcaps = get_groupcaps(60),
+		groupcaps = get_groupcaps(30, "snappy",
+			{times={
+				[default.dig.leaves] = 0.2,
+				[default.dig.wool] = 1.2,
+			}, uses=30}
+		),
 		full_punch_interval = 1,
 		damage_groups = {fleshy=2},
 	}
@@ -431,7 +436,12 @@ minetest.register_tool("default:sword_stone", {
 	description = "Stone Sword",
 	inventory_image = "default_tool_stonesword.png",
 	tool_capabilities = {
-		groupcaps = get_groupcaps(132),
+		groupcaps = get_groupcaps(66, "snappy",
+			{times={
+				[default.dig.leaves] = 0.2,
+				[default.dig.wool] = 1.2,
+			}, uses=66}
+		),
 		full_punch_interval = 1,
 		damage_groups = {fleshy=4},
 	}
@@ -440,16 +450,12 @@ minetest.register_tool("default:sword_iron", {
 	description = "Iron Sword",
 	inventory_image = "default_tool_ironsword.png",
 	tool_capabilities = {
-		groupcaps = get_groupcaps(251),
-		full_punch_interval = 1,
-		damage_groups = {fleshy=6},
-	}
-})
-minetest.register_tool("default:sword_gold", {
-	description = "Gold Sword",
-	inventory_image = "default_tool_goldsword.png",
-	tool_capabilities = {
-		groupcaps = get_groupcaps(1562),
+		ggroupcaps = get_groupcaps(125, "snappy",
+			{times={
+				[default.dig.leaves] = 0.2,
+				[default.dig.wool] = 1.2,
+			}, uses=125}
+		),
 		full_punch_interval = 1,
 		damage_groups = {fleshy=6},
 	}
@@ -458,9 +464,28 @@ minetest.register_tool("default:sword_diamond", {
 	description = "Diamond Sword",
 	inventory_image = "default_tool_diamondsword.png",
 	tool_capabilities = {
-		groupcaps = get_groupcaps(33),
+		groupcaps = get_groupcaps(551, "snappy",
+			{times={
+				[default.dig.leaves] = 0.2,
+				[default.dig.wool] = 1.2,
+			}, uses=551}
+		),
 		full_punch_interval = 1,
 		damage_groups = {fleshy=8},
+	}
+})
+minetest.register_tool("default:sword_gold", {
+	description = "Gold Sword",
+	inventory_image = "default_tool_goldsword.png",
+	tool_capabilities = {
+		groupcaps = get_groupcaps(16, "snappy",
+			{times={
+				[default.dig.leaves] = 0.2,
+				[default.dig.wool] = 1.2,
+			}, uses=16}
+		),
+		full_punch_interval = 1,
+		damage_groups = {fleshy=6},
 	}
 })
 
