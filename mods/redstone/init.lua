@@ -377,7 +377,7 @@ minetest.register_node("redstone:stone_with_redstone", {
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_diamond",
+	ore            = "redstone:stone_with_redstone",
 	wherein        = "default:stone",
 	clust_scarcity = 600,
 	clust_num_ores = 6,
@@ -387,7 +387,7 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "default:stone_with_diamond",
+	ore            = "redstone:stone_with_redstone",
 	wherein        = "default:stone",
 	clust_scarcity = 1200,
 	clust_num_ores = 4,
