@@ -146,9 +146,9 @@ if minetest.setting_getbool("creative_mode") then
 			max_drop_level = 3,
 			groupcaps = {
 				crumbly = get_list(8),
-				cracky = get_list(19),
+				cracky = get_list(20),
 				snappy = get_list(2),
-				choppy = get_list(8),
+				choppy = get_list(9),
 				dig_immediate = get_list(3), -- TODO doesnt work
 			},
 			damage_groups = {fleshy = 10},

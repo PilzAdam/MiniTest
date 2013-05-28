@@ -22,3 +22,17 @@ minetest.register_craft({
 		{"default:stone"},
 	},
 })
+
+minetest.register_craft({
+	output = "redstone:pressure_plate_stone",
+	recipe = {
+		{"default:stone", "default:stone"},
+	},
+})
+
+minetest.register_craft({
+	output = "redstone:pressure_plate_wood",
+	recipe = {
+		{"group:wood", "group:wood"},
+	},
+})

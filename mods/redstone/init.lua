@@ -462,3 +462,48 @@ local function update_button_attachment(p)
 end
 minetest.register_on_dignode(update_button_attachment)
 minetest.register_on_placenode(update_button_attachment)
+
+minetest.register_node("redstone:pressure_plate_stone", {
+	description = "Stone Pressure Plate",
+	tiles = {"default_stone.png"},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=default.dig.pressure_plate_stone,attached_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.45, -0.5, -0.45, 0.45, -0.45, 0.45},
+		},
+	},
+})
+
+minetest.register_node("redstone:pressure_plate_wood", {
+	description = "Wooden Pressure Plate",
+	tiles = {"default_wood.png"},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {choppy=default.dig.pressure_plate_wood,attached_node=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.45, -0.5, -0.45, 0.45, -0.45, 0.45},
+		},
+	},
+})
+
+minetest.register_abm({
+	nodenames = {"redstone:pressure_plate_stone", "redstone:pressure_plate_wood"},
+	interval = 1,
+	chance = 1,
+	action = function(pos)
+		if #minetest.env:get_objects_inside_radius(pos, 1) ~= 0 then
+			redstone.set_level(pos, 16)
+			pos.y = pos.y-1
+			redstone.set_level(pos, 16)
+		else
+			redstone.set_level(pos, 0)
+			pos.y = pos.y-1
+			redstone.set_level(pos, 0)
+		end
+	end,
+})
