@@ -407,7 +407,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:stonebrick',
+	output = 'default:stonebrick 4',
 	recipe = {
 		{'default:stone', 'default:stone'},
 		{'default:stone', 'default:stone'},
