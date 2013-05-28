@@ -463,3 +463,21 @@ minetest.register_tool("default:sword_diamond", {
 		damage_groups = {fleshy=8},
 	}
 })
+
+--
+-- Shears
+--
+minetest.register_tool("default:shears", {
+	description = "Shears",
+	inventory_image = "default_shears.png",
+	tool_capabilities = {
+		groupcaps = get_groupcaps(0, "snappy", {
+			times = {
+				[default.dig.leaves] = 0.05,
+				[default.dig.wool] = 0.25,
+			}, uses=238}
+		),
+		full_punch_interval = 1,
+		damage_groups = {fleshy=1},
+	}
+})

@@ -297,6 +297,18 @@ minetest.register_abm({
 			-- Drop stuff other than the node itself
 			itemstacks = minetest.get_node_drops(n0.name)
 			for _, itemname in ipairs(itemstacks) do
+				if n0.name == "default:leaves" then
+					if math.random(1, 30) == 1 then
+						itemname = "default:apple"
+					end
+					if math.random(1, 20) == 1 then
+						itemname = "default:sapling"
+					end
+				elseif n0.name == "default:jungleleaves" then
+					if math.random(1, 20) == 1 then
+						itemname = "default:junglesapling"
+					end
+				end
 				if minetest.get_item_group(n0.name, "leafdecay_drop") ~= 0 or
 						itemname ~= n0.name then
 					local p_drop = {
@@ -305,7 +317,9 @@ minetest.register_abm({
 						z = p0.z - 0.5 + math.random(),
 					}
 					local obj = minetest.env:add_item(p_drop, itemname)
-					obj:get_luaentity().collect = true
+					if obj then
+						obj:get_luaentity().collect = true
+					end
 				end
 			end
 			-- Remove node

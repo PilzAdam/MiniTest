@@ -228,6 +228,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:shears',
+	recipe = {
+		{'', 'default:iron_ingot'},
+		{'default:iron_ingot', ''},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:rail 16',
 	recipe = {
 		{'default:iron_ingot', '', 'default:iron_ingot'},

@@ -178,14 +178,40 @@ minetest.register_node("default:jungleleaves", {
 	tiles = {"default_jungleleaves.png"},
 	paramtype = "light",
 	groups = {snappy=default.dig.leaves, leafdecay=3, flammable=2, leaves=1},
-	drop = {
-		max_items = 1,
-		items = {
-			{items = {'default:junglesapling'},rarity = 20},
-		}
-	},
+	drop = "",
 	stack_max = 64,
 	sounds = default.node_sound_leaves_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local nn = "default:jungleleaves"
+		if math.random(1, 20) == 1 then
+			nn = "default:junglesapling"
+		end
+		if minetest.setting_getbool("creative_mode") then
+			local inv = digger:get_inventory()
+			if not inv:contains_item("main", ItemStack(nn)) then
+				inv:add_item("main", ItemStack(nn))
+			end
+		else
+			if digger:get_wielded_item():get_name() == "default:shears" or nn ~= "default:jungleleaves" then
+				local obj = minetest.env:add_item(pos, nn)
+				if obj ~= nil then
+					obj:get_luaentity().collect = true
+					local x = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						x = -x
+					end
+					local z = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						z = -z
+					end
+					obj:setvelocity({x=1/x, y=obj:getvelocity().y, z=1/z})
+				end
+			end
+		end
+	end,
+	after_place_node = function(pos, placer, itemstack)
+		minetest.env:set_node(pos, {name="default:jungleleaves", param2=1})
+	end,
 })
 
 minetest.register_node("default:junglesapling", {
@@ -237,15 +263,43 @@ minetest.register_node("default:leaves", {
 	tiles = {"default_leaves.png"},
 	paramtype = "light",
 	groups = {snappy=default.dig.leaves, leafdecay=3, flammable=2, leaves=1},
-	drop = {
-		max_items = 1,
-		items = {
-			{items = {'default:sapling'},rarity = 20},
-			{items = {'default:apple'},rarity = 30},
-		}
-	},
+	drop = "",
 	stack_max = 64,
 	sounds = default.node_sound_leaves_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local nn = "default:leaves"
+		if math.random(1, 30) == 1 then
+			nn = "default:apple"
+		end
+		if math.random(1, 20) == 1 then
+			nn = "default:sapling"
+		end
+		if minetest.setting_getbool("creative_mode") then
+			local inv = digger:get_inventory()
+			if not inv:contains_item("main", ItemStack(nn)) then
+				inv:add_item("main", ItemStack(nn))
+			end
+		else
+			if digger:get_wielded_item():get_name() == "default:shears" or nn ~= "default:leaves" then
+				local obj = minetest.env:add_item(pos, nn)
+				if obj ~= nil then
+					obj:get_luaentity().collect = true
+					local x = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						x = -x
+					end
+					local z = math.random(1, 5)
+					if math.random(1,2) == 1 then
+						z = -z
+					end
+					obj:setvelocity({x=1/x, y=obj:getvelocity().y, z=1/z})
+				end
+			end
+		end
+	end,
+	after_place_node = function(pos, placer, itemstack)
+		minetest.env:set_node(pos, {name="default:leaves", param2=1})
+	end,
 })
 
 minetest.register_node("default:cactus", {
