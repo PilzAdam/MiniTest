@@ -212,7 +212,7 @@ minetest.register_node("redstone:lever_off", {
 	paramtype2 = "wallmounted",
 	walkable = false,
 	stack_max = 64,
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig=default.dig.lever,attached_node=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
 		type = "wallmounted",
@@ -249,7 +249,7 @@ minetest.register_node("redstone:lever_on", {
 	paramtype2 = "wallmounted",
 	drop = "redstone:lever_off",
 	walkable = false,
-	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
+	groups = {dig=default.dig.lever,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
 		type = "wallmounted",
@@ -404,7 +404,7 @@ minetest.register_node("redstone:button", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {dig_immediate=2},
+	groups = {dig=default.dig.button},
 	node_box = {
 		type = "fixed",
 		fixed = {

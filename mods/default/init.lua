@@ -58,6 +58,15 @@ default.dig = {
 	-- Snappy (shears)
 	leaves = 1,
 	wool = 2,
+	
+	-- Dig (tool doesnt matter but count as a use)
+	bed = 1,
+	cactus = 2,
+	glass = 3,
+	ladder = 4,
+	glowstone = 5,
+	lever = 6,
+	button = 7,
 }
 
 -- Load files

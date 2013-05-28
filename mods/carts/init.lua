@@ -487,7 +487,7 @@ minetest.register_node(":default:rail", {
 		-- but how to specify the dimensions for curved and sideways rails?
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1},
+	groups = {cracky=default.dig.rail,attached_node=1,rail=1,connect_to_raillike=1},
 })
 
 minetest.register_node("carts:powerrail_off", {
@@ -504,7 +504,7 @@ minetest.register_node("carts:powerrail_off", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1},
+	groups = {cracky=default.dig.rail,attached_node=1,rail=1,connect_to_raillike=1},
 	
 	after_place_node = function(pos)
 		local level = redstone.level_at(pos)
@@ -538,7 +538,7 @@ minetest.register_node("carts:powerrail_on", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {dig_immediate=2,attached_node=1,rail=1,connect_to_raillike=1,not_in_creative_inventory=1},
+	groups = {cracky=default.dig.rail,attached_node=1,rail=1,connect_to_raillike=1,not_in_creative_inventory=1},
 	
 	redstone_update = function(pos)
 		local level = redstone.level_at(pos)

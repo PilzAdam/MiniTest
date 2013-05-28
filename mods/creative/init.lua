@@ -149,7 +149,7 @@ if minetest.setting_getbool("creative_mode") then
 				cracky = get_list(20),
 				snappy = get_list(2),
 				choppy = get_list(9),
-				dig_immediate = get_list(3), -- TODO doesnt work
+				dig = get_list(7),
 			},
 			damage_groups = {fleshy = 10},
 		}

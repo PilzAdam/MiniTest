@@ -253,7 +253,7 @@ minetest.register_node("default:cactus", {
 	tiles = {"default_cactus_top.png", "default_cactus_top.png", "default_cactus_side.png"},
 	is_ground_content = true,
 	stack_max = 64,
-	groups = {dig_immediate=2,flammable=2},
+	groups = {dig=default.dig.cactus},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -291,7 +291,7 @@ minetest.register_node("default:glass", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	stack_max = 64,
-	groups = {dig_immediate=2},
+	groups = {dig=default.dig.glass},
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -350,7 +350,7 @@ minetest.register_node("default:ladder", {
 		--wall_bottom = = <default>
 		--wall_side = = <default>
 	},
-	groups = {dig_immediate=2,flammable=2,attached_node=1},
+	groups = {dig=default.dig.ladder,flammable=2,attached_node=1},
 	legacy_wallmounted = true,
 	stack_max = 64,
 	sounds = default.node_sound_wood_defaults(),

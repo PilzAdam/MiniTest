@@ -113,7 +113,7 @@ minetest.register_node("tnt:tnt", {
 	description = "TNT",
 	tiles = {"tnt_top.png", "tnt_bottom.png", "tnt_side.png"},
 	stack_max = 64,
-	groups = {dig_immediate=2, mesecon=2},
+	groups = {dig_immediate=3},
 	sounds = default.node_sound_wood_defaults(),
 	
 	on_rightclick = function(pos, node, puncher)
@@ -138,8 +138,9 @@ minetest.register_node("tnt:tnt", {
 minetest.register_node("tnt:tnt_burning", {
 	tiles = {{name="tnt_top_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}, "tnt_bottom.png", "tnt_side.png"},
 	light_source = 5,
-	drop = "",
+	drop = "tnt:tnt",
 	sounds = default.node_sound_wood_defaults(),
+	groups = {dig_immediate=3},
 })
 
 minetest.register_node("tnt:boom", {
@@ -151,105 +152,10 @@ minetest.register_node("tnt:boom", {
 	groups = {dig_immediate=3},
 })
 
-burn = function(pos)
-	if minetest.env:get_node(pos).name == "tnt:tnt" then
-		minetest.sound_play("tnt_ignite", {pos=pos})
-		minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-		boom(pos, 1)
-		return
-	end
-	if minetest.env:get_node(pos).name ~= "tnt:gunpowder" then
-		return
-	end
-	minetest.sound_play("tnt_gunpowder_burning", {pos=pos, gain=2})
-	minetest.env:set_node(pos, {name="tnt:gunpowder_burning"})
-	
-	minetest.after(1, function(pos)
-		if minetest.env:get_node(pos).name ~= "tnt:gunpowder_burning" then
-			return
-		end
-		minetest.after(0.5, function(pos)
-			minetest.env:remove_node(pos)
-		end, {x=pos.x, y=pos.y, z=pos.z})
-		for dx=-1,1 do
-			for dz=-1,1 do
-				for dy=-1,1 do
-					pos.x = pos.x+dx
-					pos.y = pos.y+dy
-					pos.z = pos.z+dz
-					
-					if not (math.abs(dx) == 1 and math.abs(dz) == 1) then
-						if dy == 0 then
-							burn({x=pos.x, y=pos.y, z=pos.z})
-						else
-							if math.abs(dx) == 1 or math.abs(dz) == 1 then
-								burn({x=pos.x, y=pos.y, z=pos.z})
-							end
-						end
-					end
-					
-					pos.x = pos.x-dx
-					pos.y = pos.y-dy
-					pos.z = pos.z-dz
-				end
-			end
-		end
-	end, pos)
-end
-
-minetest.register_node("tnt:gunpowder", {
+minetest.register_craftitem("tnt:gunpowder", {
 	description = "Gun Powder",
-	drawtype = "raillike",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	tiles = {"tnt_gunpowder.png",},
 	inventory_image = "tnt_gunpowder_inventory.png",
-	wield_image = "tnt_gunpowder_inventory.png",
-	selection_box = {
-		type = "fixed",
-		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
-	},
 	stack_max = 64,
-	groups = {dig_immediate=2,attached_node=1},
-	sounds = default.node_sound_leaves_defaults(),
-	
-	on_punch = function(pos, node, puncher)
-		if puncher:get_wielded_item():get_name() == "default:torch" then
-			burn(pos)
-		end
-	end,
-})
-
-minetest.register_node("tnt:gunpowder_burning", {
-	drawtype = "raillike",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	light_source = 5,
-	tiles = {{name="tnt_gunpowder_burning_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1}}},
-	selection_box = {
-		type = "fixed",
-		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
-	},
-	drop = "",
-	groups = {dig_immediate=2,attached_node=1},
-	sounds = default.node_sound_leaves_defaults(),
-})
-
-minetest.register_abm({
-	nodenames = {"tnt:tnt", "tnt:gunpowder"},
-	neighbors = {"fire:basic_flame"},
-	interval = 2,
-	chance = 10,
-	action = function(pos, node)
-		if node.name == "tnt:tnt" then
-			minetest.env:set_node(pos, {name="tnt:tnt_burning"})
-			boom({x=pos.x, y=pos.y, z=pos.z}, 0)
-		else
-			burn(pos)
-		end
-	end
 })
 
 minetest.register_craft({
@@ -266,7 +172,3 @@ minetest.register_craft({
 		{"tnt:gunpowder", "group:sand", "tnt:gunpowder"}
 	}
 })
-
-if minetest.setting_get("log_mods") then
-	minetest.log("action", "tnt loaded")
-end

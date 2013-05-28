@@ -356,7 +356,7 @@ minetest.register_node("nether:glowstone", {
 			{items = {'nether:glowstone_dust'},rarity=0},
 		}
 	},
-	groups = {dig_immediate=2},
+	groups = {dig=default.dig.glowstone},
 	sounds = default.node_sound_glass_defaults(),
 })
 
