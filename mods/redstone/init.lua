@@ -183,7 +183,7 @@ minetest.register_node("redstone:redstone_on", {
 	drop = "redstone:redstone",
 	walkable = false,
 	paramtype = "light",
-	light_source = 5,
+	light_source = 7,
 	groups = {dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 	sounds = default.node_sound_defaults(),
 	selection_box = {
@@ -380,6 +380,35 @@ minetest.register_node("redstone:stone_with_redstone", {
 	},
 	stack_max = 64,
 	sounds = default.node_sound_stone_defaults(),
+	
+	on_punch = function(pos, node, puncher)
+		minetest.env:set_node(pos, {name="redstone:stone_with_redstone_activated"})
+		redstone.set_level(pos, 16)
+		minetest.after(math.random(10,20)/10, function(pos)
+			if minetest.env:get_node(pos).name == "redstone:stone_with_redstone_activated" then
+				minetest.env.set_node(pos, {name="redstone:stone_with_redstone"})
+			end
+		end, pos)
+	end,
+})
+
+minetest.register_node("redstone:stone_with_redstone_activated", {
+	tiles = {"default_stone.png^redstone_mineral_redstone.png"},
+	is_ground_content = true,
+	groups = {cracky=default.dig.redstone_ore,not_in_creative_inventory=1},
+	light_source = 9,
+	drop = {
+		items = {
+			{items={"redstone:redstone 4"}},
+			{items={"redstone:redstone"},rarity=4},
+		},
+	},
+	stack_max = 64,
+	sounds = default.node_sound_stone_defaults(),
+	
+	on_destruct = function(pos)
+		redstone.set_level(pos, 0)
+	end,
 })
 
 minetest.register_ore({
