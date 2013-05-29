@@ -34,7 +34,7 @@ minetest.register_abm({
 			minetest.env:set_node(pos, {name="default:dirt"})
 		end
 		-- check if there is water nearby
-		if minetest.env:find_node_near(pos, 3, {"group:water"}) then
+		if minetest.env:find_node_near(pos, 4, {"group:water"}) then
 			-- if it is dry soil turn it into wet soil
 			if node.name == "farming:soil" then
 				minetest.env:set_node(pos, {name="farming:soil_wet"})
