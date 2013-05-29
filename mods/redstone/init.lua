@@ -417,7 +417,7 @@ minetest.register_node("redstone:stone_with_redstone", {
 		redstone.set_level(pos, 16)
 		minetest.after(math.random(10,20)/10, function(pos)
 			if minetest.env:get_node(pos).name == "redstone:stone_with_redstone_activated" then
-				minetest.env.set_node(pos, {name="redstone:stone_with_redstone"})
+				minetest.env:set_node(pos, {name="redstone:stone_with_redstone"})
 			end
 		end, pos)
 	end,
