@@ -11,14 +11,30 @@ end
 local tick = 0
 TICKS = 10
 
+local copy = function(tbl)
+	tbl2 = {}
+	for key,val in pairs(tbl) do
+		tbl2[key] = val
+	end
+	return tbl2
+end
+
+local inlist = function(name, tbl)
+	for _,i in ipairs(tbl) do
+		if name==i then return true end
+	end
+	return false
+end
+
 minetest.register_globalstep(function(dtime)
 	tick = tick + 1
 	if tick >= TICKS then
 		tick = 0
-		for _, t in ipairs(timer) do
+		local tm = copy(timer)
+		timer = {length=0}
+		for _, t in ipairs(tm) do
 			t.f(unpack(t.args))
 		end
-		timer = {length=0}
 	end
 end)
 
@@ -27,6 +43,20 @@ dofile(minetest.get_modpath("redstone").."/crafting.lua")
 
 local function add(v1, v2)
 	return {x=v1.x+v2.x, y=v1.y+v2.y, z=v1.z+v2.z}
+end
+
+local function is_node_transparent(pos)
+	local node = minetest.env:get_node(pos)
+	return inlist(node.name,{
+		"air",
+		"nether:glowstone",
+		"default:glass"}) -- TODO: Fix that
+end
+
+local function blocks_down(pos)
+	local node = minetest.env:get_node(pos)
+	return inlist(node.name,{
+		"nether:glowstone"}) -- TODO: Fix that
 end
 
 local function hacky_swap_node(pos,name, param2)
@@ -95,6 +125,27 @@ redstone.default_rule = {
 	{x=0, y=-1, z=-1},
 }
 
+function redstone.weak_power(pos)
+	local maxpower = 0
+	for _,offset in ipairs({{x=0,y=0,z=1},{x=0,y=0,z=-1},{x=1,y=0,z=0},{x=-1,y=0,z=0},{x=0,y=1,z=0}}) do
+		local p = add(pos,offset)
+		local n = minetest.env:get_node(p)
+		if n.name == "redstone:redstone_on" then
+			local m = minetest.env:get_meta(p)
+			local power = tonumber(m:get_string("redstone_level")) or 0
+			maxpower = math.max(maxpower, power)
+		end
+	end
+	return math.max(maxpower, redstone.strong_power(pos))
+end
+
+function redstone.strong_power(pos)
+	local ppos = {x = pos.x, y = pos.y-1, z = pos.z}
+	local pnode = minetest.env:get_node(ppos)
+	if pnode.name == "redstone:torch_on" then return 15 end
+	return 0
+end
+
 function redstone.level_at(pos, rule)
 	rule  = rule or redstone.default_rule
 	
@@ -113,12 +164,41 @@ function redstone.level_at(pos, rule)
 	return level
 end
 
+local function is_redstone(pos)
+	local node = minetest.env:get_node(pos)
+	return node.name == "redstone:redstone_on" or node.name=="redstone:redstone_off"
+end
+
+function redstone.wire_level_at(pos)
+	local level = redstone.level_at(pos, {{x= 1, y= 0, z=0},{x=-1, y= 0, z=0},{x= 0, y= 0, z=1},{x=0, y= 0, z=-1}})
+	for _,offset in ipairs({{x= 1, y= 1, z=0},{x=-1, y= 1, z=0},{x= 0, y= 1, z=1},{x=0, y= 1, z=-1}}) do
+		local p = add(offset,pos)
+		if is_node_transparent({x=pos.x,y=p.y,z=pos.z}) and (not blocks_down({x=p.x,y=pos.y,z=p.z})) and is_redstone(p) then
+			level = math.max(level,redstone.level_at(pos,{offset}))
+		end
+	end
+	for _,offset in ipairs({{x= 1, y= -1, z=0},{x=-1, y= -1, z=0},{x= 0, y= -1, z=1},{x=0, y= -1, z=-1}}) do
+		local p = add(offset,pos)
+		if is_node_transparent({x=p.x,y=p.y+1,z=p.z}) and is_redstone(p) then
+			level = math.max(level,redstone.level_at(pos,{offset}))
+		end
+	end
+	for _,offset in ipairs({{x= 1, y= 0, z=0},{x=-1, y= 0, z=0},{x= 0, y= 0, z=1},{x=0, y= 0, z=-1},{x=0,y=-1,z=0}}) do
+		local p = add(offset,pos)
+		if not is_node_transparent(p) then
+			level = math.max(level,redstone.strong_power(p))
+		end
+	end
+	if minetest.env:get_node({x=pos.x,y=pos.y+1,z=pos.z}).name == "redstone:torch_on" then level = 15 end
+	return level
+end
+
 function redstone.set_level(pos, level, force)
 	local m = minetest.env:get_meta(pos)
 	if force or (level ~= (tonumber(m:get_string("redstone_level")) or 0)) then
 		m:set_string("redstone_level", tostring(level))
 		for dx=-1,1 do
-		for dy=-1,1 do
+		for dy=-1,2 do
 		for dz=-1,1 do
 			if dx~=0 or dy~=0 or dz~=0 then
 				local p = add(pos, {x=dx, y=dy, z=dz})
@@ -184,14 +264,16 @@ minetest.register_node("redstone:redstone_off", {
 		},
 	},
 	after_place_node = function(pos)
-		local level = redstone.level_at(pos)
+		--local level = redstone.level_at(pos)
+		local level = redstone.wire_level_at(pos)
 		if level > 0 then
 			minetest.env:set_node(pos, {name="redstone:redstone_on"})
 		end
 		redstone.set_level(pos, level)
 	end,
 	redstone_update = function(pos)
-		local level = redstone.level_at(pos)
+		--local level = redstone.level_at(pos)
+		local level = redstone.wire_level_at(pos)
 		if level > 0 then
 			minetest.env:set_node(pos, {name="redstone:redstone_on"})
 		end
@@ -218,7 +300,8 @@ minetest.register_node("redstone:redstone_on", {
 		redstone.set_level(pos, 0, true)
 	end,
 	redstone_update = function(pos)
-		local level = redstone.level_at(pos)
+		--local level = redstone.level_at(pos)
+		local level = redstone.wire_level_at(pos)
 		if level <= 0 then
 			minetest.env:set_node(pos, {name="redstone:redstone_off"})
 		end
@@ -317,10 +400,11 @@ minetest.register_node("redstone:torch_on", {
 	
 	redstone_update = function(pos)
 		local n = minetest.env:get_node(pos)
-		local m = minetest.env:get_meta(pos)
-		m:set_string("redstone_level", tostring(0))
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
-		m:set_string("redstone_level", tostring(16))
+		--local m = minetest.env:get_meta(pos)
+		--m:set_string("redstone_level", tostring(0))
+		--local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		--m:set_string("redstone_level", tostring(16))
+		local level = redstone.weak_power(get_wallmounted_node(pos, n.param2))
 		if level > 0 then
 			n.name = "redstone:torch_off"
 			minetest.env:set_node(pos, n)
@@ -334,7 +418,8 @@ minetest.register_node("redstone:torch_on", {
 	end,
 	after_place_node = function(pos)
 		local n = minetest.env:get_node(pos)
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		--local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		local level = redstone.weak_power(get_wallmounted_node(pos, n.param2))
 		if level > 0 then
 			n.name = "redstone:torch_off"
 			minetest.env:set_node(pos, n)
@@ -378,7 +463,8 @@ minetest.register_node("redstone:torch_off", {
 	
 	redstone_update = function(pos)
 		local n = minetest.env:get_node(pos)
-		local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		--local level = redstone.level_at(get_wallmounted_node(pos, n.param2), {get_wallmounted_dir(pos, n.param2)})
+		local level = redstone.weak_power(get_wallmounted_node(pos, n.param2))
 		if level <= 0 then
 			n.name = "redstone:torch_on"
 			minetest.env:set_node(pos, n)
