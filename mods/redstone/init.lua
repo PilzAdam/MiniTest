@@ -11,14 +11,23 @@ end
 local tick = 0
 TICKS = 10
 
+local copy = function(tbl)
+	tbl2 = {}
+	for key,val in pairs(tbl) do
+		tbl2[key] = val
+	end
+	return tbl2
+end
+
 minetest.register_globalstep(function(dtime)
 	tick = tick + 1
 	if tick >= TICKS then
 		tick = 0
-		for _, t in ipairs(timer) do
+		local tm = copy(timer)
+		timer = {length=0}
+		for _, t in ipairs(tm) do
 			t.f(unpack(t.args))
 		end
-		timer = {length=0}
 	end
 end)
 
