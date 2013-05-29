@@ -152,7 +152,6 @@ if file then
 end
 
 local timer = 0
-local wait = false
 minetest.register_globalstep(function(dtime)
 	if timer<2 then
 		timer = timer+dtime
@@ -163,21 +162,15 @@ minetest.register_globalstep(function(dtime)
 	local players = #minetest.get_connected_players()
 	if players == player_in_bed and players ~= 0 then
 		if minetest.env:get_timeofday() < 0.2 or minetest.env:get_timeofday() > 0.805 then
-			if not wait then
-				minetest.chat_send_all("Good night!!!")
-				minetest.after(2, function()
-					minetest.env:set_timeofday(0.23)
-					wait = false
-				end)
-				wait = true
-				for _,player in ipairs(minetest.get_connected_players()) do
-					beds_player_spawns[player:get_player_name()] = player:getpos()
-				end
-				local file = io.open(minetest.get_worldpath().."/beds_player_spawns", "w")
-				if file then
-					file:write(minetest.serialize(beds_player_spawns))
-					file:close()
-				end
+			minetest.chat_send_all("Good night!!!")
+			minetest.env:set_timeofday(0.23)
+			for _,player in ipairs(minetest.get_connected_players()) do
+				beds_player_spawns[player:get_player_name()] = player:getpos()
+			end
+			local file = io.open(minetest.get_worldpath().."/beds_player_spawns", "w")
+			if file then
+				file:write(minetest.serialize(beds_player_spawns))
+				file:close()
 			end
 		end
 	end
