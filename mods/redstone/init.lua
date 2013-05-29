@@ -283,7 +283,7 @@ minetest.register_node("redstone:torch_on", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	walkable = false,
-	light_source = 10,
+	light_source = 7,
 	selection_box = {
 		type = "wallmounted",
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},

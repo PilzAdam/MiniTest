@@ -38,7 +38,7 @@ minetest.register_node("nether:portal", {
 	pointable = false,
 	buildable_to = false,
 	drop = "",
-	light_source = 5,
+	light_source = 11,
 	post_effect_color = {a=180, r=128, g=0, b=128},
 	alpha = 192,
 	node_box = {
@@ -346,7 +346,7 @@ minetest.register_node("nether:glowstone", {
 	description = "Glowstone",
 	tiles = {"nether_glowstone.png"},
 	is_ground_content = true,
-	light_source = 13,
+	light_source = 15,
 	stack_max = 64,
 	drop = {
 		items = {

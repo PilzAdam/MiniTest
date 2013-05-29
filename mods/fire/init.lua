@@ -8,7 +8,7 @@ minetest.register_node("fire:basic_flame", {
 		animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1},
 	}},
 	inventory_image = "fire_basic_flame.png",
-	light_source = 14,
+	light_source = 15,
 	groups = {igniter=2,dig_immediate=3},
 	drop = '',
 	walkable = false,
