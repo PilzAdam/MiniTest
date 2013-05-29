@@ -5,7 +5,7 @@ local timer = {length = 0}
 
 function redstone.after_redstone_tick(func, ...)
 	timer[timer.length+1] = {f = func, args = {...}}
-	timer.length = timer.length
+	timer.length = timer.length + 1
 end
 
 local tick = 0
@@ -15,10 +15,11 @@ minetest.register_globalstep(function(dtime)
 	tick = tick + 1
 	if tick >= TICKS then
 		tick = 0
-		for _, t in ipairs(timer) do
+		local tm = timer
+		timer = {length=0} -- Reset timer list before we apply changes
+		for _, t in ipairs(tm) do
 			t.f(unpack(t.args))
 		end
-		timer = {length=0}
 	end
 end)
 
