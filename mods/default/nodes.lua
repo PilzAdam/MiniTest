@@ -344,6 +344,7 @@ minetest.register_node("default:glass", {
 	inventory_image = minetest.inventorycube("default_glass.png"),
 	paramtype = "light",
 	sunlight_propagates = true,
+	drop = "",
 	stack_max = 64,
 	groups = {dig=default.dig.glass},
 	sounds = default.node_sound_glass_defaults(),
