@@ -179,7 +179,11 @@ minetest.register_craftitem("redstone:redstone", {
 })
 
 minetest.register_node("redstone:redstone_off", {
-	tiles = {"redstone_redstone_off.png"},
+	tiles = {
+		"redstone_redstone_off.png",
+		"redstone_redstone_off_curved.png",
+		"redstone_redstone_off_t_junction.png",
+		"redstone_redstone_off_crossing.png"},
 	drawtype = "raillike",
 	drop = "redstone:redstone",
 	walkable = false,
@@ -209,7 +213,11 @@ minetest.register_node("redstone:redstone_off", {
 })
 
 minetest.register_node("redstone:redstone_on", {
-	tiles = {"redstone_redstone_on.png"},
+	tiles = {
+		"redstone_redstone_on.png",
+		"redstone_redstone_on_curved.png",
+		"redstone_redstone_on_t_junction.png",
+		"redstone_redstone_on_crossing.png"},
 	drawtype = "raillike",
 	drop = "redstone:redstone",
 	walkable = false,
