@@ -360,6 +360,7 @@ local function replace(old, new, min, max)
 	end
 end
 replace("air", "default:bedrock", -80, -64)
+replace("air", "default:lava_source", -64, -54)
 replace("default:stone", "default:bedrock", -80, -64)
 replace("default:gravel", "default:bedrock", -80, -64)
 replace("default:dirt", "default:bedrock", -80, -64)
