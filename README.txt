@@ -9,4 +9,4 @@ License of menu/icon.png
 Copyright (C) 2013 Calinou CC BY-SA; based on textures by Zeg9
 
 License of menu/header.png
-CC BY-SA original author: BlockMen, modified by PilzAdam
+Copyright (C) 2013 BlockMen CC BY-SA
