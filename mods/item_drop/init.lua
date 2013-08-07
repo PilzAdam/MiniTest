@@ -122,6 +122,7 @@ minetest.register_entity(":__builtin:item", {
 		textures = {""},
 		spritediv = {x=1, y=1},
 		initial_sprite_basepos = {x=0, y=0},
+		collide_with_objects = false,
 		is_visible = false,
 	},
 	
